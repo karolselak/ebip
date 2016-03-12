@@ -8,8 +8,13 @@
 #logo-img{
 	width:	180px;
 	height:	80px;
-    padding: 5px;
+  padding: 5px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+#AccountsUIWrapper{
+  display: block;
+  float: right;
+  margin-right: 100px;
 }
