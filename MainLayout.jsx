@@ -11,12 +11,21 @@ MainLayout = React.createClass({
 					</a>
 					</div>
 				</div>
+        <div class="row">
+          <div class="col-md-10">
+            <p id="AccountsUIWrapper"><AccountsUIWrapper /></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10">
+              <Homepage />
+          </div>
+        </div>
 			</div>
 		</body>
 		{/*TODO Hubert: - zrobienie paska górnego z logiem prowadzącym do '/' */}
         {/*TODO Martin: - wstawienie interfejsu wyszukiwarki*/}
-        <AccountsUIWrapper />
-        {this.props.content}
+        {/*this.props.content*/}
     </main>);
   }
 });
