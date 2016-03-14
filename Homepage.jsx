@@ -8,8 +8,8 @@ Homepage = React.createClass({
     render()
     {
         return <div>
-            <div class="container">
-              <div class="row" id="button-addInstitutions">
+            <div className="container" id="homepage">
+              <div className="row" id="button-addInstitutions">
                 <button type="button" className="btn btn-info" data-toggle="modal" data-target="#addInstitutionModal">Dodaj instytucję</button>
 
                 {/*okno dodawania instytucji: */}
@@ -19,7 +19,7 @@ Homepage = React.createClass({
                     <div className="modal-content">
                         <div className="modal-header">
                             <button type="button" className="close" data-dismiss="modal">&times;</button>
-                            <h4 className="modal-title">Modal Header</h4>
+                            <h4 className="modal-title">Dodaj instytucję</h4>
                         </div>
                     <div className="modal-body">
                         <div>Nazwa instytucji:</div>
