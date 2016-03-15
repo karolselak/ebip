@@ -25,3 +25,5 @@ accounts-ui
 aldeed:simple-schema
 twbs:bootstrap
 check
+tsega:bootstrap3-datetimepicker
+rzymek:moment-locale-pl
