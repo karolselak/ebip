@@ -2,20 +2,31 @@ Institution = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         var ins = Institutions.findOne({name: this.props.institution});
+        if (this.props.tags) {
+            //TODO Martin: obsłużenie tego przypadku, tzn. gdy są podane tagi (tags = 'tag1,tag2,tag3) i musimy wyświetlać
+            //tylko te artykuły, które owe tagi posiadają
+        } else if (this.props.phrase){
+            //TODO Martin: a także tego przypadku, tzn. gdy podana jest fraza do wyszukania (w tytule, tekście lub tagach)
+        } else {
+            var articles = Articles.find({institution_id: ins && ins._id}).fetch()
+        }
         return {
-            articles: Articles.find({institution_id: ins && ins._id}).fetch(),
+            articles: articles,
             institution: ins
         };
     },
     render()
-    {
+    {   
+        //TODO Hubert: wyświetlanie panelu bocznego instytucji (sideMenus), wraz z możliwością ich edycji
+        //(edycja, dodawanie i kasowanie kategorii oraz filtrów z tagami, struktura według InstitutionSchema).
+        //TODO Kaj: usuwanie artykułów
         return <div className='container' id='institution'>
             <h2>{this.data.institution && this.data.institution.name}</h2>
             <button type='button' className='btn btn-info' data-toggle='modal' data-target='#addArticleModal'>Dodaj artykuł</button>
 
 
             {this.renderArticles()}
-            {/*okno dodawania instytucji: */}
+            {/*okno dodawania artykułów: */}
             <div className='modal fade' id='addArticleModal' role='dialog'>
             <div className='modal-dialog'>
                 <div className='modal-content'>
@@ -30,6 +41,8 @@ Institution = React.createClass({
                         <textarea id='content' className='form-control' rows='5' cols='80'></textarea>
                         <div>Tagi:</div>
                         <input id='tags' type='text' className='form-control' placeholder='tag1, tag2...'></input>
+                        {/*TODO Hubert: dodawanie autora, którym może być jeden z urzędników (officials) istniejących w naszej instytucji.
+                           Trzeba stworzyć listę wyboru, gdzie będzie można wybrać jednego z nich.*/}
                         <div>Data publikacji:</div>
                         <div className='input-group date' id='publicationDate'>
                             <input type='text' className='form-control' placeholder='nieokreślona'/>
@@ -90,6 +103,7 @@ Institution = React.createClass({
     renderArticles() {
         return this.data.articles.map(function(el){
             return <div>
+                {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
                 <div><a>{el.title}</a></div>
                 <div>{el.content}</div>
             </div>
