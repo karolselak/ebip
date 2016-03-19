@@ -11,7 +11,7 @@ FlowRouter.route('/:institution', {
     }
 });
 //widok konkretnego artykułu:
-FlowRouter.route('/:institution/:article', {
+FlowRouter.route('/:institution/article/:article', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Institution {...params}/>});
     }
@@ -32,5 +32,11 @@ FlowRouter.route('/search/:phrase', {
 FlowRouter.route('/:institution/search/:phrase', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Institution {...params}/>});
+    }
+});
+//informacje ogólne nt. instytucji:
+FlowRouter.route('/:institution/about', {
+    action(params) {
+        ReactLayout.render(MainLayout, {content: <Institution {...params} is_about={true} />});
     }
 });
