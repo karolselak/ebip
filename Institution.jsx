@@ -78,7 +78,7 @@ Institution = React.createClass({
             var publicationDate = (new Date()).getTime();
         } else {
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
-            var publicationDate = d ? d._d.getTime() || Infinity;            
+            var publicationDate = d ? d._d.getTime() : Infinity;            
         }
         Meteor.call('addArticle', {
             title: $title.value,
