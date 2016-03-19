@@ -4,25 +4,22 @@ MainLayout = React.createClass({
     <main>
 		<body>
 			<div className="container">
-				<div className="row">
-					<div className="col-md-10" id="topStrip">
+				<div className="row" id="topStrip">
+					<div className="col-md-10">
 					    <a href="/">
 						    <img src="img/LOGO.png" className="img-responsive" id="logo-img" />
-                        </a>
-                        <div className="col-md-2 col-md-push-2" id="signin">
-                            <span id="AccountsUIWrapper"><AccountsUIWrapper /></span>
-                        </div>
-				    </div>
+              </a>
+          </div>
+          <div className="col-md-2">
+            <span id="AccountsUIWrapper"><AccountsUIWrapper /></span>
+          </div>
 				</div>
-                <div className="row">
-                  <div className="col-md-4">
-                    <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
-                  </div>
-                  <div className="col-md-10" id="browser">
-                    <span className="wyszukiwarka">WYSZUKIWARKA</span>
-                  </div>
-                </div>
-                {this.props.content}
+        <div className="row">
+          <div classnae="col-md-12">
+            <Homepage/>
+            {/* {this.props.content} */}
+          </div>
+        </div>
 			</div>
 		</body>
     </main>);
