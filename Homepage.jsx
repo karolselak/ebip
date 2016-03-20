@@ -13,7 +13,7 @@ Homepage = React.createClass({
             <div className="container">
                 <div className="row">
                   {/*text input: */}
-                  <div className="col-md-7 col-md-offset-2">
+                  <div className="col-md-7 col-md-offset-3">
                     <table>
                       <tr>
                       <td id="search-box">
@@ -30,9 +30,17 @@ Homepage = React.createClass({
                   </table>
                   </div>
                 </div>
-
                 <div className="row">
-                <button type="button" className="btn btn-info" data-toggle="modal" data-target="#addInstitutionModal">Dodaj instytucję</button>
+                  <div className="col-md-11">
+                    {this.renderInstitutions()}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div id="bottom-button-add-institution">
+                      <button type="button" className="btn btn-info" data-toggle="modal" data-target="#addInstitutionModal">Dodaj instytucję</button>
+                    </div>
+                  </div>
                 {/*okno dodawania instytucji: */}
                 <div className="modal fade" id="addInstitutionModal" role="dialog">
                 <div className="modal-dialog">
@@ -64,7 +72,6 @@ Homepage = React.createClass({
                     </div>
                 </div>
                 </div>
-              {this.renderInstitutions()}
               </div>
         </div>
         </div>

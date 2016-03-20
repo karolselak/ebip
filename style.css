@@ -39,6 +39,11 @@ margin-left: 5px;
   margin-top: 15px;
 }
 
+#bottom-button-add-institution{
+  margin-right: 20px;
+  float:right;
+}
+
 /* -----------------------------------------------Institution------------------------------------------------*/
 
 #dataPublikacji{
@@ -108,4 +113,13 @@ margin-left: 5px;
 .sidebar-nav > .sidebar-title a:hover {
     color: #E0E8EE;
     background: none;
+}
+/* -----------------------------------------------AtricleView------------------------------------------------*/
+#bottom-button-add-article{
+
+  margin-right: 30px;
+  float: right;
+}
+#bottom-Row{
+  
 }

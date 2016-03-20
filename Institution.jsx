@@ -17,20 +17,18 @@ Institution = React.createClass({
         };
     },
 
-    render() {   
+    render() {
         //TODO Hubert: wyświetlanie panelu bocznego instytucji (sideMenus), wraz z możliwością ich edycji
         //(edycja, dodawanie i kasowanie kategorii oraz filtrów z tagami, struktura według InstitutionSchema).
         return <div className='container' id='institution'>
             {/*nagłówek z nazwą instytucji: */}
-            <h2>{this.data.institution && this.data.institution.name}</h2>
-            {this.renderContent()}
 
             <div className="col-md-3">
                 <div id="sidebar-wrapper">
                     <ul className="sidebar-nav">
                         <li className="sidebar-title">
                           <a href="#">
-                              fuck her right in the pussy
+                                informacje
                           </a>
                         </li>
                         <li>
@@ -57,13 +55,16 @@ Institution = React.createClass({
                     </ul>
                 </div>
             </div>
-            
+            <div className="col-md-9">
+              <h2>{this.data.institution && this.data.institution.name}</h2>
+              {this.renderContent()}
+            </div>
         </div>
     },
     renderContent() {
         if (this.props.is_about) {
             if (this.data.institution) {
-                return <section itemScope itemType="http://schema.org/GovernmentOrganization"> 
+                return <section itemScope itemType="http://schema.org/GovernmentOrganization">
                     <div>
                         <b>Adres:</b><br/>
 	                    <span itemProp="name">{this.data.institution.name}</span><br/>
