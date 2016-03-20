@@ -39,6 +39,16 @@ ArticleView = React.createClass({
                                 <span className='glyphicon glyphicon-calendar'></span>
                             </span>
                         </div>
+                        <div>Autor:</div>
+                        <div className="dropdown" id='author'>
+                            <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Wybierz Autora
+                            <span className="caret"></span></button>
+                            <ul className="dropdown-menu">
+                                <li>Mariolka</li>
+                                <li>Buhal</li>
+                                <li>gdzie reszta?</li>
+                            </ul>
+                        </div>
                     </div>
                     <div className='modal-footer'>
                         <button type='button' id='pbtn' className='btn btn-success' data-dismiss='modal' onClick={this.addArticle} >Publikuj</button>
@@ -55,8 +65,10 @@ ArticleView = React.createClass({
         return this.props.articles.map(function(el){
             return <div>
                 {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
-                <div><a>{el.title}</a></div>
+                <div>{el.title}</div>
                 <div>{el.content}</div>
+                <div>{el.publicationDate}</div>
+                <div>{el.author}</div>
             </div>
         })
     },

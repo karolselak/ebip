@@ -16,8 +16,7 @@ MainLayout = React.createClass({
 				</div>
         <div className="row">
           <div classnae="col-md-12">
-            <Homepage/>
-            {/* {this.props.content} */}
+            {this.props.content}
           </div>
         </div>
 			</div>
