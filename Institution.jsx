@@ -16,7 +16,7 @@ Institution = React.createClass({
         };
     },
     render()
-    {   
+    {
         //TODO Hubert: wyświetlanie panelu bocznego instytucji (sideMenus), wraz z możliwością ich edycji
         //(edycja, dodawanie i kasowanie kategorii oraz filtrów z tagami, struktura według InstitutionSchema).
         //TODO Kaj: usuwanie artykułów
@@ -78,7 +78,7 @@ Institution = React.createClass({
             var publicationDate = (new Date()).getTime();
         } else {
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
-            var publicationDate = d ? d._d.getTime() : Infinity;            
+            var publicationDate = d ? d._d.getTime() : Infinity;
         }
         Meteor.call('addArticle', {
             title: $title.value,
@@ -87,6 +87,10 @@ Institution = React.createClass({
             tags: $tags.value ? $tags.value.split(', ') : [],
             publicationDate: publicationDate
         })
+    },
+    //TODO
+    removeArticle(article) {
+        Meteor.call('removeArticle', article)
     },
     componentDidMount(){
         $(function () {
@@ -100,12 +104,17 @@ Institution = React.createClass({
             $ed.data('DateTimePicker').clear();
         });
     },
+    //TODO
     renderArticles() {
         return this.data.articles.map(function(el){
             return <div>
                 {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
                 <div><a>{el.title}</a></div>
                 <div>{el.content}</div>
+                <button type="button" className="btn btn-danger"
+                onClick=this.removeArticle(el)>
+                    Usuń artykuł "{el.title}"
+                </button>
             </div>
         })
     },
