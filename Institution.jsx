@@ -2,19 +2,21 @@ Institution = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         var ins = Institutions.findOne({name: this.props.institution});
+        var articles;
         if (this.props.tags) {
             //TODO Martin: obsłużenie tego przypadku, tzn. gdy są podane tagi (tags = 'tag1,tag2,tag3) i musimy wyświetlać
             //tylko te artykuły, które owe tagi posiadają
         } else if (this.props.phrase){
             //TODO Martin: a także tego przypadku, tzn. gdy podana jest fraza do wyszukania (w tytule, tekście lub tagach)
-        } else {
-            var articles = Articles.find({institution_id: ins && ins._id}).fetch()
+        } else if (!this.props.is_about){
+            articles = Articles.find({institution_id: ins && ins._id}).fetch()
         }
         return {
             articles: articles,
             institution: ins
         };
     },
+<<<<<<< HEAD
     render()
     {
         //TODO Hubert: wyświetlanie panelu bocznego instytucji (sideMenus), wraz z możliwością ich edycji
@@ -121,17 +123,45 @@ Institution = React.createClass({
 
             </div>
 
+=======
+    render() {   
+        //TODO Hubert: wyświetlanie panelu bocznego instytucji (sideMenus), wraz z możliwością ich edycji
+        //(edycja, dodawanie i kasowanie kategorii oraz filtrów z tagami, struktura według InstitutionSchema).
+        return <div className='container' id='institution'>
+            {/*nagłówek z nazwą instytucji: */}
+            <h2>{this.data.institution && this.data.institution.name}</h2>
+            {this.renderContent()}
+>>>>>>> 075833afadff75e8bad7920b817cb11f898ca7ff
         </div>
     },
-    addArticle(event) {
-        var $modal = $(event.target).closest('.modal-content');
-        var $title = $modal.find('#title')[0];
-        var $content = $modal.find('#content')[0];
-        var $tags = $modal.find('#tags')[0];
-        var expirationDate = $modal.find('#expirationDate').data('DateTimePicker').date();
-        if (event.target.id == 'pbtn') {
-            var publicationDate = (new Date()).getTime();
+    renderContent() {
+        if (this.props.is_about) {
+            if (this.data.institution) {
+                return <section itemScope itemType="http://schema.org/GovernmentOrganization"> 
+                    <div>
+                        <b>Adres:</b><br/>
+	                    <span itemProp="name">{this.data.institution.name}</span><br/>
+	                    <section itemProp="address" itemScope itemType="http://schema.org/PostalAddress">
+		                    <span itemProp="streetAddress">{this.data.institution.address.streetAddress}</span><br/>
+		                    <span itemProp="postalCode">{this.data.institution.address.postalCode} </span>
+		                    <span itemProp="addressLocality">{this.data.institution.address.addressLocality}</span>
+	                    </section>
+                    </div>
+                    <div>
+    	                <b>Email:</b> <span itemProp="email">{this.data.institution.email}</span>
+	                </div>
+                    <div>
+    	                <b>Telefon:</b> <span itemProp="email">{this.data.institution.telephone}</span>
+	                </div>
+                    <div>
+	                    <b>Liczba pracowników:</b> <span itemProp="email">{this.data.institution.numberOfEmployees}</span>
+	                </div>
+                </section>
+            } else {
+                return <section />
+            }
         } else {
+<<<<<<< HEAD
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
@@ -166,4 +196,9 @@ Institution = React.createClass({
             </div>
         })
     },
+=======
+            return <ArticleView articles={this.data.articles} institution={this.data.institution}/>
+        }
+    }
+>>>>>>> 075833afadff75e8bad7920b817cb11f898ca7ff
 });
