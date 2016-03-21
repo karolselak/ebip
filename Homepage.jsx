@@ -58,7 +58,10 @@ Homepage = React.createClass({
                         <input type="text" id='numberOfEmployees' className='form-control'/>
                     </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-success" data-dismiss="modal" onClick={this.addInstitution} >Dodaj</button>
+                            <button type="button" className="btn btn-success"
+                            data-dismiss="modal" onClick={this.addInstitution}>
+                                Dodaj
+                            </button>
                             <button type="button" className="btn btn-default" data-dismiss="modal">Anuluj</button>
                         </div>
                     </div>
@@ -70,8 +73,14 @@ Homepage = React.createClass({
         </div>
     },
     renderInstitutions() {
-        return this.data.institutions.map(function(el){
-            return <div><a href={'/'+el.name}>{el.name}</a></div>
+        return this.data.institutions.map((el)=>{
+            return <div id={el._id}>
+                <button type="button" className="btn btn-danger"
+                onClick={this.removeInstitution}>
+                    Usuń
+                </button>
+                <a href={'/'+el.name}> {el.name}</a>
+            </div>
         })
     },
     addInstitution(event) {
@@ -87,5 +96,8 @@ Homepage = React.createClass({
             telephone: $modal.find('#telephone')[0].value,
             numberOfEmployees: $modal.find('#numberOfEmployees')[0].value,
         })
+    },
+    removeInstitution(event) {
+        Meteor.call('removeInstitution', $(event.target).closest('div')[0].id)
     }
 });

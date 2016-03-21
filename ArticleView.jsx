@@ -4,7 +4,7 @@ ArticleView = React.createClass({
         return <div>
             {/*przycisk dodawania artykułów*/}
             <button type='button' className='btn btn-info' data-toggle='modal' data-target='#addArticleModal'>Dodaj artykuł</button>
-
+            <a href={}>O nas</a>
             {/*artykuły*/}
             {this.renderArticles()}
             
@@ -65,9 +65,9 @@ ArticleView = React.createClass({
         return this.props.articles.map(function(el){
             return <div>
                 {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
-                <div>{el.title}</div>
+                <div><a><b>{el.title}</b></a></div>
                 <div>{el.content}</div>
-                <div>{el.publicationDate}</div>
+                <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>
             </div>
         })

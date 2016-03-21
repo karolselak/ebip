@@ -27,7 +27,8 @@ Institution = React.createClass({
 
             <div className="col-md-3">
                 <div id="sidebar-wrapper">
-                    <ul className="sidebar-nav">
+                    {this.data.institution && this.renderMenus()}
+                    {/*<ul className="sidebar-nav">
                         <li className="sidebar-title">
                           <a href="#">
                               fuck her right in the pussy
@@ -54,11 +55,28 @@ Institution = React.createClass({
                         <li>
                           <a href="#">:))))))))</a>
                         </li>
-                    </ul>
+                    </ul>*/}
                 </div>
             </div>
             
         </div>
+    },
+    renderMenus() {
+        return this.data.institution.sideMenus.map((menu)=>{
+            return <ul className='sidebar-nav'>
+                <li className="sidebar-title">
+                    <a href="#">{menu.header}</a>
+                </li>
+                {this.renderFilterLinks(menu)}
+            </ul>
+        })
+    },
+    renderFilterLinks(menu) {
+        return menu.filters.map((el)=>{
+            return <li className="sidebar-title">
+                <a href="#">{el.title}</a>
+            </li>
+        })
     },
     renderContent() {
         if (this.props.is_about) {
