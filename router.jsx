@@ -5,19 +5,19 @@ FlowRouter.route('/', {
     }
 });
 //strona instytucji:
-FlowRouter.route('/:institution', {
+FlowRouter.route('/i/:institution', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Institution {...params}/>});
     }
 });
 //widok konkretnego artykułu:
-FlowRouter.route('/:institution/article/:article', {
+FlowRouter.route('/i/:institution/article/:article', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Institution {...params}/>});
     }
 });
 //widok treści filtrowanej według tagów:
-FlowRouter.route('/:institution/tags/:tags', {
+FlowRouter.route('/i/:institution/tags/:tags', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Institution {...params}/>});
     }
@@ -29,13 +29,13 @@ FlowRouter.route('/search/:phrase', {
     }
 });
 //wyszukiwanie lokalne (w ramach danej instytucji):
-FlowRouter.route('/:institution/search/:phrase', {
+FlowRouter.route('/i/:institution/search/:phrase', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Institution {...params}/>});
     }
 });
 //informacje ogólne nt. instytucji:
-FlowRouter.route('/:institution/about', {
+FlowRouter.route('/i/:institution/about', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Institution {...params} is_about={true} />});
     }

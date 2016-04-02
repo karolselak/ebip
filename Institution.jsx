@@ -50,14 +50,14 @@ Institution = React.createClass({
             {/*nagłówek z nazwą instytucji: */}
 
             <h2>{this.data.institution && this.data.institution.name}</h2>
-            <a href=''ZZ>O nas</a>
+            <a href={'/'+this.data.institution.name+'/about'}>O nas</a>
             {this.renderContent()}
 
 
             <div className="col-md-3">
                 <div id="sidebar-wrapper">
                     {this.data.institution && this.renderMenus()}
-                    {/*<ul className="sidebar-nav">
+                    <ul className="sidebar-nav">
                         <li className="sidebar-title">
                           <a href="#">
                                 informacje
@@ -84,12 +84,8 @@ Institution = React.createClass({
                         <li>
                           <a href="#">:))))))))</a>
                         </li>
-                    </ul>*/}
+                    </ul>
                 </div>
-            </div>
-            <div className="col-md-9">
-              <h2>{this.data.institution && this.data.institution.name}</h2>
-              {this.renderContent()}
             </div>
         </div>
     },
@@ -127,10 +123,11 @@ Institution = React.createClass({
     	                <b>Email:</b> <span itemProp="email">{this.data.institution.email}</span>
 	                </div>
                     <div>
-    	                <b>Telefon:</b> <span itemProp="email">{this.data.institution.telephone}</span>
-	                </div>
+    	                <b>Telefon:</b> <span itemProp="telephone">{this.data.institution.telephone}</span>
+                    </div>
                     <div>
-	                    <b>Liczba pracowników:</b> <span itemProp="email">{this.data.institution.numberOfEmployees}</span>
+	                    <b>Liczba pracowników:</b>
+                        <span itemProp="numberOfEmployees">{this.data.institution.numberOfEmployees}</span>
 	                </div>
                 </section>
             } else {
