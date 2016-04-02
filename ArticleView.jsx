@@ -3,10 +3,22 @@ ArticleView = React.createClass({
         //TODO Kaj: usuwanie artykułów
         return <div>
             {/*przycisk dodawania artykułów*/}
-            <button type='button' className='btn btn-info' data-toggle='modal' data-target='#addArticleModal'>Dodaj artykuł</button>
-            {/*artykuły*/}
-            {this.renderArticles()}
-            
+
+            <div className='container'>
+              <div className="row">
+                <div className="col-md-9" id="bottom-Row">
+                  <div id="bottom-button-add-article">
+                    <button type='button'  className='btn btn-info' data-toggle='modal' data-target='#addArticleModal'>Dodaj artykuł</button>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-8">
+              {/*artykuły*/}
+              {this.renderArticles()}
+                </div>
+              </div>
+            </div>
             {/*okno dodawania artykułów: */}
             <div className='modal fade' id='addArticleModal' role='dialog'>
             <div className='modal-dialog'>
@@ -93,7 +105,7 @@ ArticleView = React.createClass({
             var publicationDate = (new Date()).getTime();
         } else {
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
-            var publicationDate = d ? d._d.getTime() : Infinity;            
+            var publicationDate = d ? d._d.getTime() : Infinity;
         }
         Meteor.call('addArticle', {
             title: $title.value,
