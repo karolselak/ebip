@@ -4,7 +4,6 @@ ArticleView = React.createClass({
         return <div>
             {/*przycisk dodawania artykułów*/}
             <button type='button' className='btn btn-info' data-toggle='modal' data-target='#addArticleModal'>Dodaj artykuł</button>
-            <a href={}>O nas</a>
             {/*artykuły*/}
             {this.renderArticles()}
             
@@ -100,6 +99,7 @@ ArticleView = React.createClass({
             title: $title.value,
             content: $content.value,
             institution_id: this.props.institution._id,
+            //TODO usuwanie spacji
             tags: $tags.value ? $tags.value.split(', ') : [],
             publicationDate: publicationDate
         })

@@ -3,9 +3,34 @@ Institution = React.createClass({
     getMeteorData() {
         var ins = Institutions.findOne({name: this.props.institution});
         var articles;
+         if (!this.props.is_about){
+            articles = Articles.find({institution_id: ins && ins._id})
+             if (this.props.phrase){
+                var temp= "/"+this.props.phrase+"/i"
+                var re = new RegExp(temp)
+                articles = articles.find({$or: [{tags: this.props.phrase},{content: re},{ title: re}]}).fetch()
+            } else if (this.props.tags) {
+                articles = articles.find({tags : this.props.tags}).fetch()
+            } else {
+                articles=articles.fetch()
+            }
+        }
+        return {
+            articles: articles,
+            institution: ins
+        };
+    },
+    getMeteorData() {
+        var ins = Institutions.findOne({name: this.props.institution});
+        var articles;
         if (this.props.tags) {
-            //TODO Martin: obsłużenie tego przypadku, tzn. gdy są podane tagi (tags = 'tag1,tag2,tag3) i musimy wyświetlać
-            //tylko te artykuły, które owe tagi posiadają
+            var temp= "/"+this.props.phrase+"/i"
+            var re = new RegExp(temp)
+            articles = Articles.find({$and: [{
+                institution_id: ins && ins._id
+            }, {
+                $or: [{tags: this.props.phrase},{content: re},{ title: re}]
+            }]}).fetch()
         } else if (this.props.phrase){
             //TODO Martin: a także tego przypadku, tzn. gdy podana jest fraza do wyszukania (w tytule, tekście lub tagach)
         } else if (!this.props.is_about){
@@ -20,9 +45,11 @@ Institution = React.createClass({
     render() {   
         //TODO Hubert: wyświetlanie panelu bocznego instytucji (sideMenus), wraz z możliwością ich edycji
         //(edycja, dodawanie i kasowanie kategorii oraz filtrów z tagami, struktura według InstitutionSchema).
+        TTT = this;
         return <div className='container' id='institution'>
             {/*nagłówek z nazwą instytucji: */}
             <h2>{this.data.institution && this.data.institution.name}</h2>
+            <a href=''ZZ>O nas</a>
             {this.renderContent()}
 
             <div className="col-md-3">
