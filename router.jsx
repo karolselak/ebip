@@ -40,3 +40,15 @@ FlowRouter.route('/i/:institution/about', {
         ReactLayout.render(MainLayout, {content: <Institution {...params} is_about={true} />});
     }
 });
+//lista zdefiniowanych typów mikrodanych
+FlowRouter.route('/itemtypes', {
+    action(params) {
+        ReactLayout.render(MainLayout, {content: <ItemTypesList />});
+    }
+});
+//podgląd typu mikrodanych
+FlowRouter.route('/itemtype/:itemname', {
+    action(params) {
+        ReactLayout.render(MainLayout, {content: <ItemType {...params} />});
+    }
+});

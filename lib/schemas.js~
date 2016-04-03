@@ -123,7 +123,7 @@ ItemTypeSchema = new SimpleSchema({
     },
     inheritsFrom: {
         type: [String],
-        label: 'array of urls defining types this property inherits from'
+        label: 'array of urls defining types the property inherits from'
     },
     properties: {
         type: [Object],
@@ -134,12 +134,12 @@ ItemTypeSchema = new SimpleSchema({
     },
     'properties.$.expectedTypes': {
         type: [String],
-        label: 'array of urls defining types allowed for property'
+        label: 'array of urls defining types allowed for the property'
     },
     'properties.$.description': {
         type: String,
         optional: true,
-        label: 'short description of property'
+        label: 'short description of the property'
     }
 });
 

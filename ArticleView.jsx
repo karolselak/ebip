@@ -73,10 +73,10 @@ ArticleView = React.createClass({
         </div>
     },
     renderArticles() {
-        return this.props.articles.map(function(el){
+        return this.props.articles && this.props.articles.map((el)=>{
             return <div>
                 {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
-                <div><a><b>{el.title}</b></a></div>
+                <div><a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}><b>{el.title}</b></a></div>
                 <div>{el.content}</div>
                 <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>

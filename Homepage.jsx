@@ -15,19 +15,19 @@ Homepage = React.createClass({
                   {/*text input: */}
                   <div className="col-md-7 col-md-offset-3">
                     <table>
-                      <tr>
-                      <td id="search-box">
-                    <div className="form-group">
-                      <input type="text" className="form-control"/>
-                    </div>
-                    </td>
-                  <td>
-                    <button type="button" className="btn btn-info" id="btn-info1">
-                      <span className="glyphicon glyphicon-search">Wyszukaj</span>
-                    </button>
-                  </td>
-                  </tr>
-                  </table>
+                        <tr>
+                            <td id="search-box">
+                                <div className="form-group">
+                                    <input type="text" className="form-control"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" className="btn btn-info" id="btn-info1">
+                                    <span className="glyphicon glyphicon-search">Wyszukaj</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
                   </div>
                 </div>
                 <div className="row">

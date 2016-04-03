@@ -86,7 +86,7 @@ Homepage = React.createClass({
                 onClick={this.removeInstitution}>
                     Usuń
                 </button>
-                <a href={'/'+el.name}> {el.name}</a>
+                <a href={'/i/'+el.name}> {el.name}</a>
             </div>
         })
     },

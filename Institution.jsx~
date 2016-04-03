@@ -4,15 +4,19 @@ Institution = React.createClass({
         var ins = Institutions.findOne({name: this.props.institution});
         var articles;
          if (!this.props.is_about){
-            articles = Articles.find({institution_id: ins && ins._id})
-             if (this.props.phrase){
-                var temp= "/"+this.props.phrase+"/i"
-                var re = new RegExp(temp)
-                articles = articles.find({$or: [{tags: this.props.phrase},{content: re},{ title: re}]}).fetch()
-            } else if (this.props.tags) {
-                articles = articles.find({tags : this.props.tags}).fetch()
+            if (this.props.article) {
+                articles = [Articles.findOne(this.props.article)]
             } else {
-                articles=articles.fetch()
+                articles = Articles.find({institution_id: ins && ins._id});
+                if (this.props.phrase){
+                    var temp = "/"+this.props.phrase+"/i"
+                    var re = new RegExp(temp)
+                    articles = articles.find({$or: [{tags: this.props.phrase},{content: re},{ title: re}]}).fetch()
+                } else if (this.props.tags) {
+                    articles = articles.find({tags : this.props.tags}).fetch()
+                } else {
+                    articles = articles.fetch()
+                }
             }
         }
         return {
@@ -20,7 +24,7 @@ Institution = React.createClass({
             institution: ins
         };
     },
-    getMeteorData() {
+    /*getMeteorData() {
         var ins = Institutions.findOne({name: this.props.institution});
         var articles;
         if (this.props.tags) {
@@ -40,7 +44,7 @@ Institution = React.createClass({
             articles: articles,
             institution: ins
         };
-    },
+    },*/
 
     render() {
         //TODO Hubert: wyświetlanie panelu bocznego instytucji (sideMenus), wraz z możliwością ich edycji
@@ -50,7 +54,7 @@ Institution = React.createClass({
             {/*nagłówek z nazwą instytucji: */}
 
             <h2>{this.data.institution && this.data.institution.name}</h2>
-            <a href={'/' + (this.data.institution && this.data.institution.name) + '/about'}>O nas</a>
+            <a href={'/i/' + (this.data.institution && this.data.institution.name) + '/about'}>O nas</a>
             {this.renderContent()}
 
 
