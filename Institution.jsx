@@ -50,7 +50,7 @@ Institution = React.createClass({
             {/*nagłówek z nazwą instytucji: */}
 
             <h2>{this.data.institution && this.data.institution.name}</h2>
-            <a href={'/'+this.data.institution.name+'/about'}>O nas</a>
+            <a href={'/i/' + (this.data.institution && this.data.institution.name) + '/about'}>O nas</a>
             {this.renderContent()}
 
 

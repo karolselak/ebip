@@ -1,0 +1,21 @@
+Articles = new Mongo.Collection('articles');
+Institutions = new Mongo.Collection('institutions');
+ItemTypes = new Mongo.Collection('itemTypes');
+
+if (Meteor.isClient) {
+    Accounts.ui.config({ passwordSignupFields: "USERNAME_ONLY" });
+    Meteor.subscribe("articles");
+    Meteor.subscribe("institutions");
+    Meteor.subscribe("itemTypes");
+}
+if (Meteor.isServer) {
+    Meteor.publish("articles",function() {
+        return Articles.find();
+    });
+    Meteor.publish("institutions",function() {
+        return Institutions.find();
+    });
+    Meteor.publish("itemTypes",function() {
+        return Institutions.find();
+    });
+}
