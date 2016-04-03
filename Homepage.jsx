@@ -82,9 +82,10 @@ Homepage = React.createClass({
     renderInstitutions() {
         return this.data.institutions.map((el)=>{
             return <div id={el._id}>
-                <button type="button" className="btn btn-danger"
+                <button type="button" className="btn btn-default"
                 onClick={this.removeInstitution}>
-                    Usuń
+                    <span className="glyphicon glyphicon-trash"
+                        aria-label="Usuń"></span>
                 </button>
                 <a href={'/i/'+el.name}> {el.name}</a>
             </div>
