@@ -121,6 +121,11 @@ ItemTypeSchema = new SimpleSchema({
     name: {
         type: String
     },
+    description: {
+        type: String,
+        label: 'short description of the type',
+        optional: true
+    },
     inheritsFrom: {
         type: [String],
         label: 'array of urls defining types the property inherits from'

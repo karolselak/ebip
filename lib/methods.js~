@@ -12,7 +12,6 @@ Meteor.methods({
         var id = Institutions.insert(newInstitution);
         return id;
     },
-    //TODO
     removeInstitution: function(id) {
         Institutions.remove(id);
     },
@@ -28,7 +27,24 @@ Meteor.methods({
     },
     addItemType: function(newType) {
         newType = ItemTypeSchema.clean(newType);
-        check(newArticle, ItemTypeSchema);
+        check(newType, ItemTypeSchema);
         return ItemTypes.insert(newType);
+    },
+    addItemTypeProperty: function(it_id, newProperty) {
+        var obj = {
+            name: '.',
+            description: '.',
+            properties: [newProperty]
+        }
+        obj = ItemTypeSchema.clean(obj);
+        check(obj, ItemTypeSchema);
+        return ItemTypes.update({_id: it_id}, {$push: {properties: obj.properties[0]}});
+    },
+    removeItemTypeProperty: function(it_id, propertyIndex) {
+        var unset = {$unset: {}};
+        console.log('properties.'+propertyIndex);
+        unset.$unset['properties.'+propertyIndex] = 1;
+        ItemTypes.update({_id: it_id}, unset)
+        ItemTypes.update({_id: it_id}, {$pull: {properties: null}})
     }
 });

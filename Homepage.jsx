@@ -7,6 +7,7 @@ Homepage = React.createClass({
     },
     render()
     {
+        _homepage_ = this;
         //TODO Hubert: niech to zacznie wyglądać po ludzku, bez tych brzydkich zaokrągleń, wyszukiwarka jako input
         //TODO Kaj: usuwanie instytucji (przycisk + funkcja + metoda w methods.js)
         return <div>
@@ -82,7 +83,7 @@ Homepage = React.createClass({
     renderInstitutions() {
         return this.data.institutions.map((el)=>{
             return <div id={el._id}>
-                <button type="button" className="btn btn-default"
+                <button type="button" className="btn btn-xs btn-default"
                 onClick={this.removeInstitution}>
                     <span className="glyphicon glyphicon-trash"
                         aria-label="Usuń"></span>

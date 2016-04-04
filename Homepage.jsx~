@@ -7,6 +7,7 @@ Homepage = React.createClass({
     },
     render()
     {
+        _homepage_ = this;
         //TODO Hubert: niech to zacznie wyglądać po ludzku, bez tych brzydkich zaokrągleń, wyszukiwarka jako input
         //TODO Kaj: usuwanie instytucji (przycisk + funkcja + metoda w methods.js)
         return <div>
@@ -15,19 +16,19 @@ Homepage = React.createClass({
                   {/*text input: */}
                   <div className="col-md-7 col-md-offset-3">
                     <table>
-                      <tr>
-                      <td id="search-box">
-                    <div className="form-group">
-                      <input type="text" className="form-control"/>
-                    </div>
-                    </td>
-                  <td>
-                    <button type="button" className="btn btn-info" id="btn-info1">
-                      <span className="glyphicon glyphicon-search">Wyszukaj</span>
-                    </button>
-                  </td>
-                  </tr>
-                  </table>
+                        <tr>
+                            <td id="search-box">
+                                <div className="form-group">
+                                    <input type="text" className="form-control"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" className="btn btn-info" id="btn-info1">
+                                    <span className="glyphicon glyphicon-search">Wyszukaj</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
                   </div>
                 </div>
                 <div className="row">
@@ -82,9 +83,10 @@ Homepage = React.createClass({
     renderInstitutions() {
         return this.data.institutions.map((el)=>{
             return <div id={el._id}>
-                <button type="button" className="btn btn-danger"
+                <button type="button" className="btn btn-sm btn-default"
                 onClick={this.removeInstitution}>
-                    Usuń
+                    <span className="glyphicon glyphicon-trash"
+                        aria-label="Usuń"></span>
                 </button>
                 <a href={'/i/'+el.name}> {el.name}</a>
             </div>
