@@ -48,68 +48,53 @@ Institution = React.createClass({
         TTT = this;
         return <div className='container' id='institution'>
             {/*nagłówek z nazwą instytucji: */}
-
-            <h2>{this.data.institution && this.data.institution.name}</h2>
-            <a href={'/i/' + (this.data.institution && this.data.institution.name) + '/about'}>O nas</a>
-            {this.renderContent()}
-
-
-            <div className="col-md-3">
-                <div id="sidebar-wrapper">
-                    {this.data.institution && this.renderMenus()}
-                    <ul className="sidebar-nav">
-                        <li className="sidebar-title">
-                          <a href="#">
-                                informacje
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">?????</a>
-                        </li>
-                        <li>
-                          <a href="#">!!!!</a>
-                        </li>
-                        <li>
-                          <a href="#">#####</a>
-                        </li>
-                        <li>
-                          <a href="#">@@@@@</a>
-                        </li>
-                        <li>
-                          <a href="#">%%%%%</a>
-                        </li>
-                        <li>
-                          <a href="#">&&&&&</a>
-                        </li>
-                        <li>
-                          <a href="#">:))))))))</a>
-                        </li>
-                    </ul>
+            <div className="row">
+              <div className="col-md-12">
+                <div id='centerTopSection'>
+                  <p><h2>{this.data.institution && this.data.institution.name}</h2></p>
+                  <p id="aboutUs-p"><a href={'/i/' + (this.data.institution && this.data.institution.name) + '/about'}>O nas</a></p>
                 </div>
+              </div>
             </div>
+
+            <div className="row">
+              <div className="col-md-2">
+                  <div id="sidebar-wrapper">
+                      {this.data.institution && this.renderMenus()}
+                  </div>
+              </div>
+              <div className="col-md-9">
+                {this.renderContent()}
+              </div>
+          </div>
         </div>
+
+
     },
     renderMenus() {
         return this.data.institution.sideMenus.map((menu)=>{
-            return <ul className='sidebar-nav'>
-                <li className="sidebar-title">
-                    <a href="#">{menu.header}</a>
-                </li>
+            return (
+              <ul className="sidebar-nav">
+              <li className="sidebar-title">
+                  <a href="#">{menu.header}</a>
+              </li>
                 {this.renderFilterLinks(menu)}
             </ul>
-        })
+        )})
     },
     renderFilterLinks(menu) {
         return menu.filters.map((el)=>{
-            return <li className="sidebar-title">
+            return (
+            <li className="sidebar-title">
                 <a href="#">{el.title}</a>
             </li>
-        })
+        )})
     },
     renderContent() {
         if (this.props.is_about) {
             if (this.data.institution) {
-                return <section itemScope itemType="http://schema.org/GovernmentOrganization">
+                return
+                <section itemScope itemType="http://schema.org/GovernmentOrganization">
                     <div>
                         <b>Adres:</b><br/>
 	                    <span itemProp="name">{this.data.institution.name}</span><br/>

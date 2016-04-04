@@ -69,9 +69,13 @@ margin-left: 5px;
     background: #000;
 }
 
+#aboutUs-p{
+  text-align: center;
+}
+
 .sidebar-nav {
     position: absolute;
-    top: 20px;
+    top: 0 px;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -116,10 +120,15 @@ margin-left: 5px;
 }
 /* -----------------------------------------------AtricleView------------------------------------------------*/
 #bottom-button-add-article{
-
   margin-right: 30px;
   float: right;
 }
+#centerTopSection{
+  text-align: center;
+}
+#articles{
+  margin-top: 20px;
+}
 #bottom-Row{
-  
+
 }

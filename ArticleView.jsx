@@ -6,16 +6,16 @@ ArticleView = React.createClass({
 
             <div className='container'>
               <div className="row">
-                <div className="col-md-9" id="bottom-Row">
-                  <div id="bottom-button-add-article">
-                    <button type='button'  className='btn btn-info' data-toggle='modal' data-target='#addArticleModal'>Dodaj artykuł</button>
-                  </div>
+                <div className="col-md-9" id='articles'>
+                  {/*artykuły*/}
+                  {this.renderArticles()}
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-8">
-              {/*artykuły*/}
-              {this.renderArticles()}
+                <div className="col-md-10" id="bottom-Row">
+                  <div id="bottom-button-add-article">
+                    <button type='button'  className='btn btn-info' data-toggle='modal' data-target='#addArticleModal'>Dodaj artykuł</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -68,8 +68,7 @@ ArticleView = React.createClass({
                     </div>
                 </div>
             </div>
-            </div>
-
+        </div>
         </div>
     },
     renderArticles() {
