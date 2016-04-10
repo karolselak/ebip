@@ -9,7 +9,6 @@ Homepage = React.createClass({
     {
         _homepage_ = this;
         //TODO Hubert: niech to zacznie wyglądać po ludzku, bez tych brzydkich zaokrągleń, wyszukiwarka jako input
-        //TODO Kaj: usuwanie instytucji (przycisk + funkcja + metoda w methods.js)
         return <div>
             <div className="container">
                 <div className="row">

@@ -1,6 +1,5 @@
 ArticleView = React.createClass({
     render() {
-        //TODO Kaj: usuwanie artykułów
         return <div>
             {/*przycisk dodawania artykułów*/}
 
@@ -73,7 +72,12 @@ ArticleView = React.createClass({
     },
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
-            return <div>
+            return <div id={el._id}>
+                <button type="button" className="btn btn-xs btn-default"
+                onClick={this.removeArticle}>
+                    <span className="glyphicon glyphicon-trash"
+                        aria-label="Usuń"></span>
+                </button>
                 {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
                 <div><a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}><b>{el.title}</b></a></div>
                 <div>{el.content}</div>
@@ -114,5 +118,8 @@ ArticleView = React.createClass({
             tags: $tags.value ? $tags.value.split(', ') : [],
             publicationDate: publicationDate
         })
+    },
+    removeArticle(event) {
+        Meteor.call('removeArticle', $(event.target).closest('div')[0].id);
     }
 });
