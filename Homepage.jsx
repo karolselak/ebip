@@ -23,7 +23,7 @@ Homepage = React.createClass({
                             </td>
                             <td>
                                 <button type="button" className="btn btn-info" id="btn-info1">
-                                    <span className="glyphicon glyphicon-search">Wyszukaj</span>
+                                    <span className="glyphicon glyphicon-search"></span> Wyszukaj
                                 </button>
                             </td>
                         </tr>
