@@ -59,6 +59,8 @@ ArticleView = React.createClass({
                                 <li>gdzie reszta?</li>
                             </ul>
                         </div>
+                        <div>Dodaj załącznik: </div>
+                        <input type="file" id="file" />
                     </div>
                     <div className='modal-footer'>
                         <button type='button' id='pbtn' className='btn btn-success' data-dismiss='modal' onClick={this.addArticle} >Publikuj</button>
@@ -110,6 +112,10 @@ ArticleView = React.createClass({
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
+        var file = $modal.find('#file')[0];
+        Attachments.insert(file, function(err, fileObj) {
+
+        });
         Meteor.call('addArticle', {
             title: $title.value,
             content: $content.value,

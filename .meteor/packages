@@ -28,3 +28,6 @@ tsega:bootstrap3-datetimepicker
 rzymek:moment-locale-pl
 standard-minifier-css
 standard-minifier-js
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem
