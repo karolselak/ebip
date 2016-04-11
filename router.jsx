@@ -41,13 +41,13 @@ FlowRouter.route('/i/:institution/about', {
     }
 });
 //lista zdefiniowanych typów mikrodanych
-FlowRouter.route('/itemtypes', {
+FlowRouter.route('/directory', {
     action(params) {
-        ReactLayout.render(MainLayout, {content: <ItemTypesList />});
+        ReactLayout.render(MainLayout, {content: <Directory />});
     }
 });
 //podgląd typu mikrodanych
-FlowRouter.route('/itemtype/:itemname', {
+FlowRouter.route('/directory/:itemname', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <ItemType {...params} />});
     }
