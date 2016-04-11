@@ -18,12 +18,12 @@ Homepage = React.createClass({
                         <tr>
                             <td id="search-box">
                                 <div className="form-group">
-                                    <input type="text" className="form-control"/>
+                                    <input type="text" className="form-control" id="searchValue"/>
                                 </div>
                             </td>
                             <td>
-                                <button type="button" className="btn btn-info" id="btn-info1">
-                                    <span className="glyphicon glyphicon-search"></span> Wyszukaj
+                                <button type="button" className="btn btn-info" id="btn-info1" onClick={this.gotoSerchResults} >
+                                    <span className="glyphicon glyphicon-search">Wyszukaj</span>
                                 </button>
                             </td>
                         </tr>
@@ -45,7 +45,7 @@ Homepage = React.createClass({
                 <div className="modal fade" id="addInstitutionModal" role="dialog">
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        <div className="modal-header">
+                        <div className="modal-header">/search/ala
                             <button type="button" className="close" data-dismiss="modal">&times;</button>
                             <h4 className="modal-title">Dodaj instytucję</h4>
                         </div>
@@ -107,5 +107,11 @@ Homepage = React.createClass({
     },
     removeInstitution(event) {
         Meteor.call('removeInstitution', $(event.target).closest('div')[0].id)
+    },
+    gotoSerchResults(){ 
+        var temp=document.getElementById("searchValue").value
+        if(temp!=""){
+            document.location="/search/"+temp
+        }
     }
 });
