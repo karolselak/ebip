@@ -6,7 +6,7 @@ SearchResults = React.createClass({
     	var ins = Institutions.find({$or: [{name:  {$regex: temp,$options:"i"}  },{email: {$regex: temp,$options:"i"} },{address: {$regex: temp,$options:"i"} }]}).fetch();
     	var art= Articles.find({$or: [{tags: temp},{content: {$regex: temp,$options:"i"}},{ title: {$regex: temp,$options:"i"}}]}).fetch();
     	return {
-            articles :art,
+            articles: art,
     		institutions: ins
     	};
     },
