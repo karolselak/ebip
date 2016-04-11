@@ -52,7 +52,7 @@ FlowRouter.route('/directory/:itemname', {
         ReactLayout.render(MainLayout, {content: <ItemType {...params} />});
     }
 });
-//Uprawnienia urzytkownikow
+//Uprawnienia użytkownikow
 FlowRouter.route('/permissions', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Permissions />});
