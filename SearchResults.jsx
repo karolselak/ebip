@@ -2,8 +2,9 @@ SearchResults = React.createClass({
     //TODO Martin: sprawienie, aby w tej klasie renderowały się globalne wyniki wyszukiwania
     mixins: [ReactMeteorData],
     getMeteorData() {
-    	var ins = Institutions.find({$or: [{name: "ala"},{email:"ala"},{address: "ala"}]}).fetch();
-    	var art= Articles.find({$or: [{tags: "ala"},{content: "ala"},{ title: "ala"}]}).fetch();
+        var temp= this.props.phrase
+    	var ins = Institutions.find({$or: [{name:  {$regex: temp,$options:"i"}  },{email: {$regex: temp,$options:"i"} },{address: {$regex: temp,$options:"i"} }]}).fetch();
+    	var art= Articles.find({$or: [{tags: temp},{content: {$regex: temp,$options:"i"}},{ title: {$regex: temp,$options:"i"}}]}).fetch();
     	return {
             articles :art,
     		institutions: ins
