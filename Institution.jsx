@@ -49,7 +49,7 @@ Institution = React.createClass({
     render() {
         //TODO Hubert: wyświetlanie panelu bocznego instytucji (sideMenus), wraz z możliwością ich edycji
         //(edycja, dodawanie i kasowanie kategorii oraz filtrów z tagami, struktura według InstitutionSchema).
-        TTT = this;
+        _Institution = this;
         return <div className='container' id='institution'>
             {/*nagłówek z nazwą instytucji: */}
             <div className="row">

@@ -1,5 +1,18 @@
 ArticleView = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData() {
+        return {
+            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['article']}}).fetch()
+        };
+    },
+    getInitialState() {
+        return {
+            selectedType: '',
+            selectedAuthor: ''
+        }
+    },
     render() {
+        _ArticleView = this;
         return <div>
             {/*przycisk dodawania artykułów*/}
 
@@ -49,6 +62,15 @@ ArticleView = React.createClass({
                                 <span className='glyphicon glyphicon-calendar'></span>
                             </span>
                         </div>
+                        <div>Typ artykułu:</div>
+                        <div className="dropdown" id='author'>
+                            <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{this.renderSelectedType()} <span className="caret"></span>
+                            </button>
+                            <ul className="dropdown-menu">
+                                {this.renderDropdownTypes()}
+                            </ul>
+                        </div>
+                        {this.renderExtendedModal()}
                         <div>Autor:</div>
                         <div className="dropdown" id='author'>
                             <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Wybierz Autora
@@ -69,6 +91,38 @@ ArticleView = React.createClass({
             </div>
         </div>
         </div>
+    },
+    renderExtendedModal() {
+        if (this.state.selectedType) {
+            return this.data.articleTypes.find((el)=>{return el.name == this.state.selectedType}).properties.map((el)=>{
+                return <div>
+                    <div>{el.name+':'}</div>
+                    <input id={el.name} className='form-control extensions' type='text'></input>
+                </div>
+            })
+        }
+    },
+    renderSelectedType() {
+        if (!this.state.selectedType) {
+            return <span>brak typu</span>;        
+        } else {
+            return <span>{this.state.selectedType}</span>;
+        }
+    },
+    renderDropdownTypes() {
+        var arr = this.data.articleTypes.map((el)=>{return el.name})
+        arr.push('');
+        for (var i in arr) {
+            if (arr[i] == this.state.selectedType) {
+                arr.splice(i,1);
+            }
+        }
+        return arr.map((el)=>{
+            return <li onClick={this.selectType}><a href='#' id={el}>{el || ' - brak typu - '}</a></li>;
+        });
+    },
+    selectType(event) {
+        this.setState({selectedType: event.target.id})
     },
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
@@ -103,6 +157,14 @@ ArticleView = React.createClass({
         var $title = $modal.find('#title')[0];
         var $content = $modal.find('#content')[0];
         var $tags = $modal.find('#tags')[0];
+        var $extensions = $modal.find('.extensions');
+        var extensions = {}
+        for (var i in $extensions) {
+            if ($extensions[i].value) {
+                extensions[$extensions[i].id] = $extensions[i].value;
+            }
+        }
+        debugger        
         var expirationDate = $modal.find('#expirationDate').data('DateTimePicker').date();
         if (event.target.id == 'pbtn') {
             var publicationDate = (new Date()).getTime();
@@ -116,7 +178,8 @@ ArticleView = React.createClass({
             institution_id: this.props.institution._id,
             //TODO usuwanie spacji
             tags: $tags.value ? $tags.value.split(', ') : [],
-            publicationDate: publicationDate
+            publicationDate: publicationDate,
+            extensions: extensions
         })
     },
     removeArticle(event) {
