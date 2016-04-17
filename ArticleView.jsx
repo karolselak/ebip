@@ -112,7 +112,7 @@ ArticleView = React.createClass({
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
-        var file = $modal.find('#file')[0];
+        var file = $modal.find('#file')[0].files[0];
         Attachments.insert(file, function(err, fileObj) {
 
         });
