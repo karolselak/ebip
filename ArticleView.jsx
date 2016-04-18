@@ -166,7 +166,6 @@ ArticleView = React.createClass({
                 extensions[$extensions[i].id] = $extensions[i].value;
             }
         }
-        debugger        
         var expirationDate = $modal.find('#expirationDate').data('DateTimePicker').date();
         if (event.target.id == 'pbtn') {
             var publicationDate = (new Date()).getTime();
@@ -175,9 +174,9 @@ ArticleView = React.createClass({
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
         var file = $modal.find('#file')[0].files[0];
-        Attachments.insert(file, function(err, fileObj) {
-
-        });
+        if (file) {
+            Attachments.insert(file);
+        }        
         Meteor.call('addArticle', {
             title: $title.value,
             content: $content.value,
