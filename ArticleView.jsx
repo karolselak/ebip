@@ -176,8 +176,7 @@ ArticleView = React.createClass({
             title: $title.value,
             content: $content.value,
             institution_id: this.props.institution._id,
-            //TODO usuwanie spacji
-            tags: $tags.value ? $tags.value.split(', ') : [],
+            tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
             publicationDate: publicationDate,
             extensions: extensions
         })

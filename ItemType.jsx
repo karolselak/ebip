@@ -10,8 +10,9 @@ ItemType = React.createClass({
             return <div className='container'>
                 {/*nagłówek z nazwą typu: */}
                 <h2>{this.data.itemtype.name}</h2>
+                <div><b>{this.data.itemtype.description}</b></div>
                 {this.renderParents()}
-                <div>{this.data.itemtype.description}</div>
+                {this.renderSameAs()}
                 <table className='table'>
                     <thead>
                         <tr>
@@ -43,7 +44,7 @@ ItemType = React.createClass({
                         <div>Nazwa:</div>
                         <input type="text" id='name' className='form-control'/>
                         <div>Spodziewany typ:</div>
-                        <textarea id='expectedTypes' className='form-control' rows='3' cols='80'></textarea>
+                        <textarea id='expectedTypes' className='form-control' rows='3' cols='80' >https://schema.org/Text</textarea>
                         <div>Opis:</div>
                         <textarea id='description' className='form-control' rows='3' cols='80'></textarea>                       
                     </div>
@@ -87,13 +88,17 @@ ItemType = React.createClass({
     },
     renderExpectedTypes(arr) {
         return arr.map((el, i)=>{
-            var splitString = el.split('/');
-            var name = splitString[splitString.length-1];
-            if (i < arr.length-1) {
-                return <span><a href={el}>{name}</a> lub </span>
+            if (el) {
+                var splitString = el.split('/');
+                var name = splitString[splitString.length-1];
+                if (i < arr.length-1) {
+                    return <span><a href={el}>{name}</a> lub </span>
+                } else {
+                    return <span><a href={el}>{name}</a></span>            
+                } 
             } else {
-                return <span><a href={el}>{name}</a></span>            
-            } 
+                return null;            
+            }
         })
     },
     renderParents() {
@@ -104,6 +109,20 @@ ItemType = React.createClass({
                     return <span><a href={'/directory/'+el}>{el}</a>, </span>
                 } else {
                     return <span><a href={'/directory/'+el}>{el}</a></span>            
+                } 
+            })}</div>
+        }
+    },
+    renderSameAs() {
+        if (this.data.itemtype.sameAs && this.data.itemtype.sameAs.length > 0) {
+            var arr = this.data.itemtype.sameAs;
+            return <div>Identyczny z: {arr.map((el, i)=>{
+                var splitString = el.split('/');
+                var name = splitString[splitString.length-1];
+                if (i < arr.length-1) {
+                    return <span><a href={el}>{name}</a>, </span>
+                } else {
+                    return <span><a href={el}>{name}</a></span>            
                 } 
             })}</div>
         }

@@ -50,6 +50,7 @@ logging@1.0.10
 mdg:validation-error@0.2.0
 meteor@1.1.12
 meteor-base@1.0.2
+meteorhacks:picker@1.0.3
 minifier-css@1.1.9
 minifier-js@1.1.9
 minimongo@1.0.12

@@ -58,3 +58,35 @@ FlowRouter.route('/permissions', {
         ReactLayout.render(MainLayout, {content: <Permissions />});
     }
 });
+
+/*
+
+	        var xhttp = new XMLHttpRequest();
+
+	        xhttp.onreadystatechange = function () {
+	            if (xhttp.readyState == 4 && xhttp.status == 200) {
+	                var Token = xhttp.responseText;
+	                console.log(xhttp.responseText);
+	                if (Token) {
+	                    localStorage.setItem('token', Token);
+	                    this.forceUpdate();
+	                }
+	            }
+	        };
+	        xhttp.open('POST', 'signIn?email=' + email + '&password=' + password, true);
+	        xhttp.send();
+	    },
+*/
+if (Meteor.isServer) {
+    var postRoutes = Picker.filter(function(req, res) {
+        return req.method == "POST";
+    });
+    var getRoutes = Picker.filter(function(req, res) {
+        return req.method == "GET" && req.headers.accept == "application/json";
+    });
+    getRoutes.route('/directory/:itemname', function(params, req, res, next) {
+        var itemType = ItemTypes.findOne({name: params.itemname})
+        res.end(JSON.stringifyCircular(itemType));
+    });
+}
+
