@@ -29,3 +29,6 @@ rzymek:moment-locale-pl
 standard-minifier-css
 standard-minifier-js
 meteorhacks:picker
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem
