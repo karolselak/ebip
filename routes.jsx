@@ -88,5 +88,9 @@ if (Meteor.isServer) {
         var itemType = ItemTypes.findOne({name: params.itemname})
         res.end(JSON.stringifyCircular(itemType));
     });
+    getRoutes.route('/restQuery/:collection/:jsonQuery', function(params, req, res, next) {
+        var result = Mongo.Collection.get(params.collection).find(JSON.parse(decodeURI(params.jsonQuery))).fetch();
+        res.end(JSON.stringifyCircular(result));
+    });
 }
 

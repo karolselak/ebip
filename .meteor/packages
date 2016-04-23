@@ -32,3 +32,4 @@ meteorhacks:picker
 cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
+dburles:mongo-collection-instances
