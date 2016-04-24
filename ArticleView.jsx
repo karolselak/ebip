@@ -106,7 +106,7 @@ ArticleView = React.createClass({
     },
     renderSelectedType() {
         if (!this.state.selectedType) {
-            return <span>brak typu</span>;        
+            return <span>brak typu</span>;
         } else {
             return <span>{this.state.selectedType}</span>;
         }
@@ -128,6 +128,9 @@ ArticleView = React.createClass({
     },
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
+            var attachment = Attachments.find({"_id":el.attachment_id});
+
+
             return <div id={el._id}>
                 <button type="button" className="btn btn-xs btn-default"
                 onClick={this.removeArticle}>
@@ -139,6 +142,7 @@ ArticleView = React.createClass({
                 <div>{el.content}</div>
                 <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>
+                <div>{attachment.name}</div>
             </div>
         })
     },
@@ -174,16 +178,25 @@ ArticleView = React.createClass({
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
         var file = $modal.find('#file')[0].files[0];
+        var file_id = "file_id";
         if (file) {
-            Attachments.insert(file);
-        }        
+            Attachments.insert(file, function (err, fileObj) {
+                if (err) {
+                    console.log("err");
+                } else {
+                    file_id = fileObj._id;
+                    console.log("dsfaasdf");
+                }
+            });
+        }
         Meteor.call('addArticle', {
             title: $title.value,
             content: $content.value,
             institution_id: this.props.institution._id,
             tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
             publicationDate: publicationDate,
-            extensions: extensions
+            extensions: extensions,
+            attachment_id: file_id
         })
     },
     removeArticle(event) {
