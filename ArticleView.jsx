@@ -178,26 +178,32 @@ ArticleView = React.createClass({
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
         var file = $modal.find('#file')[0].files[0];
-        var file_id = "file_id";
         if (file) {
             Attachments.insert(file, function (err, fileObj) {
                 if (err) {
                     console.log("err");
                 } else {
-                    file_id = fileObj._id;
+                    Meteor.call('addArticle', {
+                        title: $title.value,
+                        content: $content.value,
+                        institution_id: this.props.institution._id,
+                        tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
+                        publicationDate: publicationDate,
+                        extensions: extensions,
+                        attachment_id: fileObj._id
+                    })
                     console.log("dsfaasdf");
                 }
             });
+        } else {
+          Meteor.call('addArticle', {
+              title: $title.value,
+              content: $content.value,
+              institution_id: this.props.institution._id,
+              tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
+              publicationDate: publicationDate,
+              extensions: extensions
         }
-        Meteor.call('addArticle', {
-            title: $title.value,
-            content: $content.value,
-            institution_id: this.props.institution._id,
-            tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
-            publicationDate: publicationDate,
-            extensions: extensions,
-            attachment_id: file_id
-        })
     },
     removeArticle(event) {
         Meteor.call('removeArticle', $(event.target).closest('div')[0].id);
