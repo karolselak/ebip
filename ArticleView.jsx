@@ -81,6 +81,8 @@ ArticleView = React.createClass({
                                 <li>gdzie reszta?</li>
                             </ul>
                         </div>
+                        <div>Dodaj załącznik: </div>
+                        <input type="file" id="file" />
                     </div>
                     <div className='modal-footer'>
                         <button type='button' id='pbtn' className='btn btn-success' data-dismiss='modal' onClick={this.addArticle} >Publikuj</button>
@@ -164,7 +166,6 @@ ArticleView = React.createClass({
                 extensions[$extensions[i].id] = $extensions[i].value;
             }
         }
-        debugger        
         var expirationDate = $modal.find('#expirationDate').data('DateTimePicker').date();
         if (event.target.id == 'pbtn') {
             var publicationDate = (new Date()).getTime();
@@ -172,12 +173,15 @@ ArticleView = React.createClass({
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
+        var file = $modal.find('#file')[0].files[0];
+        if (file) {
+            Attachments.insert(file);
+        }        
         Meteor.call('addArticle', {
             title: $title.value,
             content: $content.value,
             institution_id: this.props.institution._id,
-            //TODO usuwanie spacji
-            tags: $tags.value ? $tags.value.split(', ') : [],
+            tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
             publicationDate: publicationDate,
             extensions: extensions
         })
