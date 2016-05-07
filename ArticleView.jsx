@@ -128,7 +128,7 @@ ArticleView = React.createClass({
     },
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
-            var attachment = Attachments.find({"_id":el.attachment_id});
+            var attachment = Attachments.findOne({"_id":el.attachment_id});
 
 
             return <div id={el._id}>
@@ -137,12 +137,11 @@ ArticleView = React.createClass({
                     <span className="glyphicon glyphicon-trash"
                         aria-label="Usuń"></span>
                 </button>
-                {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
                 <div><a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}><b>{el.title}</b></a></div>
                 <div>{el.content}</div>
                 <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>
-                <div>{attachment.name}</div>
+                <div><a href={attachment.url()} download>{attachment.name()}</a></div>
             </div>
         })
     },
@@ -164,7 +163,7 @@ ArticleView = React.createClass({
         var $content = $modal.find('#content')[0];
         var $tags = $modal.find('#tags')[0];
         var $extensions = $modal.find('.extensions');
-        var extensions = {}
+        var extensions = {};
         for (var i in $extensions) {
             if ($extensions[i].value) {
                 extensions[$extensions[i].id] = $extensions[i].value;
@@ -178,21 +177,20 @@ ArticleView = React.createClass({
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
         var file = $modal.find('#file')[0].files[0];
+        var ins_id = this.props.institution._id;
         if (file) {
             Attachments.insert(file, function (err, fileObj) {
                 if (err) {
-                    console.log("err");
                 } else {
                     Meteor.call('addArticle', {
                         title: $title.value,
                         content: $content.value,
-                        institution_id: this.props.institution._id,
+                        institution_id: ins_id,
                         tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
                         publicationDate: publicationDate,
                         extensions: extensions,
                         attachment_id: fileObj._id
-                    })
-                    console.log("dsfaasdf");
+                    });
                 }
             });
         } else {
@@ -203,7 +201,8 @@ ArticleView = React.createClass({
               tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
               publicationDate: publicationDate,
               extensions: extensions
-        }
+          });
+      }
     },
     removeArticle(event) {
         Meteor.call('removeArticle', $(event.target).closest('div')[0].id);
