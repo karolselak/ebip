@@ -97,9 +97,10 @@ Institution = React.createClass({
     },
     renderContent() {
         if (this.props.is_about) {
+            console.log('is_about')
+            console.log(this.data.institution)
             if (this.data.institution) {
-                return
-                <section itemScope itemType="http://schema.org/GovernmentOrganization">
+                return <section itemScope itemType="http://schema.org/GovernmentOrganization">
                     <div>
                         <b>Adres:</b><br/>
 	                    <span itemProp="name">{this.data.institution.name}</span><br/>
