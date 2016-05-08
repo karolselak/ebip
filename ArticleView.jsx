@@ -128,20 +128,26 @@ ArticleView = React.createClass({
     },
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
+            if (!el) {
+                return null;
+            }           
             var attachment = Attachments.findOne({"_id":el.attachment_id});
-
-
+            
             return <div id={el._id}>
-                <button type="button" className="btn btn-xs btn-default"
-                onClick={this.removeArticle}>
-                    <span className="glyphicon glyphicon-trash"
-                        aria-label="Usuń"></span>
+                <button type="button" className="btn btn-xs btn-default" onClick={this.removeArticle}>
+                    <span className="glyphicon glyphicon-trash" aria-label="Usuń"></span>
                 </button>
                 <div><a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}><b>{el.title}</b></a></div>
                 <div>{el.content}</div>
                 <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>
-                <div><a href={attachment.url()} download>{attachment.name()}</a></div>
+                {(function(){
+                    if (attachment) {
+                        console.log('attachment:')
+                        console.log(attachment)
+                        return <div><a href={attachment.url()} download>{attachment.name()}</a></div>                    
+                    }                
+                })()}
             </div>
         })
     },
@@ -194,15 +200,15 @@ ArticleView = React.createClass({
                 }
             });
         } else {
-          Meteor.call('addArticle', {
-              title: $title.value,
-              content: $content.value,
-              institution_id: this.props.institution._id,
-              tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
-              publicationDate: publicationDate,
-              extensions: extensions
-          });
-      }
+            Meteor.call('addArticle', {
+                title: $title.value,
+                content: $content.value,
+                institution_id: this.props.institution._id,
+                tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
+                publicationDate: publicationDate,
+                extensions: extensions
+            });
+        }
     },
     removeArticle(event) {
         Meteor.call('removeArticle', $(event.target).closest('div')[0].id);
