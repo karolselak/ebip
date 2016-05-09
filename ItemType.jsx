@@ -1,8 +1,14 @@
 ItemType = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
+        var itemtype = ItemTypes.findOne({name: this.props.itemname});
+        var propertytype;        
+        if (!itemtype) {
+            propertytype = PropertyTypes.findOne({name: this.props.itemname});
+        }
         return {
-            itemtype: ItemTypes.findOne({name: this.props.itemname})
+            itemtype: itemtype,
+            propertytype: propertytype
         };
     },
     render() {
@@ -12,7 +18,7 @@ ItemType = React.createClass({
                 <h2>{this.data.itemtype.name}</h2>
                 <div><b>{this.data.itemtype.description}</b></div>
                 {this.renderParents()}
-                {this.renderSameAs()}
+                {this.renderSameAs(this.data.itemtype.sameAs)}
                 <table className='table'>
                     <thead>
                         <tr>
@@ -47,6 +53,8 @@ ItemType = React.createClass({
                         <textarea id='expectedTypes' className='form-control' rows='3' cols='80' >https://schema.org/Text</textarea>
                         <div>Opis:</div>
                         <textarea id='description' className='form-control' rows='3' cols='80'></textarea>                       
+                        <div>Identyczny z:</div>
+                        <input type="text" id='sameAs' className='form-control'/>
                     </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-success"
@@ -59,6 +67,14 @@ ItemType = React.createClass({
                 </div>
                 </div>
             </div>
+        } else if (this.data.propertytype){
+                        return <div className='container'>
+                {/*nagłówek z nazwą typu: */}
+                <h2>{this.data.propertytype.name}</h2>
+                <div>{this.renderSameAs(this.data.propertytype.sameAs)}</div>
+                <div><b>{this.data.propertytype.description}</b></div>
+                
+            </div>
         } else {
             return null;        
         }
@@ -68,18 +84,20 @@ ItemType = React.createClass({
         Meteor.call('addItemTypeProperty', this.data.itemtype._id, {
             name: $modal.find('#name')[0].value,
             expectedTypes: $modal.find('#expectedTypes')[0].value.split(',').map((el)=>{return el.trim()}),
-            description: $modal.find('#description')[0].value
+            description: $modal.find('#description')[0].value,
+            sameAs: $modal.find('#sameAs')[0].value
         })    
     },
     renderProperties() {
-        return this.data.itemtype.properties.map((el, i)=>{
+        return this.data.itemtype.properties.map((name, i)=>{
+            var el = PropertyTypes.findOne({name: name});
             return <tr>
                 <td>
                     <button type="button" id={i} className="btn btn-xs btn-default"
                     onClick={this.removeProperty}>
                         <span className="glyphicon glyphicon-trash"
                             aria-label="Usuń"></span>
-                    </button> {el.name}
+                    </button> <a href={'/directory/'+el.name}>{el.name}</a>
                 </td>
                 <td>{this.renderExpectedTypes(el.expectedTypes)}</td>
                 <td>{el.description}</td> 
@@ -113,8 +131,8 @@ ItemType = React.createClass({
             })}</div>
         }
     },
-    renderSameAs() {
-        if (this.data.itemtype.sameAs && this.data.itemtype.sameAs.length > 0) {
+    renderSameAs(el) {
+        /*if (this.data.itemtype.sameAs && this.data.itemtype.sameAs.length > 0) {
             var arr = this.data.itemtype.sameAs;
             return <div>Identyczny z: {arr.map((el, i)=>{
                 var splitString = el.split('/');
@@ -125,6 +143,11 @@ ItemType = React.createClass({
                     return <span><a href={el}>{name}</a></span>            
                 } 
             })}</div>
+        }*/
+        if (el) {
+            var splitString = el.split('/');
+            var name = splitString[splitString.length-1];
+            return <span>Identyczny z: <a href={el}>{name}</a></span>;
         }
     },
     removeProperty(event) {

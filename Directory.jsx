@@ -104,7 +104,7 @@ Directory = React.createClass({
             name: $modal.find('#name')[0].value,
             description: $modal.find('#description')[0].value,
             inheritsFrom: this.state.selectedParent ? [this.state.selectedParent] : [],
-            sameAs: sameAsStr ? sameAsStr.split(',').map(function(el){return el.trim()}) : [],
+            sameAs: sameAsStr// ? sameAsStr.split(',').map(function(el){return el.trim()}) : [],
         })
     },
 });
