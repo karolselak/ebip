@@ -28,14 +28,11 @@ tsega:bootstrap3-datetimepicker
 rzymek:moment-locale-pl
 standard-minifier-css
 standard-minifier-js
-<<<<<<< cde2d60ef0a5a167e78185bb124a32cc7dfe7160
 meteorhacks:picker
 cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
 dburles:mongo-collection-instances
-=======
 cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
->>>>>>> sdfasf

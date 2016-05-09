@@ -183,7 +183,6 @@ ArticleView = React.createClass({
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
         var file = $modal.find('#file')[0].files[0];
-<<<<<<< cde2d60ef0a5a167e78185bb124a32cc7dfe7160
         var ins_id = this.props.institution._id;
         if (file) {
             Attachments.insert(file, function (err, fileObj) {
@@ -210,20 +209,6 @@ ArticleView = React.createClass({
                 extensions: extensions
             });
         }
-=======
-        Attachments.insert(file, function(err, fileObj) {
-
-        });
-        Meteor.call('addArticle', {
-            title: $title.value,
-            content: $content.value,
-            institution_id: this.props.institution._id,
-            //TODO usuwanie spacji
-            tags: $tags.value ? $tags.value.split(', ') : [],
-            publicationDate: publicationDate,
-            extensions: extensions
-        })
->>>>>>> sdfasf
     },
     removeArticle(event) {
         Meteor.call('removeArticle', $(event.target).closest('div')[0].id);
