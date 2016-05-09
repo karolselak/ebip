@@ -33,6 +33,3 @@ cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
 dburles:mongo-collection-instances
-cfs:standard-packages
-cfs:gridfs
-cfs:filesystem

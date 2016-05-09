@@ -1,8 +1,14 @@
 ItemType = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
+        var itemtype = ItemTypes.findOne({name: this.props.itemname});
+        var propertytype;        
+        if (!itemtype) {
+            propertytype = PropertyTypes.findOne({name: this.props.itemname});
+        }
         return {
-            itemtype: ItemTypes.findOne({name: this.props.itemname})
+            itemtype: itemtype,
+            propertytype: propertytype
         };
     },
     render() {
@@ -59,8 +65,28 @@ ItemType = React.createClass({
                 </div>
                 </div>
             </div>
+        } else if (this.data.propetytype) {
+            return <div className='container'>
+                {/*nagłówek z nazwą typu: */}
+                <h2>{this.data.itemtype.name}</h2>
+                <div><b>{this.data.itemtype.description}</b></div>
+                {this.renderParents()}
+                {this.renderSameAs()}
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Spodziewany typ</th>
+                            <th>Opis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderProperties()}
+                    </tbody>
+                </table>              
+            </div>
         } else {
-            return null;        
+            return null;
         }
     },
     addProperty(event) {
@@ -109,7 +135,7 @@ ItemType = React.createClass({
                     return <span><a href={'/directory/'+el}>{el}</a>, </span>
                 } else {
                     return <span><a href={'/directory/'+el}>{el}</a></span>            
-                } 
+                }
             })}</div>
         }
     },
