@@ -1,8 +1,14 @@
 ItemType = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
+        var itemtype = ItemTypes.findOne({name: this.props.itemname});
+        var propertytype;        
+        if (!itemtype) {
+            propertytype = PropertyTypes.findOne({name: this.props.itemname});
+        }
         return {
-            itemtype: ItemTypes.findOne({name: this.props.itemname})
+            itemtype: itemtype,
+            propertytype: propertytype
         };
     },
     render() {
@@ -12,7 +18,7 @@ ItemType = React.createClass({
                 <h2>{this.data.itemtype.name}</h2>
                 <div><b>{this.data.itemtype.description}</b></div>
                 {this.renderParents()}
-                {this.renderSameAs()}
+                {/*this.renderSameAs()*/}
                 <table className='table'>
                     <thead>
                         <tr>
@@ -59,6 +65,12 @@ ItemType = React.createClass({
                 </div>
                 </div>
             </div>
+        } else if (this.data.propertytype){
+                        return <div className='container'>
+                {/*nagłówek z nazwą typu: */}
+                <h2>{this.data.propertytype.name}</h2>
+                <div><b>{this.data.propertytype.description}</b></div>
+            </div>
         } else {
             return null;        
         }
@@ -80,7 +92,7 @@ ItemType = React.createClass({
                     onClick={this.removeProperty}>
                         <span className="glyphicon glyphicon-trash"
                             aria-label="Usuń"></span>
-                    </button> {el.name}
+                    </button> <a href={'/directory/'+el.name}>{el.name}</a>
                 </td>
                 <td>{this.renderExpectedTypes(el.expectedTypes)}</td>
                 <td>{el.description}</td> 
@@ -116,13 +128,19 @@ ItemType = React.createClass({
     },
     renderSameAs() {
         if (this.data.itemtype.sameAs && this.data.itemtype.sameAs.length > 0) {
-            var el = this.data.itemtype.sameAs;
-            var splitString = el.split('/');
-            var name = splitString[splitString.length-1];
-            return <div>Identyczny z: <span><a href={el}>{name}</a></span></div>
+            var arr = this.data.itemtype.sameAs;
+            return <div>Identyczny z: {arr.map((el, i)=>{
+                var splitString = el.split('/');
+                var name = splitString[splitString.length-1];
+                if (i < arr.length-1) {
+                    return <span><a href={el}>{name}</a>, </span>
+                } else {
+                    return <span><a href={el}>{name}</a></span>            
+                } 
+            })}</div>
         }
     },
     removeProperty(event) {
-        Meteor.call('removeItemTypeProperty', this.data.itemtype._id, $(event.target).closest('button')[0].id)    
+        Meteor.call('removeItemTypeProperty', this.data.itemtype._id, event.target.id)    
     }
 });
