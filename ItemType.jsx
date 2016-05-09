@@ -72,7 +72,8 @@ ItemType = React.createClass({
         })    
     },
     renderProperties() {
-        return this.data.itemtype.properties.map((el, i)=>{
+        return this.data.itemtype.properties.map((name, i)=>{
+            var el = PropertyTypes.findOne({name: name});
             return <tr>
                 <td>
                     <button type="button" id={i} className="btn btn-xs btn-default"
