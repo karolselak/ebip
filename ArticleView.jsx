@@ -2,7 +2,7 @@ ArticleView = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         return {
-            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['article']}}).fetch()
+            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['Article']}}).fetch()
         };
     },
     getInitialState() {
@@ -100,8 +100,8 @@ ArticleView = React.createClass({
         if (this.state.selectedType) {
             return this.data.articleTypes.find((el)=>{return el.name == this.state.selectedType}).properties.map((el)=>{
                 return <div>
-                    <div>{el.name+':'}</div>
-                    <input id={el.name} className='form-control extensions' type='text'></input>
+                    <div>{el+':'}</div>
+                    <input id={el} className='form-control extensions' type='text'></input>
                 </div>
             })
         }
@@ -130,7 +130,6 @@ ArticleView = React.createClass({
     },
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
-<<<<<<< HEAD
             if (!el) {
                 return null;
             }           
@@ -144,41 +143,18 @@ ArticleView = React.createClass({
                 <div>{el.content}</div>
                 <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>
-                {(function(){
+                {/*załącznik:*/}
+                {(()=>{
                     if (attachment) {
-                        console.log('attachment:')
-                        console.log(attachment)
+                        //rozwiązanie problemu z nieklikalnym linkiem:
+                        if (!attachment.url()) {
+                            setTimeout(()=>{
+                                this.forceUpdate();
+                            }, 200);                        
+                        }
                         return <div><a href={attachment.url()} download>{attachment.name()}</a></div>                    
                     }                
                 })()}
-=======
-            return <div className='row' id={el._id}>
-                <br />
-                {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
-                <div>
-                    <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}>
-                        <b>{el.title}</b>
-                    </a>
-                    <span className='pull-right'>
-                        <button type='button' className='btn btn-xs btn-default'
-                            onClick={this.removeArticle}>
-                            <span className='glyphicon glyphicon-trash'
-                                aria-label='Usuń'></span>
-                        </button>
-                        <button type='button' className='btn btn-xs btn-default'
-                            data-toggle='modal' data-target='#editArticleModal' onClick={this.editArticle}>
-                            <span className='glyphicon glyphicon-pencil'
-                                aria-label='Edytuj'></span>
-                        </button>
-                        {' '}{el.author} {el.publicationDate
-                        && el.publicationDate != Infinity ? (new Date(el.publicationDate)).toLocaleDateString()
-                        : ''}
-                        
-                    </span>
-                </div>
-                <br />
-                <div className='text-justify'>{el.content}</div>
->>>>>>> LD2
             </div>
         })
     },
@@ -219,33 +195,27 @@ ArticleView = React.createClass({
         }
         var file = $modal.find('#file')[0].files[0];
         var ins_id = this.props.institution._id;
+        var obj = {
+            title: $title.value,
+            content: $content.value,
+            institution_id: ins_id,
+            type: this.state.selectedType,
+            tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
+            publicationDate: publicationDate,
+        }
+        _.extend(obj, extensions)
         if (file) {
-            Attachments.insert(file, function (err, fileObj) {
-                if (err) {
-                } else {
-                    Meteor.call('addArticle', {
-                        title: $title.value,
-                        content: $content.value,
-                        institution_id: ins_id,
-                        tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
-                        publicationDate: publicationDate,
-                        extensions: extensions,
-                        attachment_id: fileObj._id
-                    });
+            Attachments.insert(file, function(err, fileObj) {
+                if (!err) {
+                    obj.attachment_id = fileObj._id;
+                    Meteor.call('addArticle', obj);
                 }
             });
         } else {
-            Meteor.call('addArticle', {
-                title: $title.value,
-                content: $content.value,
-                institution_id: this.props.institution._id,
-                tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
-                publicationDate: publicationDate,
-                extensions: extensions
-            });
+            Meteor.call('addArticle', obj);
         }
     },
     removeArticle(event) {
-        Meteor.call('removeArticle', $(event.target).closest('.row')[0].id);
+        Meteor.call('removeArticle', $(event.currentTarget).closest('div')[0].id);
     }
 });

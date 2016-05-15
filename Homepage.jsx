@@ -82,8 +82,7 @@ Homepage = React.createClass({
     renderInstitutions() {
         return this.data.institutions.map((el)=>{
             return <div id={el._id}>
-                <button type="button" className="btn btn-xs btn-default"
-                onClick={this.removeInstitution}>
+                <button type="button" className="btn btn-xs btn-default" onClick={this.removeInstitution}>
                     <span className="glyphicon glyphicon-trash"
                         aria-label="Usuń"></span>
                 </button>

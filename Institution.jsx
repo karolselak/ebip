@@ -117,7 +117,7 @@ Institution = React.createClass({
     	                <b>Telefon:</b> <span itemProp="telephone">{this.data.institution.telephone}</span>
                     </div>
                     <div>
-	                    <b>Liczba pracowników:</b>
+	                    <b>Liczba pracowników: </b>
                         <span itemProp="numberOfEmployees">{this.data.institution.numberOfEmployees}</span>
 	                </div>
                 </section>

@@ -5,6 +5,26 @@ ItemType = React.createClass({
         var propertytype;        
         if (!itemtype) {
             propertytype = PropertyTypes.findOne({name: this.props.itemname});
+        } else {
+            itemtype.properties = itemtype.properties.map((name, i)=>{
+                return PropertyTypes.findOne({name: name});
+            });
+            var extendItemType2 = function(type) {
+                for (var i in type.inheritsFrom) {
+                    var parent = ItemTypes.findOne({name: type.inheritsFrom[i]});
+                    parent.properties = parent.properties.map((name, i)=>{
+                        return PropertyTypes.findOne({name: name});
+                    });
+                    extendItemType2(parent);
+                    type.inheritedProperties = [{from: parent.name, properties: parent.properties}];
+                    if (parent.inheritedProperties) {
+                        type.inheritedProperties = type.inheritedProperties.concat(parent.inheritedProperties);
+                    }
+                }
+            }
+            extendItemType2(itemtype);
+            
+            console.log(itemtype)
         }
         return {
             itemtype: itemtype,
@@ -19,25 +39,23 @@ ItemType = React.createClass({
                 <div><b>{this.data.itemtype.description}</b></div>
                 {this.renderParents()}
                 {this.renderSameAs(this.data.itemtype.sameAs)}
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>Nazwa</th>
-                            <th>Spodziewany typ</th>
-                            <th>Opis</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderProperties()}
-                    </tbody>
-                </table>
                 <div className="row">
                     <div className="col-md-12">
                         <button type="button" className="btn btn-info" data-toggle="modal" data-target="#addPropertyModal">
                             Dodaj właściwość
                         </button>
                     </div>
-                </div>
+                </div>                
+                <table className='table'>
+                    <thead>
+                        <tr className='info'>
+                            <th>Nazwa</th>
+                            <th>Spodziewany typ</th>
+                            <th>Opis</th>
+                        </tr>
+                    </thead>
+                    {this.renderProperties()}
+                </table>
                 {/*okno dodawania właściwości: */}
                 <div className="modal fade" id="addPropertyModal" role="dialog">
                 <div className="modal-dialog">
@@ -73,6 +91,7 @@ ItemType = React.createClass({
                 <h2>{this.data.propertytype.name}</h2>
                 <div>{this.renderSameAs(this.data.propertytype.sameAs)}</div>
                 <div><b>{this.data.propertytype.description}</b></div>
+                Spodziewany typ: {this.renderExpectedTypes(this.data.propertytype.expectedTypes)}
                 
             </div>
         } else {
@@ -89,20 +108,35 @@ ItemType = React.createClass({
         })    
     },
     renderProperties() {
-        return this.data.itemtype.properties.map((name, i)=>{
-            var el = PropertyTypes.findOne({name: name});
-            return <tr>
-                <td>
-                    <button type="button" id={i} className="btn btn-xs btn-default"
-                    onClick={this.removeProperty}>
-                        <span className="glyphicon glyphicon-trash"
-                            aria-label="Usuń"></span>
-                    </button> <a href={'/directory/'+el.name}>{el.name}</a>
-                </td>
-                <td>{this.renderExpectedTypes(el.expectedTypes)}</td>
-                <td>{el.description}</td> 
-            </tr>
-        })
+        var render = (props, ifBin)=>{
+            return props.map((el, i)=>{
+                //var el = PropertyTypes.findOne({name: name});
+                return <tr>
+                    <td>
+                        {ifBin ? <button type="button" id={i} className="btn btn-xs btn-default"
+                        onClick={this.removeProperty}>
+                            <span className="glyphicon glyphicon-trash"
+                                aria-label="Usuń"></span>
+                        </button> : null} <a href={'/dictionary/'+el.name}>{el.name}</a>
+                    </td>
+                    <td>{this.renderExpectedTypes(el.expectedTypes)}</td>
+                    <td>{el.description}</td> 
+                </tr>
+            })
+        }
+        var arr = [];
+        arr.push(<thead><tr className='active'><td colSpan='3'>
+            <b>Właściwości z <a href={'/dictionary/'+this.data.itemtype.name}>{this.data.itemtype.name}:</a></b>
+        </td></tr></thead>);
+        arr = arr.concat(<tbody>{render(this.data.itemtype.properties, true)}</tbody>);        
+        var p = this.data.itemtype.inheritedProperties;
+        for (var i in p) {
+            arr.push(<thead><tr className='active'><th colSpan='3'>
+                <b>Właściwości z <a href={'/dictionary/'+p[i].from}>{p[i].from}:</a></b>
+            </th></tr></thead>)
+            arr = arr.concat(<tbody>{render(p[i].properties)}</tbody>);
+        }
+        return arr;
     },
     renderExpectedTypes(arr) {
         return arr.map((el, i)=>{
@@ -124,9 +158,9 @@ ItemType = React.createClass({
             var arr = this.data.itemtype.inheritsFrom;
             return <div>Dziedziczy po: {arr.map((el, i)=>{
                 if (i < arr.length-1) {
-                    return <span><a href={'/directory/'+el}>{el}</a>, </span>
+                    return <span><a href={'/dictionary/'+el}>{el}</a>, </span>
                 } else {
-                    return <span><a href={'/directory/'+el}>{el}</a></span>            
+                    return <span><a href={'/dictionary/'+el}>{el}</a></span>            
                 } 
             })}</div>
         }
@@ -151,6 +185,6 @@ ItemType = React.createClass({
         }
     },
     removeProperty(event) {
-        Meteor.call('removeItemTypeProperty', this.data.itemtype._id, event.target.id)    
+        Meteor.call('removeItemTypeProperty', this.data.itemtype._id, event.currentTarget.id)    
     }
 });
