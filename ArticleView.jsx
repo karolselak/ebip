@@ -130,9 +130,8 @@ ArticleView = React.createClass({
         return this.props.articles && this.props.articles.map((el)=>{
             if (!el) {
                 return null;
-            }           
-            var attachment = Attachments.findOne({"_id":el.attachment_id});
-            
+            }
+
             return <div id={el._id}>
                 <button type="button" className="btn btn-xs btn-default" onClick={this.removeArticle}>
                     <span className="glyphicon glyphicon-trash" aria-label="Usuń"></span>
@@ -142,14 +141,26 @@ ArticleView = React.createClass({
                 <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>
                 {(function(){
-                    if (attachment) {
-                        console.log('attachment:')
-                        console.log(attachment)
-                        return <div><a href={attachment.url()} download>{attachment.name()}</a></div>                    
-                    }                
+                    var attachments = el.attachment_id;
+                    console.log(attachments);
+                    for (i = 0; i < attachments.length; i++) {
+                        var attachment = Attachments.findOne({"_id":attachments[i]});
+                        if (attachment) { console.log("cos");
+                            //return <div><a href={attachment.url()} download>{attachment.name()}</a></div>
+                            attachments[i] = "<div><a href="+attachment.url()+
+                            " download>"+attachment.name()+"</a></div>";
+                        }
+                    }
+                    return attachments;
                 })()}
+                <div>Dodaj załącznik:</div>
+                <input type="file" />
+                <button >Dodaj</button>
             </div>
         })
+    },
+    renderAttachments(article_id) {
+        return
     },
     componentDidMount(){
         $(function () {
@@ -195,7 +206,7 @@ ArticleView = React.createClass({
                         tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
                         publicationDate: publicationDate,
                         extensions: extensions,
-                        attachment_id: fileObj._id
+                        attachment_id: [fileObj._id]
                     });
                 }
             });
