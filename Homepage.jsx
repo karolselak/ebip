@@ -13,7 +13,7 @@ Homepage = React.createClass({
             <div className="container">
                 <div className="row">
                   {/*text input: */}
-                  <div className="col-md-7 col-md-offset-3">
+                  <div className="col-md-7 col-md-offset-3 well">
                     <table>
                         <tr>
                             <td id="search-box">
@@ -22,7 +22,17 @@ Homepage = React.createClass({
                                 </div>
                             </td>
                             <td>
-                                <button type="button" className="btn btn-info" id="btn-info1" onClick={this.gotoSerchResults} >
+
+                            <div className="dropdown" id='author'>
+                                <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Wybierz instytucje
+                                <span className="caret"></span></button>
+                                <ul className="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    {this.renderInsToSrlrect()}
+                                </ul>
+                            </div>
+                            </td>
+                            <td>
+                                <button type="button" className="btn btn-infol"  id="btn-info1" onClick={this.gotoSerchResults} >
                                     <span className="glyphicon glyphicon-search">Wyszukaj</span>
                                 </button>
                             </td>
@@ -33,13 +43,11 @@ Homepage = React.createClass({
                 <div className="row">
                   <div className="col-md-11">
                     {this.renderInstitutions()}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div id="bottom-button-add-institution">
-                      <button type="button" className="btn btn-info" data-toggle="modal" data-target="#addInstitutionModal">Dodaj instytucję</button>
-                    </div>
+                    <i data-toggle="modal" data-target="#addInstitutionModal">
+                      <div id="addInstitutiontile">
+                        <span className="glyphicon glyphicon-plus-sign"></span>
+                      </div>
+                    </i>
                   </div>
                 {/*okno dodawania instytucji: */}
                 <div className="modal fade" id="addInstitutionModal" role="dialog">
@@ -79,16 +87,25 @@ Homepage = React.createClass({
         </div>
         </div>
     },
+    renderInsToSrlrect(){
+      return this.data.institutions.map((el)=>{
+          return <li role="presentation"><a role="menuitem" href="#">{el.name}</a></li>
+        });
+
+    },
     renderInstitutions() {
         return this.data.institutions.map((el)=>{
-            return <div id={el._id}>
-                <button type="button" className="btn btn-xs btn-default"
-                onClick={this.removeInstitution}>
-                    <span className="glyphicon glyphicon-trash"
-                        aria-label="Usuń"></span>
-                </button>
-                <a href={'/i/'+el.name}> {el.name}</a>
-            </div>
+            return <div className= "tile1" >
+                    <a className="tilelink" href={'/i/'+el.name}> {el.name}
+                    </a>
+                    <div className="bottomRowInst" id={el._id}>
+                      <button type="button" className="btn btn-xs btn-default "
+                      onClick={this.removeInstitution}>
+                          <span className="glyphicon glyphicon-trash"
+                              aria-label="Usuń"></span>
+                      </button>
+                    </div>
+                  </div>
         })
     },
     addInstitution(event) {
@@ -108,7 +125,7 @@ Homepage = React.createClass({
     removeInstitution(event) {
         Meteor.call('removeInstitution', $(event.target).closest('div')[0].id)
     },
-    gotoSerchResults(){ 
+    gotoSerchResults(){
         var temp=document.getElementById("searchValue").value
         if(temp!=""){
             document.location="/search/"+temp
