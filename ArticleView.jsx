@@ -16,7 +16,7 @@ ArticleView = React.createClass({
         return <div>
             {/*przycisk dodawania artykułów*/}
 
-            <div className='container'>
+
               <div className="row">
                 <div className="col-md-9" id='articles'>
                   {/*artykuły*/}
@@ -30,7 +30,7 @@ ArticleView = React.createClass({
                   </div>
                 </div>
               </div>
-            </div>
+            
             {/*okno dodawania artykułów: */}
             <div className='modal fade' id='addArticleModal' role='dialog'>
             <div className='modal-dialog'>
@@ -130,9 +130,9 @@ ArticleView = React.createClass({
         return this.props.articles && this.props.articles.map((el)=>{
             if (!el) {
                 return null;
-            }           
+            }
             var attachment = Attachments.findOne({"_id":el.attachment_id});
-            
+
             return <div id={el._id}>
                 <button type="button" className="btn btn-xs btn-default" onClick={this.removeArticle}>
                     <span className="glyphicon glyphicon-trash" aria-label="Usuń"></span>
@@ -145,8 +145,8 @@ ArticleView = React.createClass({
                     if (attachment) {
                         console.log('attachment:')
                         console.log(attachment)
-                        return <div><a href={attachment.url()} download>{attachment.name()}</a></div>                    
-                    }                
+                        return <div><a href={attachment.url()} download>{attachment.name()}</a></div>
+                    }
                 })()}
             </div>
         })
@@ -183,7 +183,6 @@ ArticleView = React.createClass({
             var publicationDate = d ? d._d.getTime() : Infinity;
         }
         var file = $modal.find('#file')[0].files[0];
-<<<<<<< cde2d60ef0a5a167e78185bb124a32cc7dfe7160
         var ins_id = this.props.institution._id;
         if (file) {
             Attachments.insert(file, function (err, fileObj) {
@@ -210,20 +209,6 @@ ArticleView = React.createClass({
                 extensions: extensions
             });
         }
-=======
-        Attachments.insert(file, function(err, fileObj) {
-
-        });
-        Meteor.call('addArticle', {
-            title: $title.value,
-            content: $content.value,
-            institution_id: this.props.institution._id,
-            //TODO usuwanie spacji
-            tags: $tags.value ? $tags.value.split(', ') : [],
-            publicationDate: publicationDate,
-            extensions: extensions
-        })
->>>>>>> sdfasf
     },
     removeArticle(event) {
         Meteor.call('removeArticle', $(event.target).closest('div')[0].id);

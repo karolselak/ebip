@@ -3,24 +3,34 @@ MainLayout = React.createClass({
         return (
         <main>
         <body>
-            <div className="container">
-	            <div className="row" id="topStrip">
-		            <div className="col-md-10">
-		                <a href="/">
-			                <img src="img/LOGO.png" className="img-responsive" id="logo-img" />
-              </a>
+          <div className="container">
+
+  	        <header>
+  		        <div className="col-md-10">
+  		          <a href="/" id="projectTitleLink">
+  			          <h2><p id="projectTitle">Projekt eBIP</p></h2>
+                </a>
+              </div>
+              <div className="col-md-2">
+                <span id="AccountsUIWrapper"><AccountsUIWrapper /></span>
+              </div>
+  	        </header>
+
+              <div className="row">
+                <div className="col-md-12 h-scroll">
+                  {this.props.content}
+                </div>
+              </div>
+
+            <footer>
+              <h5 id="footerText">
+                <p className ="text-center">Projekt zrealizowany przez studentów Politechniki Wrocławskiej</p>
+                <p className="text-center">Wrocław 2016</p>
+              </h5>
+            </footer>
           </div>
-          <div className="col-md-2">
-            <span id="AccountsUIWrapper"><AccountsUIWrapper /></span>
-          </div>
-	            </div>
-        <div className="row">
-          <div classnae="col-md-12">
-            {this.props.content}
-          </div>
-        </div>
-            </div>
+
         </body>
         </main>);
-    }    
+    }
 });
