@@ -19,7 +19,7 @@ Permissions = React.createClass({
                     <table className='table table-hover'>
                         <thead>
                             <tr>
-                                <td><p>Urzytkownik</p><td><p>Posiadane uprawnienia</p></td></td> <td>  </td> <td> </td>
+                                <td><p>Uzytkownik</p><td><p>Posiadane uprawnienia</p></td></td> <td>  </td> <td> </td>
                             </tr>
                         </thead>
                         <tbody>
