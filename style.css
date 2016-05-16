@@ -35,6 +35,16 @@ footer {
   max-width: 850px;
 
 }
+.userIcon{
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  font-size:25px;
+}
+#userButton{
+  text-align: center;
+  padding: 10px;
+}
 #projectTitleLink{
     text-decoration: none;
 }
