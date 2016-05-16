@@ -33,4 +33,8 @@ cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
 dburles:mongo-collection-instances
+<<<<<<< HEAD
 http
+=======
+kookoskar:bootstrap-select
+>>>>>>> 28cb99c14c1f057ff14fbc522abbadf38b8f4e69
