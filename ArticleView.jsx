@@ -2,7 +2,7 @@ ArticleView = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         return {
-            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['article']}}).fetch()
+            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['Article']}}).fetch()
         };
     },
     getInitialState() {
@@ -100,8 +100,8 @@ ArticleView = React.createClass({
         if (this.state.selectedType) {
             return this.data.articleTypes.find((el)=>{return el.name == this.state.selectedType}).properties.map((el)=>{
                 return <div>
-                    <div>{el.name+':'}</div>
-                    <input id={el.name} className='form-control extensions' type='text'></input>
+                    <div>{el+':'}</div>
+                    <input id={el} className='form-control extensions' type='text'></input>
                 </div>
             })
         }
@@ -141,10 +141,15 @@ ArticleView = React.createClass({
                 <div>{el.content}</div>
                 <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>
-                {(function(){
+                
+                {(()=>{
                     if (attachment) {
-                        console.log('attachment:')
-                        console.log(attachment)
+                        //rozwiązanie problemu z nieklikalnym linkiem:
+                        if (!attachment.url()) {
+                            setTimeout(()=>{
+                                this.forceUpdate();
+                            }, 200);                        
+                        }
                         return <div><a href={attachment.url()} download>{attachment.name()}</a></div>                    
                     }                
                 })()}*/
@@ -220,33 +225,27 @@ ArticleView = React.createClass({
         }
         var file = $modal.find('#file')[0].files[0];
         var ins_id = this.props.institution._id;
+        var obj = {
+            title: $title.value,
+            content: $content.value,
+            institution_id: ins_id,
+            type: this.state.selectedType,
+            tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
+            publicationDate: publicationDate,
+        }
+        _.extend(obj, extensions)
         if (file) {
-            Attachments.insert(file, function (err, fileObj) {
-                if (err) {
-                } else {
-                    Meteor.call('addArticle', {
-                        title: $title.value,
-                        content: $content.value,
-                        institution_id: ins_id,
-                        tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
-                        publicationDate: publicationDate,
-                        extensions: extensions,
-                        attachment_id: fileObj._id
-                    });
+            Attachments.insert(file, function(err, fileObj) {
+                if (!err) {
+                    obj.attachment_id = fileObj._id;
+                    Meteor.call('addArticle', obj);
                 }
             });
         } else {
-            Meteor.call('addArticle', {
-                title: $title.value,
-                content: $content.value,
-                institution_id: this.props.institution._id,
-                tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
-                publicationDate: publicationDate,
-                extensions: extensions
-            });
+            Meteor.call('addArticle', obj);
         }
     },
     removeArticle(event) {
-        Meteor.call('removeArticle', $(event.target).closest('.row')[0].id);
+        Meteor.call('removeArticle', $(event.currentTarget).closest('.row')[0].id);
     }
 });

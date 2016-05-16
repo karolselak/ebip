@@ -53,7 +53,7 @@ Homepage = React.createClass({
                 <div className="modal fade" id="addInstitutionModal" role="dialog">
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        <div className="modal-header">/search/ala
+                        <div className="modal-header">
                             <button type="button" className="close" data-dismiss="modal">&times;</button>
                             <h4 className="modal-title">Dodaj instytucję</h4>
                         </div>
@@ -106,6 +106,15 @@ Homepage = React.createClass({
                       </button>
                     </div>
                   </div>
+/*=======
+            return <div id={el._id}>
+                <button type="button" className="btn btn-xs btn-default" onClick={this.removeInstitution}>
+                    <span className="glyphicon glyphicon-trash"
+                        aria-label="Usuń"></span>
+                </button>
+                <a href={'/i/'+el.name}> {el.name}</a>
+            </div>
+>>>>>>> many_changes*/
         })
     },
     addInstitution(event) {

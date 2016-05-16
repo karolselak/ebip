@@ -43,7 +43,7 @@ FlowRouter.route('/i/:institution/about', {
 //lista zdefiniowanych typów mikrodanych
 FlowRouter.route('/dictionary', {
     action(params) {
-        ReactLayout.render(MainLayout, {content: <Directory />});
+        ReactLayout.render(MainLayout, {content: <Dictionary />});
     }
 });
 //podgląd typu mikrodanych
@@ -86,10 +86,32 @@ if (Meteor.isServer) {
     });
     getRoutes.route('/dictionary/:itemname', function(params, req, res, next) {
         var itemType = ItemTypes.findOne({name: params.itemname})
+        if (!itemType) {
+            itemType = PropertyTypes.findOne({name: params.itemname})
+        } else {
+            extendItemType(itemType);
+        }
         res.end(JSON.stringifyCircular(itemType));
     });
     getRoutes.route('/restQuery/:collection/:jsonQuery', function(params, req, res, next) {
         var result = Mongo.Collection.get(params.collection).find(JSON.parse(decodeURI(params.jsonQuery))).fetch();
+        var type = WhatIs[params.collection]; //tłumaczymy nazwę kolekcji na nazwę klasy w słowniku
+        result = result.map((el)=>{
+            delete el._id;
+            el['@context'] = rdfContext;
+            el['@type'] = type;
+            return el;
+        })
+
+        /*HTTP.get(url, {
+            headers: {
+                'accept': 'application/json'
+            }
+        }, function(err, res2) {
+            res2.content
+            
+            console.log(JSON.parse(res2.content));
+        });*/
         res.end(JSON.stringifyCircular(result));
     });
 }

@@ -55,7 +55,7 @@ Institution = React.createClass({
             <div className="row">
               <div className="col-md-12">
                 <div id='centerTopSection'>
-                  <h2>{this.data.institution && this.data.institution.name}</h2>
+                  <h2>{this.data.institution && <a href={'/i/'+this.data.institution.name}>{this.data.institution.name}</a>}</h2>
                   <p id="aboutUs-p"><a href={'/i/' + (this.data.institution && this.data.institution.name) + '/about'}>O nas</a></p>
                 </div>
               </div>
@@ -117,7 +117,7 @@ Institution = React.createClass({
     	                <b>Telefon:</b> <span itemProp="telephone">{this.data.institution.telephone}</span>
                     </div>
                     <div>
-	                    <b>Liczba pracowników:</b>
+	                    <b>Liczba pracowników: </b>
                         <span itemProp="numberOfEmployees">{this.data.institution.numberOfEmployees}</span>
 	                </div>
                 </section>

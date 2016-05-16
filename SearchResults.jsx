@@ -31,17 +31,21 @@ SearchResults = React.createClass({
     },
     printInstitutions(){
     	return this.data.institutions.map((el)=>{
-    		return <div id={el._id}><a href={"/i/"+el.name}>{el.name}</a></div>
+            if(el) {
+        		return <div id={el._id}><a href={"/i/"+el.name}>{el.name}</a></div>
+            }
     	})
 
     },
     printArticles(){
         var ins2;
         return this.data.articles.map((el2)=>{
-            ins2 = Institutions.findOne({_id: el2.institution_id});
-            return <div id={el2._id}>
-                <a href={"/i/"+ins2.name+"/article/"+el2._id} >{el2.title}</a>
-            </div>
+            ins2 = Institutions.findOne({_id: el2.institution_id});            
+            if (el2 && ins2) {
+                return <div id={el2._id}>
+                    <a href={"/i/"+ins2.name+"/article/"+el2._id} >{el2.title}</a>
+                </div>
+            }
         })
     }
 });
