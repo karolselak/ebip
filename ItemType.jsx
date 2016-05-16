@@ -115,19 +115,13 @@ ItemType = React.createClass({
     },
     renderSameAs() {
         if (this.data.itemtype.sameAs && this.data.itemtype.sameAs.length > 0) {
-            var arr = this.data.itemtype.sameAs;
-            return <div>Identyczny z: {arr.map((el, i)=>{
-                var splitString = el.split('/');
-                var name = splitString[splitString.length-1];
-                if (i < arr.length-1) {
-                    return <span><a href={el}>{name}</a>, </span>
-                } else {
-                    return <span><a href={el}>{name}</a></span>            
-                } 
-            })}</div>
+            var el = this.data.itemtype.sameAs;
+            var splitString = el.split('/');
+            var name = splitString[splitString.length-1];
+            return <div>Identyczny z: <span><a href={el}>{name}</a></span></div>
         }
     },
     removeProperty(event) {
-        Meteor.call('removeItemTypeProperty', this.data.itemtype._id, event.target.id)    
+        Meteor.call('removeItemTypeProperty', this.data.itemtype._id, $(event.target).closest('button')[0].id)    
     }
 });

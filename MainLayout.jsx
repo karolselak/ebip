@@ -11,6 +11,7 @@ MainLayout = React.createClass({
               </a>
           </div>
           <div className="col-md-2">
+            <a href="/dictionary/">słownik</a>
             <span id="AccountsUIWrapper"><AccountsUIWrapper /></span>
           </div>
 	            </div>

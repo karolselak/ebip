@@ -41,13 +41,13 @@ FlowRouter.route('/i/:institution/about', {
     }
 });
 //lista zdefiniowanych typów mikrodanych
-FlowRouter.route('/directory', {
+FlowRouter.route('/dictionary', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <Directory />});
     }
 });
 //podgląd typu mikrodanych
-FlowRouter.route('/directory/:itemname', {
+FlowRouter.route('/dictionary/:itemname', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <ItemType {...params} />});
     }
@@ -84,7 +84,7 @@ if (Meteor.isServer) {
     var getRoutes = Picker.filter(function(req, res) {
         return req.method == "GET" && req.headers.accept == "application/json";
     });
-    getRoutes.route('/directory/:itemname', function(params, req, res, next) {
+    getRoutes.route('/dictionary/:itemname', function(params, req, res, next) {
         var itemType = ItemTypes.findOne({name: params.itemname})
         res.end(JSON.stringifyCircular(itemType));
     });
