@@ -10,6 +10,6 @@ AccountsUIWrapper = React.createClass({
   },
   render() {
     // Just render a placeholder container that will be filled in
-    return <div><span ref="container" /></div>;
+    return <span className="glyphicon glyphicon-user" ref="container" />;
   }
 });

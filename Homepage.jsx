@@ -83,13 +83,13 @@ Homepage = React.createClass({
                     </div>
                 </div>
                 </div>
-              
+
         </div>
         </div>
     },
     renderInsToSrlrect(){
       return this.data.institutions.map((el)=>{
-          return <li role="presentation"><a role="menuitem" href="#">{el.name}</a></li>
+          return <li role="presentation"><a role="menuitem" >{el.name}</a></li>
         });
 
     },

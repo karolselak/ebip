@@ -11,9 +11,16 @@ MainLayout = React.createClass({
   			          <h2><p id="projectTitle">Projekt eBIP</p></h2>
                 </a>
               </div>
-              <div className="col-md-2">
-                <span id="AccountsUIWrapper"><AccountsUIWrapper /></span>
+              <div id="UserAccounts">
+                <AccountsUIWrapper />
               </div>
+              <div className="col-adm">
+                <a className="adminLink " href={'/permissions'}>
+                <div className="adminIcon glyphicon glyphicon-cog" ></div><div>Administratorzy</div>
+                </a>
+              </div>
+
+
   	        </header>
 
               <div className="row">

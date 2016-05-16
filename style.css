@@ -30,31 +30,55 @@ footer {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+.col-md-10{
+  float: left;
+  max-width: 850px;
+
+}
 #projectTitleLink{
     text-decoration: none;
 }
-
+#projectTitle{
+  font-family: "Times New Roman", Times, serif;
+  color: #fffffe;
+  margin-left: 60%;
+}
 #footerText{
   font-family: "Times New Roman", Times, serif;
   color: #5e7c9c;
 }
-
-#projectTitle{
-  font-family: "Times New Roman", Times, serif;
-  color: #fffffe;
-  margin-left: 55%;
-}
-
-
-
 #AccountsUIWrapper{
-    float:right;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+}
+.col-adm{
+  float:right;
+  max-width: 300px;
+  min-width: 150px;
+  text-align: center;
+  padding: 10px;
+}
+.adminIcon{
+  font-size: 25px;
+}
+a.adminLink{
+  text-decoration: none;
+  text-align: center;
+
+  color: #ffffff;
+}
+#UserAccounts{
+  float: right;
+  max-width: 300px;
+  min-width: 100px;
 }
 
 /* -----------------------------------------------Homepage------------------------------------------------*/
 .col-md-11{
   padding: 5px;
   max-width: 850px;
+  min-height: 210px;
   float: right;
 }
 .tile1{
