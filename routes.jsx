@@ -41,13 +41,13 @@ FlowRouter.route('/i/:institution/about', {
     }
 });
 //lista zdefiniowanych typów mikrodanych
-FlowRouter.route('/directory', {
+FlowRouter.route('/dictionary', {
     action(params) {
-        ReactLayout.render(MainLayout, {content: <Directory />});
+        ReactLayout.render(MainLayout, {content: <Dictionary />});
     }
 });
 //podgląd typu mikrodanych
-FlowRouter.route('/directory/:itemname', {
+FlowRouter.route('/dictionary/:itemname', {
     action(params) {
         ReactLayout.render(MainLayout, {content: <ItemType {...params} />});
     }
@@ -84,12 +84,34 @@ if (Meteor.isServer) {
     var getRoutes = Picker.filter(function(req, res) {
         return req.method == "GET" && req.headers.accept == "application/json";
     });
-    getRoutes.route('/directory/:itemname', function(params, req, res, next) {
+    getRoutes.route('/dictionary/:itemname', function(params, req, res, next) {
         var itemType = ItemTypes.findOne({name: params.itemname})
+        if (!itemType) {
+            itemType = PropertyTypes.findOne({name: params.itemname})
+        } else {
+            extendItemType(itemType);
+        }
         res.end(JSON.stringifyCircular(itemType));
     });
     getRoutes.route('/restQuery/:collection/:jsonQuery', function(params, req, res, next) {
         var result = Mongo.Collection.get(params.collection).find(JSON.parse(decodeURI(params.jsonQuery))).fetch();
+        var type = WhatIs[params.collection]; //tłumaczymy nazwę kolekcji na nazwę klasy w słowniku
+        result = result.map((el)=>{
+            delete el._id;
+            el['@context'] = rdfContext;
+            el['@type'] = type;
+            return el;
+        })
+
+        /*HTTP.get(url, {
+            headers: {
+                'accept': 'application/json'
+            }
+        }, function(err, res2) {
+            res2.content
+            
+            console.log(JSON.parse(res2.content));
+        });*/
         res.end(JSON.stringifyCircular(result));
     });
 }

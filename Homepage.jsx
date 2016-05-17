@@ -95,6 +95,15 @@ Homepage = React.createClass({
     },
     renderInstitutions() {
         return this.data.institutions.map((el)=>{
+<<<<<<< HEAD
+            return <div id={el._id}>
+                <button type="button" className="btn btn-xs btn-default" onClick={this.removeInstitution}>
+                    <span className="glyphicon glyphicon-trash"
+                        aria-label="Usuń"></span>
+                </button>
+                <a href={'/i/'+el.name}> {el.name}</a>
+            </div>
+=======
             return <div className= "tile1" >
                     <a className="tilelink" href={'/i/'+el.name}> {el.name}
                     </a>
@@ -106,6 +115,7 @@ Homepage = React.createClass({
                       </button>
                     </div>
                   </div>
+>>>>>>> 28cb99c14c1f057ff14fbc522abbadf38b8f4e69
         })
     },
     addInstitution(event) {

@@ -1,4 +1,4 @@
-Directory = React.createClass({
+Dictionary = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         return {
@@ -93,7 +93,7 @@ Directory = React.createClass({
     renderList() {
         return this.data.itemtypes.map((el)=>{
             return <div id={el._id}>
-                <a href={'/directory/'+el.name}> {el.name}</a>
+                <a href={'/dictionary/'+el.name}> {el.name}</a>
             </div>
         })
     },
@@ -104,7 +104,7 @@ Directory = React.createClass({
             name: $modal.find('#name')[0].value,
             description: $modal.find('#description')[0].value,
             inheritsFrom: this.state.selectedParent ? [this.state.selectedParent] : [],
-            sameAs: sameAsStr ? sameAsStr.split(',').map(function(el){return el.trim()}) : [],
+            sameAs: sameAsStr// ? sameAsStr.split(',').map(function(el){return el.trim()}) : [],
         })
     },
 });

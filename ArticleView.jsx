@@ -2,50 +2,52 @@ ArticleView = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         return {
-            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['article']}}).fetch()
+            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['Article']}}).fetch()
         };
     },
     getInitialState() {
         return {
             selectedType: '',
-            selectedAuthor: ''
+            selectedAuthor: '',
+            nowEdited: ''
         }
     },
     render() {
         _ArticleView = this;
+        var e = this.props.articles && this.props.articles.find((el)=>{el.id == this.state.nowEdited});
         return <div>
             {/*przycisk dodawania artykułów*/}
 
             <div className='container'>
-              <div className="row">
-                <div className="col-md-9" id='articles'>
+              <div className='row'>
+                <div className='col-md-9' id='articles'>
                   {/*artykuły*/}
                   {this.renderArticles()}
                 </div>
               </div>
-              <div className="row">
-                <div className="col-md-10" id="bottom-Row">
-                  <div id="bottom-button-add-article">
-                    <button type='button'  className='btn btn-info' data-toggle='modal' data-target='#addArticleModal'>Dodaj artykuł</button>
+              <div className='row'>
+                <div className='col-md-10' id='bottom-Row'>
+                  <div id='bottom-button-add-article'>
+                    <button type='button'  className='btn btn-info' data-toggle='modal' data-target='#editArticleModal'>Dodaj artykuł</button>
                   </div>
                 </div>
               </div>
             </div>
-            {/*okno dodawania artykułów: */}
-            <div className='modal fade' id='addArticleModal' role='dialog'>
+            {/*okno edycji artykułów: */}
+            <div className='modal fade' id='editArticleModal' role='dialog'>
             <div className='modal-dialog'>
                 <div className='modal-content'>
                     <div className='modal-header'>
                         <button type='button' className='close' data-dismiss='modal'>&times;</button>
-                        <h4 className='modal-title'>Dodaj artykuł</h4>
+                        <h4 className='modal-title'>Edytuj artykuł</h4>
                     </div>
                     <div className='modal-body'>
                         <div>Tytuł:</div>
-                        <input id='title' className='form-control' type='text'></input>
+                        <input id='title' className='form-control' type='text' value={e && e.title}></input>
                         <div>Treść:</div>
-                        <textarea id='content' className='form-control' rows='5' cols='80'></textarea>
+                        <textarea id='content' className='form-control' rows='5' cols='80'>{e && e.content}</textarea>
                         <div>Tagi:</div>
-                        <input id='tags' type='text' className='form-control' placeholder='tag1, tag2...'></input>
+                        <input id='tags' type='text' className='form-control' placeholder='tag1, tag2...' value={e && e.tags}></input>
                         {/*TODO Hubert: dodawanie autora, którym może być jeden z urzędników (officials) istniejących w naszej instytucji.
                            Trzeba stworzyć listę wyboru, gdzie będzie można wybrać jednego z nich.*/}
                         <div>Data publikacji:</div>
@@ -63,26 +65,26 @@ ArticleView = React.createClass({
                             </span>
                         </div>
                         <div>Typ artykułu:</div>
-                        <div className="dropdown" id='author'>
-                            <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{this.renderSelectedType()} <span className="caret"></span>
+                        <div className='dropdown' id='author'>
+                            <button className='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>{this.renderSelectedType()} <span className='caret'></span>
                             </button>
-                            <ul className="dropdown-menu">
+                            <ul className='dropdown-menu'>
                                 {this.renderDropdownTypes()}
                             </ul>
                         </div>
                         {this.renderExtendedModal()}
                         <div>Autor:</div>
-                        <div className="dropdown" id='author'>
-                            <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Wybierz Autora
-                            <span className="caret"></span></button>
-                            <ul className="dropdown-menu">
+                        <div className='dropdown' id='author'>
+                            <button className='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>Wybierz Autora
+                            <span className='caret'></span></button>
+                            <ul className='dropdown-menu'>
                                 <li>Mariolka</li>
                                 <li>Buhal</li>
                                 <li>gdzie reszta?</li>
                             </ul>
                         </div>
                         <div>Dodaj załącznik: </div>
-                        <input type="file" id="file" />
+                        <input type='file' id='file' />
                     </div>
                     <div className='modal-footer'>
                         <button type='button' id='pbtn' className='btn btn-success' data-dismiss='modal' onClick={this.addArticle} >Publikuj</button>
@@ -98,8 +100,8 @@ ArticleView = React.createClass({
         if (this.state.selectedType) {
             return this.data.articleTypes.find((el)=>{return el.name == this.state.selectedType}).properties.map((el)=>{
                 return <div>
-                    <div>{el.name+':'}</div>
-                    <input id={el.name} className='form-control extensions' type='text'></input>
+                    <div>{el+':'}</div>
+                    <input id={el} className='form-control extensions' type='text'></input>
                 </div>
             })
         }
@@ -141,10 +143,15 @@ ArticleView = React.createClass({
                 <div>{el.content}</div>
                 <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
                 <div>{el.author}</div>
-                {(function(){
+                {/*załącznik:*/}
+                {(()=>{
                     if (attachment) {
-                        console.log('attachment:')
-                        console.log(attachment)
+                        //rozwiązanie problemu z nieklikalnym linkiem:
+                        if (!attachment.url()) {
+                            setTimeout(()=>{
+                                this.forceUpdate();
+                            }, 200);                        
+                        }
                         return <div><a href={attachment.url()} download>{attachment.name()}</a></div>                    
                     }                
                 })()}
@@ -162,6 +169,10 @@ ArticleView = React.createClass({
             $ed.data('DateTimePicker').minDate(new Date());
             $ed.data('DateTimePicker').clear();
         });
+    },
+    editArticle(event) {
+        this.setState({nowEdited: $(event.target).closest('.row')[0].id});
+        var $modal = $('#editArticleModal')
     },
     addArticle(event) {
         var $modal = $(event.target).closest('.modal-content');
@@ -184,33 +195,27 @@ ArticleView = React.createClass({
         }
         var file = $modal.find('#file')[0].files[0];
         var ins_id = this.props.institution._id;
+        var obj = {
+            title: $title.value,
+            content: $content.value,
+            institution_id: ins_id,
+            type: this.state.selectedType,
+            tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
+            publicationDate: publicationDate,
+        }
+        _.extend(obj, extensions)
         if (file) {
-            Attachments.insert(file, function (err, fileObj) {
-                if (err) {
-                } else {
-                    Meteor.call('addArticle', {
-                        title: $title.value,
-                        content: $content.value,
-                        institution_id: ins_id,
-                        tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
-                        publicationDate: publicationDate,
-                        extensions: extensions,
-                        attachment_id: fileObj._id
-                    });
+            Attachments.insert(file, function(err, fileObj) {
+                if (!err) {
+                    obj.attachment_id = fileObj._id;
+                    Meteor.call('addArticle', obj);
                 }
             });
         } else {
-            Meteor.call('addArticle', {
-                title: $title.value,
-                content: $content.value,
-                institution_id: this.props.institution._id,
-                tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
-                publicationDate: publicationDate,
-                extensions: extensions
-            });
+            Meteor.call('addArticle', obj);
         }
     },
     removeArticle(event) {
-        Meteor.call('removeArticle', $(event.target).closest('div')[0].id);
+        Meteor.call('removeArticle', $(event.currentTarget).closest('div')[0].id);
     }
 });
