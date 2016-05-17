@@ -1,5 +1,5 @@
 SearchResults = React.createClass({
-    //TODO Martin: sprawienie, aby w tej klasie renderowały się globalne wyniki wyszukiwania
+    //TODO: sparametryzowac wyszukiwanie do danej instytucji
     mixins: [ReactMeteorData],
     getMeteorData() {
         var temp= this.props.phrase
@@ -33,7 +33,7 @@ SearchResults = React.createClass({
     	return this.data.institutions.map((el)=>{
     		return <div id={el._id}><a href={"/i/"+el.name}>{el.name}</a></div>
     	})
-    	
+
     },
     printArticles(){
         var ins2;
@@ -42,6 +42,6 @@ SearchResults = React.createClass({
             return <div id={el2._id}>
                 <a href={"/i/"+ins2.name+"/article/"+el2._id} >{el2.title}</a>
             </div>
-        }) 
+        })
     }
 });

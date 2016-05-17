@@ -61,6 +61,7 @@ insecure@1.0.7
 jquery@1.11.8
 kadira:flow-router@2.12.1
 kadira:react-layout@1.5.3
+kookoskar:bootstrap-select@1.7.3
 lai:collection-extensions@0.2.1_1
 launch-screen@1.0.11
 less@2.6.0

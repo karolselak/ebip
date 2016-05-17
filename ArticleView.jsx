@@ -16,7 +16,7 @@ ArticleView = React.createClass({
         return <div>
             {/*przycisk dodawania artykułów*/}
 
-            <div className='container'>
+
               <div className="row">
                 <div className="col-md-9" id='articles'>
                   {/*artykuły*/}
@@ -30,7 +30,7 @@ ArticleView = React.createClass({
                   </div>
                 </div>
               </div>
-            </div>
+            
             {/*okno dodawania artykułów: */}
             <div className='modal fade' id='addArticleModal' role='dialog'>
             <div className='modal-dialog'>
@@ -130,9 +130,9 @@ ArticleView = React.createClass({
         return this.props.articles && this.props.articles.map((el)=>{
             if (!el) {
                 return null;
-            }           
+            }
             var attachment = Attachments.findOne({"_id":el.attachment_id});
-            
+
             return <div id={el._id}>
                 <button type="button" className="btn btn-xs btn-default" onClick={this.removeArticle}>
                     <span className="glyphicon glyphicon-trash" aria-label="Usuń"></span>
@@ -145,8 +145,8 @@ ArticleView = React.createClass({
                     if (attachment) {
                         console.log('attachment:')
                         console.log(attachment)
-                        return <div><a href={attachment.url()} download>{attachment.name()}</a></div>                    
-                    }                
+                        return <div><a href={attachment.url()} download>{attachment.name()}</a></div>
+                    }
                 })()}
             </div>
         })
