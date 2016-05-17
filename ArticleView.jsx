@@ -135,7 +135,6 @@ ArticleView = React.createClass({
             var attachment = Attachments.findOne({"_id":el.attachment_id});
             return <div className='row' id={el._id}>
                 <br />
-                {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
                 <div>
                     <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}>
                         <b>{el.title}</b>
@@ -158,6 +157,7 @@ ArticleView = React.createClass({
                     </span>
                 </div>
                 <br />
+                {/*TODO Łukasz: funkcja obcinająca el.content*/}
                 <div className='text-justify'>{el.content}</div>
                 {attachment ? <div><a href={attachment.url()} download>{attachment.name()}</a></div> : null}
             </div>
