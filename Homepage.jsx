@@ -27,7 +27,7 @@ Homepage = React.createClass({
                                 <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Wybierz instytucje
                                 <span className="caret"></span></button>
                                 <ul className="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                    {this.renderInsToSrlrect()}
+                                    {this.renderSearchDropdown()}
                                 </ul>
                             </div>
                             </td>
@@ -40,11 +40,11 @@ Homepage = React.createClass({
                     </table>
                   </div>
                 </div>
-                <div className="row">
+
                   <div className="col-md-11">
                     {this.renderInstitutions()}
                     <i data-toggle="modal" data-target="#addInstitutionModal">
-                      <div id="addInstitutiontile">
+                      <div id="addInstitutionTile">
                         <span className="glyphicon glyphicon-plus-sign"></span>
                       </div>
                     </i>
@@ -83,11 +83,11 @@ Homepage = React.createClass({
                     </div>
                 </div>
                 </div>
-              </div>
+
         </div>
         </div>
     },
-    renderInsToSrlrect(){
+    renderSearchDropdown(){
       return this.data.institutions.map((el)=>{
           return <li role="presentation"><a role="menuitem" href="#">{el.name}</a></li>
         });
@@ -96,25 +96,16 @@ Homepage = React.createClass({
     renderInstitutions() {
         return this.data.institutions.map((el)=>{
             return <div className= "tile1" >
-                    <a className="tilelink" href={'/i/'+el.name}> {el.name}
-                    </a>
-                    <div className="bottomRowInst" id={el._id}>
-                      <button type="button" className="btn btn-xs btn-default "
-                      onClick={this.removeInstitution}>
-                          <span className="glyphicon glyphicon-trash"
-                              aria-label="Usuń"></span>
-                      </button>
-                    </div>
-                  </div>
-/*=======
-            return <div id={el._id}>
-                <button type="button" className="btn btn-xs btn-default" onClick={this.removeInstitution}>
-                    <span className="glyphicon glyphicon-trash"
-                        aria-label="Usuń"></span>
-                </button>
-                <a href={'/i/'+el.name}> {el.name}</a>
+                <a className="tilelink" href={'/i/'+el.name}> {el.name}
+                </a>
+                <div className="bottomRowInst" id={el._id}>
+                  <button type="button" className="btn btn-xs btn-default "
+                  onClick={this.removeInstitution}>
+                      <span className="glyphicon glyphicon-trash"
+                          aria-label="Usuń"></span>
+                  </button>
+                </div>
             </div>
->>>>>>> many_changes*/
         })
     },
     addInstitution(event) {

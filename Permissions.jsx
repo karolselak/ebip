@@ -19,7 +19,7 @@ Permissions = React.createClass({
                     <table className='table table-hover'>
                         <thead>
                             <tr>
-                                <td><p>Urzytkownik</p><td><p>Posiadane uprawnienia</p></td></td> <td>  </td> <td> </td>
+                                <td><p>Użytkownik</p><td><p>Posiadane uprawnienia</p></td></td> <td>  </td> <td> </td>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@ Permissions = React.createClass({
                         <div className="modal-content">
                             <div className="modal-header">
                                 <button type="button" className="close" data-dismiss="modal">&times;</button>
-                                <h4 className="modal-title">Dodaj uprawnienia urzytkownikowi: {this.state.HandleUser}</h4>
+                                <h4 className="modal-title">Dodaj uprawnienia użytkownikowi: {this.state.HandleUser}</h4>
                             </div >
 
                             <table className='table table-hover' >

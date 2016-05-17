@@ -17,7 +17,6 @@ ArticleView = React.createClass({
         var e = this.props.articles && this.props.articles.find((el)=>{el.id == this.state.nowEdited});
         return <div>
             {/*przycisk dodawania artykułów*/}
-
             <div className='container'>
               <div className='row'>
                 <div className='col-md-9' id='articles'>
@@ -130,30 +129,6 @@ ArticleView = React.createClass({
     },
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
-//<<<<<<< HEAD
-         /*   
-            
-            return <div id={el._id}>
-                <button type="button" className="btn btn-xs btn-default" onClick={this.removeArticle}>
-                    <span className="glyphicon glyphicon-trash" aria-label="Usuń"></span>
-                </button>
-                <div><a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}><b>{el.title}</b></a></div>
-                <div>{el.content}</div>
-                <div>{el.publicationDate && (new Date(el.publicationDate)).toLocaleDateString()}</div>
-                <div>{el.author}</div>
-                
-                {(()=>{
-                    if (attachment) {
-                        //rozwiązanie problemu z nieklikalnym linkiem:
-                        if (!attachment.url()) {
-                            setTimeout(()=>{
-                                this.forceUpdate();
-                            }, 200);                        
-                        }
-                        return <div><a href={attachment.url()} download>{attachment.name()}</a></div>                    
-                    }                
-                })()}*/
-//=======
             if (!el) {
                 return null;
             }           

@@ -23,8 +23,6 @@ ItemType = React.createClass({
                 }
             }
             extendItemType2(itemtype);
-            
-            console.log(itemtype)
         }
         return {
             itemtype: itemtype,
@@ -86,16 +84,15 @@ ItemType = React.createClass({
                 </div>
             </div>
         } else if (this.data.propertytype){
-                        return <div className='container'>
+            return <div className='container'>
                 {/*nagłówek z nazwą typu: */}
                 <h2>{this.data.propertytype.name}</h2>
                 <div>{this.renderSameAs(this.data.propertytype.sameAs)}</div>
                 <div><b>{this.data.propertytype.description}</b></div>
                 Spodziewany typ: {this.renderExpectedTypes(this.data.propertytype.expectedTypes)}
-                
             </div>
         } else {
-            return null;        
+            return null;
         }
     },
     addProperty(event) {
