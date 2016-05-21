@@ -12,11 +12,7 @@ Homepage = React.createClass({
         return <div className="container">
                   <div className="col-md-12" id="hompeCont">
                     {this.renderInstitutions()}
-                    <i data-toggle="modal" data-target="#addInstitutionModal">
-                      <div id="addInstitutionTile">
-                        <span className="glyphicon glyphicon-plus-sign"></span>
-                      </div>
-                    </i>
+                    {this.addInstButton()}
                   </div>
                 {/*okno dodawania instytucji: */}
                 <div className="modal fade" id="addInstitutionModal" role="dialog">
@@ -55,19 +51,37 @@ Homepage = React.createClass({
         </div>
     },
     renderInstitutions() {
+      if ( Meteor.user()) {
+        if (Meteor.user().GlobalRight===true) {
+          return this.data.institutions.map((el)=>{
+              return <div className= "tile1" >
+                  <a className="tilelink" href={'/i/'+el.name}> {el.name}
+                  </a>
+                  <div className="bottomRowInst" id={el._id}>
+                    <button type="button" id={'buttonRemuve'+el._id} className="btn btn-xs btn-default "
+                    onClick={this.removeInstitution}>
+                        <span className="glyphicon glyphicon-trash" aria-label="Usuń">
+                        </span>
+                    </button>
+                  </div>
+              </div>
+          })
+        }else{
+          return this.data.institutions.map((el)=>{
+              return <div className= "tile1" >
+                  <a className="tilelink2" href={'/i/'+el.name}> {el.name}
+                  </a>
+              </div>
+          })
+        }
+      }else{
         return this.data.institutions.map((el)=>{
             return <div className= "tile1" >
-                <a className="tilelink" href={'/i/'+el.name}> {el.name}
+                <a className="tilelink2" href={'/i/'+el.name}> {el.name}
                 </a>
-                <div className="bottomRowInst" id={el._id}>
-                  <button type="button" className="btn btn-xs btn-default "
-                  onClick={this.removeInstitution}>
-                      <span className="glyphicon glyphicon-trash"
-                          aria-label="Usuń"></span>
-                  </button>
-                </div>
             </div>
         })
+      }
     },
     addInstitution(event) {
         var $modal = $(event.target).closest('.modal-content');
@@ -85,5 +99,16 @@ Homepage = React.createClass({
     },
     removeInstitution(event) {
         Meteor.call('removeInstitution', $(event.target).closest('div')[0].id)
+    },
+    addInstButton(){
+      if ( Meteor.user()) {
+        if (Meteor.user().GlobalRight===true) {
+          return <i data-toggle="modal" data-target="#addInstitutionModal">
+            <div id="addInstitutionTile">
+              <span className="glyphicon glyphicon-plus-sign"></span>
+            </div>
+          </i>
+        }
+      }
     }
 });
