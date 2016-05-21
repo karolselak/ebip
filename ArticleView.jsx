@@ -131,10 +131,11 @@ ArticleView = React.createClass({
         return this.props.articles && this.props.articles.map((el)=>{
             if (!el) {
                 return null;
-            }           
+            }
             var attachment = Attachments.findOne({"_id":el.attachment_id});
             return <div className='row' id={el._id}>
                 <br />
+                {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
                 <div>
                     <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}>
                         <b>{el.title}</b>
@@ -153,11 +154,10 @@ ArticleView = React.createClass({
                         {' '}{el.author} {el.publicationDate
                         && el.publicationDate != Infinity ? (new Date(el.publicationDate)).toLocaleDateString()
                         : ''}
-                        
+
                     </span>
                 </div>
                 <br />
-                {/*TODO Łukasz: funkcja obcinająca el.content*/}
                 <div className='text-justify'>{el.content}</div>
                 {attachment ? <div><a href={attachment.url()} download>{attachment.name()}</a></div> : null}
             </div>

@@ -10,6 +10,6 @@ AccountsUIWrapper = React.createClass({
   },
   render() {
     // Just render a placeholder container that will be filled in
-    return <div id="userButton"><div className=" userIcon glyphicon glyphicon-user"></div><div ><span ref="container" /></div></div>;
+    return <div ><span ref="container" /></div>;
   }
 });

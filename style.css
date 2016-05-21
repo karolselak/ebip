@@ -2,118 +2,40 @@
 /* -----------------------------------------------MainLayout------------------------------------------------*/
 
 body{
-  /*background-color: #303030;*/
+  background-color: #c9d0d6;
+}
+.bodystyle{
+  border-radius:0px 0px 20px 20px;
+  max-width: 1100px;
+  background-color: #fffff1;
+}
 
+@media (min-width: 360px) {
+  .container {
+    max-width: 100%;
+  }
 }
 .container{
-  width: 1000px;
+  margin-right:auto;
   margin-left: auto;
-  margin-right: auto;
 }
-.tile1{
-  margin: 5px;
-  width: 240px;
-  height: 152px;
-  background-color: #3095d3;
-  float: left;
-  font-size: 30px;
 
-}
-.tile1:hover{
-  background-color: #2084c2;
-}
-a.tilelink{
-  color: #ffffff;
-  display: table-cell;
-  width: 240px;
-  height: 112px;
-  text-decoration: none;
-  text-align: center;
-  vertical-align: middle;
-  overflow:hidden;
-}
-#addInstitutiontile{
-  color: #ffffff;
-  margin: 5px;
-  width: 240px;
-  height: 152px;
-  background-color: #3095d3;
-  line-height: 152px;
-  display:  block;
-  font-weight: 152px;
-  text-align: center;
-  vertical-align: bottom;
-  float: left;
-  font-size: 120px;
-}
-#addInstitutiontile:hover{
-  background-color: #2084c2;
-}
-.bottomRowInst{
-  color: #ffffff;
-  display: block;
-  width: 240px;
-  height: 40px;
-  padding-right: 10px;
-  text-align: right;
-  vertical-align: middle;
-  line-height: 40px;
-  background-color: #1073B1;
-}
-#addInstitution{
-  margin: 5px;
-  width: 240px;
-  height: 152px;
-
-  background-color: #3095d3;
-  float: left;
-}
-#topStrip{
-  /*background-color:#E0E8EE;*/
-  margin-left: 20px;
-  margin-right: 10px;
-  background-color: #c9d0d6;
-
-
-}
+/* HEADER*/
 header{
   background-image: url(img/gradient.jpg);
   background-size:     cover;                      /* <------ */
   background-repeat:   no-repeat;
   background-position: center center;
-  height: 80px;
-  width: auto;
+  min-height: 80px;
 }
-footer {
-  border-radius:0px 0px 20px 20px;
-  clear:both;
-  height:50px;
-  background-color: #B0C4DE;
-}
-.container{
-  border-radius:0px 0px 20px 20px;
-  max-width: 1500px;
-  min-height: 100%;
-  margin-left:auto;
-  margin-right: auto;
-  background-color: #fffff1;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-.col-md-10{
-  float: left;
-  max-width: 850px;
-
-}
-.userIcon{
-  text-align: center;
-  text-decoration: none;
+.menuIcon{
+  font-size: 25px;
   color: #ffffff;
-  font-size:25px;
 }
-#userButton{
+a.menuLink{
+  text-decoration: none;
   text-align: center;
-  padding: 10px;
+  color: #ffffff;
 }
 #projectTitleLink{
     text-decoration: none;
@@ -121,45 +43,49 @@ footer {
 #projectTitle{
   font-family: "Times New Roman", Times, serif;
   color: #fffffe;
-  margin-left: 60%;
+  text-align:center;
+
+}
+
+.tileMenu{
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/*FOODER*/
+footer {
+  border-radius:0px 0px 20px 20px;
+  clear:both;
+  position: relative;
+  height:50px;
+  background-color: #B0C4DE;
 }
 #footerText{
   font-family: "Times New Roman", Times, serif;
   color: #5e7c9c;
+  margin: 0px;
 }
-#AccountsUIWrapper{
-  text-align: center;
-  text-decoration: none;
-  color: #ffffff;
-}
-.col-adm{
-  float:right;
-  max-width: 300px;
-  min-width: 150px;
-  text-align: center;
-  padding: 10px;
-}
-.adminIcon{
-  font-size: 25px;
-}
-a.adminLink{
-  text-decoration: none;
-  text-align: center;
 
-  color: #ffffff;
+/*SEARCH*/
+.searchControl{
+  margin-top: 0px;
+  width: 100%;
 }
-#UserAccounts{
-  float: right;
-  max-width: 300px;
-  min-width: 100px;
+.instSearch{
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 10px;
+
 }
 
 /* -----------------------------------------------Homepage------------------------------------------------*/
-.col-md-11{
-  padding: 5px;
-  max-width: 850px;
-  min-height: 210px;
-  float: right;
+
+
+#hompeCont{
+  padding: 15px;
 }
 .tile1{
   margin: 5px;
@@ -216,17 +142,8 @@ a.tilelink{
 .table{
   width: 100%;
 }
-#search-box{
-  width:100%;
-}
 
-#btn-info1{
-margin-left: 5px;
-}
 
-.form-control{
-  margin-top: 15px;
-}
 
 #bottom-button-add-institution{
   margin-right: 20px;
@@ -323,4 +240,31 @@ margin-left: 5px;
 #selectpicker{
   style: 'btn-info',
   size: 4
+}
+/* -----------------------------------------------SeacrchResults-------------------------------------------------*/
+.searchContentView{
+  display: block;
+  overflow: hidden;
+  text-align: justify;
+  line-height: 15px;
+  max-height: 45px;
+  width: 100%
+}
+.searchBackground{
+  padding: 5px;
+  border-radius:10px;
+}
+.searchBackground:hover{
+  background-color: transparent;
+  background-color: rgba(169,169,169, 0.4);
+}
+.serachHeading{
+  margin-bottom: 5px;
+  color: #000000;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+}
+a.searchLink{
+  text-decoration: none;
 }

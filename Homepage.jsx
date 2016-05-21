@@ -9,39 +9,8 @@ Homepage = React.createClass({
     {
         _homepage_ = this;
         //TODO Hubert: niech to zacznie wyglądać po ludzku, bez tych brzydkich zaokrągleń, wyszukiwarka jako input
-        return <div>
-            <div className="container">
-                <div className="row">
-                  {/*text input: */}
-                  <div className="col-md-7 col-md-offset-3 well">
-                    <table>
-                        <tr>
-                            <td id="search-box">
-                                <div className="form-group">
-                                    <input type="text" className="form-control" id="searchValue"/>
-                                </div>
-                            </td>
-                            <td>
-
-                            <div className="dropdown" id='author'>
-                                <button className="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Wybierz instytucje
-                                <span className="caret"></span></button>
-                                <ul className="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                    {this.renderSearchDropdown()}
-                                </ul>
-                            </div>
-                            </td>
-                            <td>
-                                <button type="button" className="btn btn-infol"  id="btn-info1" onClick={this.gotoSerchResults} >
-                                    <span className="glyphicon glyphicon-search">Wyszukaj</span>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                  </div>
-                </div>
-
-                  <div className="col-md-11">
+        return <div className="container">
+                  <div className="col-md-12" id="hompeCont">
                     {this.renderInstitutions()}
                     <i data-toggle="modal" data-target="#addInstitutionModal">
                       <div id="addInstitutionTile">
@@ -83,15 +52,7 @@ Homepage = React.createClass({
                     </div>
                 </div>
                 </div>
-
         </div>
-        </div>
-    },
-    renderSearchDropdown(){
-      return this.data.institutions.map((el)=>{
-          return <li role="presentation"><a role="menuitem" href="#">{el.name}</a></li>
-        });
-
     },
     renderInstitutions() {
         return this.data.institutions.map((el)=>{
@@ -124,11 +85,5 @@ Homepage = React.createClass({
     },
     removeInstitution(event) {
         Meteor.call('removeInstitution', $(event.target).closest('div')[0].id)
-    },
-    gotoSerchResults(){
-        var temp=document.getElementById("searchValue").value
-        if(temp!=""){
-            document.location="/search/"+temp
-        }
     }
 });

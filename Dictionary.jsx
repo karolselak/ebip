@@ -11,7 +11,7 @@ Dictionary = React.createClass({
         }
     },
     render() {
-        return <div className='container'>
+        return <div >
             <div className="row">
               <div className="col-md-11">
                 {this.renderList()}
@@ -39,7 +39,7 @@ Dictionary = React.createClass({
                         <div>Opis:</div>
                         <textarea id='description' className='form-control' rows='3' cols='80'></textarea>
                     </div>
-                    <div>                        
+                    <div>
                         <div>Rodzic:</div>
                         <br/>
                         <div className="dropdown" id='author'>
@@ -53,8 +53,8 @@ Dictionary = React.createClass({
                     </div>
                     <div>
                         <div>Identyczny z:</div>
-                        <input type="text" id='sameAs' className='form-control'/>        
-                    </div>    
+                        <input type="text" id='sameAs' className='form-control'/>
+                    </div>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-success"
@@ -70,7 +70,7 @@ Dictionary = React.createClass({
     },
     renderSelectedParent() {
         if (!this.state.selectedParent) {
-            return <span>brak rodzica</span>;        
+            return <span>brak rodzica</span>;
         } else {
             return <span>{this.state.selectedParent}</span>;
         }

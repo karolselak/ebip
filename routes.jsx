@@ -109,10 +109,9 @@ if (Meteor.isServer) {
             }
         }, function(err, res2) {
             res2.content
-            
+
             console.log(JSON.parse(res2.content));
         });*/
         res.end(JSON.stringifyCircular(result));
     });
 }
-
