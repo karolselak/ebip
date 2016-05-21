@@ -51,7 +51,7 @@ SearchResults = React.createClass({
                         </div>
                       </div>
                       <div className="row " >
-                        <div className="col-md-12 searchContentView ">
+                        <div className="col-md-12 ShortArticleView ">
                           {el2.content}
                         </div>
                       </div>

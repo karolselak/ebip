@@ -252,7 +252,7 @@ a.tilelink2{
   size: 4
 }
 /* -----------------------------------------------SeacrchResults-------------------------------------------------*/
-.searchContentView{
+.ShortArticleView{
   display: block;
   overflow: hidden;
   text-align: justify;
