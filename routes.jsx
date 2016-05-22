@@ -40,6 +40,11 @@ FlowRouter.route('/i/:institution/about', {
         ReactLayout.render(MainLayout, {content: <Institution {...params} is_about={true} />});
     }
 });
+FlowRouter.route('/person/:pesel', {
+    action(params) {
+        ReactLayout.render(MainLayout, {content: <Person {...params} />});
+    }
+});
 //lista zdefiniowanych typów mikrodanych
 FlowRouter.route('/dictionary', {
     action(params) {
