@@ -26,9 +26,7 @@ ArticleView = React.createClass({
               </div>
               <div className='row'>
                 <div className='col-md-10' id='bottom-Row'>
-                  <div id='bottom-button-add-article'>
-                    <button type='button'  className='btn btn-info' data-toggle='modal' data-target='#editArticleModal'>Dodaj artykuł</button>
-                  </div>
+                  {this.addArticleButton()}
                 </div>
               </div>
             </div>
@@ -131,34 +129,26 @@ ArticleView = React.createClass({
         return this.props.articles && this.props.articles.map((el)=>{
             if (!el) {
                 return null;
-            }           
+            }
             var attachment = Attachments.findOne({"_id":el.attachment_id});
             return <div className='row' id={el._id}>
                 <br />
+                {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
                 <div>
                     <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}>
                         <b>{el.title}</b>
                     </a>
                     <span className='pull-right'>
-                        <button type='button' className='btn btn-xs btn-default'
-                            onClick={this.removeArticle}>
-                            <span className='glyphicon glyphicon-trash'
-                                aria-label='Usuń'></span>
-                        </button>
-                        <button type='button' className='btn btn-xs btn-default'
-                            data-toggle='modal' data-target='#editArticleModal' onClick={this.editArticle}>
-                            <span className='glyphicon glyphicon-pencil'
-                                aria-label='Edytuj'></span>
-                        </button>
+                      <div>
+                        {this.articleEditeButtons()}
                         {' '}{el.author} {el.publicationDate
                         && el.publicationDate != Infinity ? (new Date(el.publicationDate)).toLocaleDateString()
                         : ''}
-                        
+                      </div>
                     </span>
                 </div>
                 <br />
-                {/*TODO Łukasz: funkcja obcinająca el.content*/}
-                <div className='text-justify'>{el.content}</div>
+                <div className='ShortArticleView'>{el.content}</div>
                 {attachment ? <div><a href={attachment.url()} download>{attachment.name()}</a></div> : null}
             </div>
         })
@@ -222,5 +212,40 @@ ArticleView = React.createClass({
     },
     removeArticle(event) {
         Meteor.call('removeArticle', $(event.currentTarget).closest('.row')[0].id);
+    },
+    articleEditeButtons(){
+      var inst=-1;
+      if ( Meteor.user()) {
+        if(Meteor.user().institutions ){
+          inst=Meteor.user().institutions.indexOf(this.props.institution._id );
+        }
+        if ( Meteor.user().GlobalRight===true ||inst!=-1) {
+          return <div>
+                    <button type='button' className='btn btn-xs btn-default'
+                        onClick={this.removeArticle}>
+                        <span className='glyphicon glyphicon-trash'
+                            aria-label='Usuń'></span>
+                    </button>
+                    <button type='button' className='btn btn-xs btn-default'
+                        data-toggle='modal' data-target='#editArticleModal' onClick={this.editArticle}>
+                        <span className='glyphicon glyphicon-pencil'
+                            aria-label='Edytuj'></span>
+                    </button>
+                  </div>
+        }
+      }
+    },
+    addArticleButton(){
+      var inst=-1;
+      if ( Meteor.user()) {
+        if(Meteor.user().institutions && this.props.articles){
+          inst=Meteor.user().institutions.indexOf(this.props.institution._id );
+        }
+        if ( Meteor.user().GlobalRight===true ||inst!=-1) {
+          return <div id='bottom-button-add-article'>
+                    <button type='button'  className='btn btn-info' data-toggle='modal' data-target='#editArticleModal'>Dodaj artykuł</button>
+                  </div>
+        }
+      }
     }
 });
