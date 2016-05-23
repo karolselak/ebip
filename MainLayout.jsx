@@ -51,7 +51,7 @@ MainLayout = React.createClass({
                 <div className="row">
                   <div className="col-md-2">
                    <br/>dyjtyjtjkdtjt
-                </div> 
+                </div>
                     <div className="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="hompeCont">
                       {this.props.content}
                     </div>
@@ -80,7 +80,7 @@ MainLayout = React.createClass({
         var szukana=document.getElementById("searchValue").value
         if(szukana){
           if(this.state.selectedInst){
-            document.location="/search/"+szukana+"/"+this.state.selectedInst
+            document.location="i/"+this.state.selectedInst+"/search/"+szukana
           }else{
             document.location="/search/"+szukana
           }
