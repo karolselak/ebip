@@ -98,7 +98,9 @@ Homepage = React.createClass({
         })
     },
     removeInstitution(event) {
-        Meteor.call('removeInstitution', $(event.target).closest('div')[0].id)
+        if(confirm("Czy na pewno usunąć instytucję?")) {
+            Meteor.call('removeInstitution', $(event.target).closest('div')[0].id);
+        }
     },
     addInstButton(){
       if ( Meteor.user()) {

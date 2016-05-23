@@ -165,6 +165,11 @@ ArticleView = React.createClass({
             $ed.data('DateTimePicker').clear();
         });
     },
+    /*componentDidUpdate() {
+        $(function() {
+            $('[data-toggle="popover"]').popover();
+        });
+    },*/
     editArticle(event) {
         this.setState({nowEdited: $(event.target).closest('.row')[0].id});
         var $modal = $('#editArticleModal')
@@ -211,7 +216,9 @@ ArticleView = React.createClass({
         }
     },
     removeArticle(event) {
-        Meteor.call('removeArticle', $(event.currentTarget).closest('.row')[0].id);
+        if (confirm("Na pewno usunąć artykuł?")) {
+            Meteor.call('removeArticle', $(event.currentTarget).closest('.row')[0].id);
+        }
     },
     articleEditeButtons(){
       var inst=-1;
@@ -220,6 +227,10 @@ ArticleView = React.createClass({
           inst=Meteor.user().institutions.indexOf(this.props.institution._id );
         }
         if ( Meteor.user().GlobalRight===true ||inst!=-1) {
+            //var html_usun = '<button onClick={this.removeArticle} type="button" class="btn btn-danger">Danger</button>';
+            //var id = $(event.target).closest('.row')[0].id;
+            //var modal_id = "modal" + id;
+            //var s_modal_id = "#" + modal_id;
           return <div>
                     <button type='button' className='btn btn-xs btn-default'
                         onClick={this.removeArticle}>
@@ -231,6 +242,33 @@ ArticleView = React.createClass({
                         <span className='glyphicon glyphicon-pencil'
                             aria-label='Edytuj'></span>
                     </button>
+                    {/*}<button type='button' className='btn btn-xs btn-default'
+                        data-toggle="modal" data-target={s_modal_id}>
+                        <span className='glyphicon glyphicon-trash'
+                            aria-label='Usuń'></span>
+                    </button>*/}
+                    {/*<div id={modal_id} className="modal fade" role="dialog">
+                  <div className="modal-dialog">
+
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <button type="button" className="close" data-dismiss="modal">&times;</button>
+                        <h4 className="modal-title">Usunięcie {id}</h4>
+                      </div>
+                      <div className="modal-body">
+                        <p>Czy usunąć artykuł?</p>
+                            <button type="button" className="btn btn-default"
+                                onClick={this.removeArticle}>Tak</button>
+                      </div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-default" data-dismiss="modal"
+                            onClick={this.removeArticle}>Tak</button>
+                        <button type="button" className="btn btn-default" data-dismiss="modal">Nie</button>
+                      </div>
+                    </div>
+
+                </div>
+                </div>*/}
                   </div>
         }
       }
