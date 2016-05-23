@@ -13,12 +13,12 @@ Dictionary = React.createClass({
     render() {
         return <div >
             <div className="row">
-              <div className="col-md-11">
+              <div className="col-md-11 col-lg-11 col-xs-11 col-sm-11">
                 {this.renderList()}
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-md-12 col-lg-12 col-xs-12 col-sm-12">
                   <button type="button" className="btn btn-info" data-toggle="modal" data-target="#addTypeModal">Dodaj typ</button>
               </div>
             </div>

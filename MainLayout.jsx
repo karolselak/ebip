@@ -49,10 +49,10 @@ MainLayout = React.createClass({
                 </div>
 
                 <div className="row">
-                    <div className="col-md-2">
-                      <br/>dyjtyjtjkdtjt
-                    </div>
-                    <div className="col-md-10" id="hompeCont">
+                  <div className="col-md-2">
+                   <br/>dyjtyjtjkdtjt
+                </div> 
+                    <div className="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="hompeCont">
                       {this.props.content}
                     </div>
                 </div>
