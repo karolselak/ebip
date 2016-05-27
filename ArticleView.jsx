@@ -14,7 +14,6 @@ ArticleView = React.createClass({
     },
     render() {
         _ArticleView = this;
-        var e = this.props.articles && this.props.articles.find((el)=>{el.id == this.state.nowEdited});
         return <div>
             {/*przycisk dodawania artykułów*/}
             <div className='container'>
@@ -40,11 +39,11 @@ ArticleView = React.createClass({
                     </div>
                     <div className='modal-body'>
                         <div>Tytuł:</div>
-                        <input id='title' className='form-control' type='text' value={e && e.title}></input>
+                        <input id='title' className='form-control' type='text'></input>
                         <div>Treść:</div>
-                        <textarea id='content' className='form-control' rows='5' cols='80'>{e && e.content}</textarea>
+                        <textarea id='content' className='form-control' rows='5' cols='80'></textarea>
                         <div>Tagi:</div>
-                        <input id='tags' type='text' className='form-control' placeholder='tag1, tag2...' value={e && e.tags}></input>
+                        <input id='tags' type='text' className='form-control' placeholder='tag1, tag2...'></input>
                         {/*TODO Hubert: dodawanie autora, którym może być jeden z urzędników (officials) istniejących w naszej instytucji.
                            Trzeba stworzyć listę wyboru, gdzie będzie można wybrać jednego z nich.*/}
                         <div>Data publikacji:</div>
@@ -140,7 +139,7 @@ ArticleView = React.createClass({
                     </a>
                     <span className='pull-right'>
                       <div>
-                        {this.articleEditeButtons()}
+                        {this.articleEditButtons()}
                         {' '}{el.author} {el.publicationDate
                         && el.publicationDate != Infinity ? (new Date(el.publicationDate)).toLocaleDateString()
                         : ''}
@@ -165,14 +164,20 @@ ArticleView = React.createClass({
             $ed.data('DateTimePicker').clear();
         });
     },
-    /*componentDidUpdate() {
-        $(function() {
-            $('[data-toggle="popover"]').popover();
-        });
-    },*/
     editArticle(event) {
-        this.setState({nowEdited: $(event.target).closest('.row')[0].id});
-        var $modal = $('#editArticleModal')
+        var id = $(event.target).closest('.row')[0].id;
+        this.setState({nowEdited: id});
+        var $modal = $('#editArticleModal');
+        var article = this.props.articles.find(function(el){return el._id == id});
+        this.setState({selectedType: article.type});
+        this.forceUpdate();
+
+        $modal.find('#title')[0].value = article.title;
+        $modal.find('#content')[0].value = article.content;
+        $tags = $modal.find('#tags')[0].value = article.tags;
+        var $extensions = $modal.find('.extensions');
+
+debugger
     },
     addArticle(event) {
         var $modal = $(event.target).closest('.modal-content');
@@ -220,17 +225,13 @@ ArticleView = React.createClass({
             Meteor.call('removeArticle', $(event.currentTarget).closest('.row')[0].id);
         }
     },
-    articleEditeButtons(){
+    articleEditButtons(){
       var inst=-1;
       if ( Meteor.user()) {
         if(Meteor.user().institutions ){
           inst=Meteor.user().institutions.indexOf(this.props.institution._id );
         }
         if ( Meteor.user().GlobalRight===true ||inst!=-1) {
-            //var html_usun = '<button onClick={this.removeArticle} type="button" class="btn btn-danger">Danger</button>';
-            //var id = $(event.target).closest('.row')[0].id;
-            //var modal_id = "modal" + id;
-            //var s_modal_id = "#" + modal_id;
           return <div>
                     <button type='button' className='btn btn-xs btn-default'
                         onClick={this.removeArticle}>
@@ -242,33 +243,6 @@ ArticleView = React.createClass({
                         <span className='glyphicon glyphicon-pencil'
                             aria-label='Edytuj'></span>
                     </button>
-                    {/*}<button type='button' className='btn btn-xs btn-default'
-                        data-toggle="modal" data-target={s_modal_id}>
-                        <span className='glyphicon glyphicon-trash'
-                            aria-label='Usuń'></span>
-                    </button>*/}
-                    {/*<div id={modal_id} className="modal fade" role="dialog">
-                  <div className="modal-dialog">
-
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <button type="button" className="close" data-dismiss="modal">&times;</button>
-                        <h4 className="modal-title">Usunięcie {id}</h4>
-                      </div>
-                      <div className="modal-body">
-                        <p>Czy usunąć artykuł?</p>
-                            <button type="button" className="btn btn-default"
-                                onClick={this.removeArticle}>Tak</button>
-                      </div>
-                      <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal"
-                            onClick={this.removeArticle}>Tak</button>
-                        <button type="button" className="btn btn-default" data-dismiss="modal">Nie</button>
-                      </div>
-                    </div>
-
-                </div>
-                </div>*/}
                   </div>
         }
       }

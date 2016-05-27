@@ -50,7 +50,7 @@ MainLayout = React.createClass({
 
                 <div className="row">
                   <div className="col-md-2">
-                   <br/>dyjtyjtjkdtjt
+                   <br/>
                 </div> 
                     <div className="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="hompeCont">
                       {this.props.content}
