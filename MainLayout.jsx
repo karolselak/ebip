@@ -53,6 +53,7 @@ MainLayout = React.createClass({
                     <div className="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="hompeCont">
                       {this.props.content}
                     </div>
+                  </div>
                 </div>
 
                 <footer className="row">
@@ -64,7 +65,6 @@ MainLayout = React.createClass({
                   </div>
                 </footer>
             </div>
-
         </body>
         </main>);
     },
