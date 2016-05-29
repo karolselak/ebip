@@ -68,10 +68,10 @@ Permissions = React.createClass({
                                 <h4 className="modal-title">Czy chcesz nadach urzytkownikowi {this.state.HandleUser} uprawnienia globalne?</h4>
                             </div >
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-success" onClick={this.saveGlobalRights} data-dismiss="modal">
+                                <button type="button"  className="btn btn-success" onClick={this.saveGlobalRights} data-dismiss="modal">
                                     TAK
                                 </button>
-                                <button type="button" className="btn btn-default" data-dismiss="modal">
+                                <button type="button"  className="btn btn-default" data-dismiss="modal">
                                     Anuluj
                                 </button>
                             </div>
