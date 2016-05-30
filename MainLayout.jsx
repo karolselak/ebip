@@ -49,10 +49,10 @@ MainLayout = React.createClass({
                 </div>
 
                 <div className="row">
-                  <div className="col-md-2">
+
                     <div className="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="hompeCont">
                       {this.props.content}
-                    </div>
+                    
                   </div>
                 </div>
 
@@ -111,8 +111,8 @@ MainLayout = React.createClass({
                     <a className="menuLink" href={'/permissions'} id="administratorsLink">
                     <div className="menuIcon glyphicon glyphicon-cog" ></div><div>Administratorzy</div>
                     </a>
+                    <div className="col-md-4 tileMenu">
                   </div>
-                  <div className="col-md-4 tileMenu">
                     <div className=" menuIcon glyphicon glyphicon-user"></div>
                     <AccountsUIWrapper />
                   </div>
