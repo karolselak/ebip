@@ -19,7 +19,7 @@ Dictionary = React.createClass({
             </div>
             {Meteor.user() && Meteor.user().GlobalRight ? <div className="row">
               <div className="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                  <button type="button" className="btn btn-info" data-toggle="modal" data-target="#addTypeModal">Dodaj typ</button>
+                  <button id="addType" type="button" className="btn btn-info" data-toggle="modal" data-target="#addTypeModal">Dodaj typ</button>
               </div>
             </div> : null}
             {/*okno dodawania typu: */}
@@ -57,11 +57,11 @@ Dictionary = React.createClass({
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-success"
+                    <button id="buttonAddType" type="button" className="btn btn-success"
                     data-dismiss="modal" onClick={this.addItemType}>
                         Dodaj
                     </button>
-                    <button type="button" className="btn btn-default" data-dismiss="modal">Anuluj</button>
+                    <button id="buttonCancelType" type="button" className="btn btn-default" data-dismiss="modal">Anuluj</button>
                 </div>
                 </div>
             </div>

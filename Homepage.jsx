@@ -107,7 +107,7 @@ Homepage = React.createClass({
         if (Meteor.user().GlobalRight===true) {
           return <i data-toggle="modal" data-target="#addInstitutionModal">
             <div id="addInstitutionTile">
-              <span className="glyphicon glyphicon-plus-sign"></span>
+              <span id="glyphiconPlusSign" className="glyphicon glyphicon-plus-sign"></span>
             </div>
           </i>
         }
