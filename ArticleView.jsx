@@ -85,7 +85,7 @@ ArticleView = React.createClass({
                     <div className='modal-footer'>
                         <button type='button' id='pbtn' className='btn btn-success' data-dismiss='modal' onClick={this.addArticle} >Publikuj</button>
                         <button type='button' id='sbtn' className='btn btn-info' data-dismiss='modal' onClick={this.addArticle} >Zapisz wersję roboczą</button>
-                        <button type='button' className='btn btn-default' data-dismiss='modal'>Anuluj</button>
+                        <button type='button' id='abtn' className='btn btn-default' data-dismiss='modal'>Anuluj</button>
                     </div>
                 </div>
             </div>
@@ -281,7 +281,7 @@ ArticleView = React.createClass({
         }
         if ( Meteor.user().GlobalRight===true ||inst!=-1) {
           return <div>
-                    <button type='button' className='btn btn-xs btn-default'
+                    <button type='button' id="deleteArticleButton" className='btn btn-xs btn-default'
                         onClick={this.removeArticle}>
                         <span className='glyphicon glyphicon-trash'
                             aria-label='Usuń'></span>
