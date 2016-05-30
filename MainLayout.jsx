@@ -43,13 +43,12 @@ MainLayout = React.createClass({
                     </div>
                     <div className="col-md-2 instSearch">
                         <button type="button " className="btn btn-infol searchControl"  onClick={this.gotoSerchResults} >
-                            <span className="glyphicon glyphicon-search">&nbsp;Wyszukaj</span>
+                            <span className="glyphicon glyphicon-search"></span> Wyszukaj
                         </button>
                     </div>
                 </div>
 
                 <div className="row">
-                  <div className="col-md-2">
                     <div className="col-md-12 col-xs-12 col-sm-12 col-lg-12" id="hompeCont">
                       {this.props.content}
                     </div>
@@ -64,7 +63,6 @@ MainLayout = React.createClass({
                   </div>
                 </footer>
             </div>
-
         </body>
         </main>);
     },
@@ -95,41 +93,24 @@ MainLayout = React.createClass({
     selectInst(event) {
         this.setState({selectedInst: event.target.id});
     },
-
-    headerMenu(){
-      if ( Meteor.user()) {
-        if (Meteor.user().GlobalRight===true) {
-          return<div>
-                  <div className="col-md-3 tileMenu">
-                    <a className="menuLink" href="/dictionary/" id="dictionaryLink">
-                    <div className="menuIcon glyphicon glyphicon-book" ></div><div>Słownik</div>
-                    </a>
-                  </div>
-                  <div className="col-md-5 tileMenu">
+    headerMenu() {
+        return <div>
+            <div className="col-md-3 tileMenu">
+                <a className="menuLink" href="/dictionary/" id="dictionaryLink">
+                <div className="menuIcon glyphicon glyphicon-book" ></div><div>Słownik</div>
+                </a>
+              </div>
+            {
+                Meteor.user() && Meteor.user().GlobalRight ? <div className="col-md-5 tileMenu">
                     <a className="menuLink" href={'/permissions'}>
                     <div className="menuIcon glyphicon glyphicon-cog" ></div><div>Administratorzy</div>
                     </a>
-                  </div>
-                  <div className="col-md-4 tileMenu">
-                    <div className=" menuIcon glyphicon glyphicon-user"></div>
-                    <AccountsUIWrapper />
-                  </div>
-                </div>
-        }else{
-          return<div>
-                  <div className="col-md-offset-8 col-md-4 tileMenu">
-                    <div className=" menuIcon glyphicon glyphicon-user"></div>
-                    <AccountsUIWrapper />
-                  </div>
-                </div>
-        }
-      }else{
-        return<div>
-                <div className="col-md-offset-8 col-md-4 tileMenu">
-                  <div className=" menuIcon glyphicon glyphicon-user"></div>
-                  <AccountsUIWrapper />
-                </div>
-              </div>
-      }
+                </div> : null
+            }
+          <div className="col-md-4 tileMenu">
+            <div className=" menuIcon glyphicon glyphicon-user"></div>
+            <AccountsUIWrapper align='left' />
+          </div>
+        </div>
     }
 });
