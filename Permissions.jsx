@@ -65,7 +65,7 @@ Permissions = React.createClass({
                         <div className="modal-content">
                             <div className="modal-header">
                                 <button type="button" className="close" data-dismiss="modal">&times;</button>
-                                <h4 className="modal-title">Czy chcesz nadach urzytkownikowi {this.state.HandleUser} uprawnienia globalne?</h4>
+                                <h4 className="modal-title">Czy chcesz nadach użytkownikowi {this.state.HandleUser} uprawnienia globalne?</h4>
                             </div >
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-success" onClick={this.saveGlobalRights} data-dismiss="modal">
@@ -80,15 +80,15 @@ Permissions = React.createClass({
                     </div>
 
                     {/*okno usuwania uprawnien globalnych */}
-                    <div className="modal fade" id="remuveGlobalRight" role="dialog">
+                    <div className="modal fade" id="removeGlobalRight" role="dialog">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <button type="button" className="close" data-dismiss="modal">&times;</button>
-                                <h4 className="modal-title">Czy na pewno chcesz odebrać urzytkownikowi {this.state.HandleUser} uprawnienia globalne?</h4>
+                                <h4 className="modal-title">Czy na pewno chcesz odebrać użytkownikowi {this.state.HandleUser} uprawnienia globalne?</h4>
                             </div >
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-success" onClick={this.remuveGlobalRights} data-dismiss="modal">
+                                <button type="button" className="btn btn-success" onClick={this.removeGlobalRights} data-dismiss="modal">
                                     TAK
                                 </button>
                                 <button type="button" className="btn btn-default" data-dismiss="modal">
@@ -138,7 +138,7 @@ Permissions = React.createClass({
     globalRightButton: function(value){
       if(value.GlobalRight===true){
         return <div>
-                <button type="button" id={value.username} onClick={this.handleClick.bind(this,value.username)} className="btn btn-info" data-toggle="modal" data-target="#remuveGlobalRight">
+                <button type="button" id={value.username} onClick={this.handleClick.bind(this,value.username)} className="btn btn-info" data-toggle="modal" data-target="#removeGlobalRight">
                   Usuń uprawnienia Globalne
                 </button>
               </div>
@@ -192,8 +192,8 @@ Permissions = React.createClass({
     saveGlobalRights(){
         Meteor.call('addGlobalAdminRights',this.state.HandleUser)
     },
-    remuveGlobalRights(){
-        Meteor.call('remuveGlobalAdminRights',this.state.HandleUser)
+    removeGlobalRights(){
+        Meteor.call('removeGlobalAdminRights',this.state.HandleUser)
     },
     saveRights(){
         var ins=[];
