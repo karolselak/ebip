@@ -11,6 +11,7 @@ MainLayout = React.createClass({
         }
     },
     render() {
+        _MainLayout = this;
         return (
         <main>
         <body>

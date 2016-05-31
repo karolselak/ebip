@@ -7,7 +7,7 @@ Homepage = React.createClass({
     },
     render()
     {
-        _homepage_ = this;
+        _Homepage = this;
         //TODO Hubert: niech to zacznie wyglądać po ludzku, bez tych brzydkich zaokrągleń, wyszukiwarka jako input
         return <div className="container">
                   <div className="col-md-12" id="hompeCont">
@@ -58,7 +58,7 @@ Homepage = React.createClass({
                   <a className="tilelink" href={'/i/'+el.name}> {el.name}
                   </a>
                   <div className="bottomRowInst" id={el._id}>
-                    <button type="button" id={'buttonRemuve'+el._id} className="btn btn-xs btn-default "
+                    <button type="button" id={'buttonBin_'+el.name} className="btn btn-xs btn-default "
                     onClick={this.removeInstitution}>
                         <span className="glyphicon glyphicon-trash" aria-label="Usuń">
                         </span>
