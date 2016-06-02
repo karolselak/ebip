@@ -34,3 +34,4 @@ cfs:filesystem
 dburles:mongo-collection-instances
 kookoskar:bootstrap-select
 http
+themeteorites:quilljs
