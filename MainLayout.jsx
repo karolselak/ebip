@@ -96,6 +96,8 @@ MainLayout = React.createClass({
     },
     headerMenu() {
         var accountUI = Accounts.userId() ? this.logoutModal() : this.loginModal();
+        var nazwa = Accounts.user();
+        nazwa = nazwa != null ? nazwa.username : "Account";
         return <div>
             <div className="col-md-3 tileMenu">
                 <a className="menuLink" href="/dictionary/" id="dictionaryLink">
@@ -116,17 +118,22 @@ MainLayout = React.createClass({
           <div className="col-md-4 tileMenu">
             <div className=" menuIcon glyphicon glyphicon-user"></div>
             <button type="button" className="btn btn-info btn-lg" data-toggle="modal"
-                data-target="#accountModal">Open Modal</button>
+                data-target="#accountModal">{nazwa}</button>
           </div>
           {accountUI}
         </div>
     },
     loginModal() {
+        var show_login = function(event) {
+            var $modal = $(event.target).closest('.modal-body');
+            $modal.find("#sign_up").show();
+            $modal.find("#sign_in").hide();
+        };
         var login = function(event) {
             var $modal = $(event.target).closest('.modal-body');
             var credentials = $modal.find("#sign_in")
-            var username = $modal.find('#username')[0].value;
-            var password = $modal.find('#password')[0].value;
+            var username = credentials.find('#username')[0].value;
+            var password = credentials.find('#password')[0].value;
             Meteor.loginWithPassword(username, password);
             console.log(Meteor.loggingIn());
             //window.location.reload();
@@ -145,7 +152,7 @@ MainLayout = React.createClass({
                     username : username,
                     password : password
                 };
-                //console.log(data);
+                console.log(data);
                 Accounts.createUser(data);
                 //while (Meteor.loggingIn()) {
 
@@ -162,25 +169,28 @@ MainLayout = React.createClass({
         <h4 className="modal-title">Login</h4>
       </div>
       <div className="modal-body">
-          <p id="sign_in">
+          <div id="sign_in">
+              <label htmlFor="username">Nazwa użytkownika</label>
               <input id='username' className='form-control' type='text' />
+              <label htmlFor="password">Hasło</label>
               <input id='password' className='form-control' type='password' />
-          </p>
-          <p>
-              <button type="button" className="btn btn-primary" onClick={login}>
-                  Sign in
-              </button>
-          </p>
-          <p id="sign_up">
+                  <button type="button" className="btn btn-primary" onClick={login}
+                      data-dismiss="modal">
+                      Zaloguj
+                  </button>
+                  <button className="btn btn-primary" onClick={show_login}>Stwórz nowe konto</button>
+          </div>
+          <div id="sign_up" style={{display: "none"}}>
+              <label htmlFor="username">Nazwa użytkownika</label>
               <input id='username' className='form-control' type='text' />
+              <label htmlFor="password">Hasło</label>
               <input id='password' className='form-control' type='password' />
+              <label htmlFor="password_confirm">Powtórz hasło</label>
               <input id='password_confirm' className='form-control' type='password' />
-          </p>
-          <p>
-              <button type="button" className="btn btn-primary" onClick={sign_up}>
-                  Sign up
-              </button>
-          </p>
+                  <button type="button" className="btn btn-primary" onClick={sign_up}>
+                      Stwórz nowe konto
+                  </button>
+          </div>
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -193,7 +203,7 @@ MainLayout = React.createClass({
     logoutModal() {
         var logout = function() {
             Meteor.logout();
-            window.location.reload();
+            //window.location.reload();
         };
         var change = function(event) {
             var $modal = $(event.target).closest('.modal-body');
@@ -205,6 +215,11 @@ MainLayout = React.createClass({
                 Accounts.changePassword(old_pass, new_pass);
             }
         };
+        var show_change = function(event) {
+            var $modal = $(event.target).closest('.modal-body');
+            $modal.find("#logged_user_ui-buttons").hide();
+            $modal.find("#change_password").show();
+        };
         return <div id="accountModal" className="modal fade" role="dialog">
   <div className="modal-dialog">
 
@@ -214,23 +229,31 @@ MainLayout = React.createClass({
         <h4 className="modal-title">Logout</h4>
       </div>
       <div className="modal-body">
-          <p>
-              <p id="change_password">
+
+          <div id="change_password" style={{display: "none"}}>
+                  <label htmlFor="old_password">Stare hasło</label>
                   <input id='old_password' className='form-control' type='password' />
+                  <label htmlFor="new_password">Nowe hasło</label>
                   <input id='new_password' className='form-control' type='password' />
+                  <label htmlFor="new_password_confirm">Powtórz nowe hasło</label>
                   <input id='new_password_confirm' className='form-control' type='password' />
-              </p>
-              <button type="button" className="btn btn-primary" data-dismiss="modal"
+
+              <button type="button" className="btn btn-primary"
                    onClick={change}>
-                  Change password
+                  Zmień hasło
               </button>
-          </p>
-          <p>
+          </div>
+
+          <div id="logged_user_ui-buttons">
+              <button type="button" className="btn btn-primary"
+                   onClick={show_change}>
+                  Zmień hasło
+              </button>
             <button type="button" className="btn btn-primary" data-dismiss="modal"
                  onClick={logout}>
                 Sign out
             </button>
-        </p>
+        </div>
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
