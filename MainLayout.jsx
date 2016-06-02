@@ -2,7 +2,8 @@ MainLayout = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         return {
-            institutions: Institutions.find().fetch()
+            institutions: Institutions.find().fetch(),
+            user: Meteor.user()
         };
     },
     getInitialState() {
@@ -105,20 +106,16 @@ MainLayout = React.createClass({
                 </a>
               </div>
             {
-                Meteor.user() && Meteor.user().GlobalRight ? <div className="col-md-5 tileMenu">
+                this.data.user && this.data.user.GlobalRight ? <div className="col-md-5 tileMenu">
                     <a className="menuLink" href={'/permissions'}>
                     <div className="menuIcon glyphicon glyphicon-cog" ></div><div>Administratorzy</div>
                     </a>
                 </div> : null
             }
           <div className="col-md-4 tileMenu">
-            <div className=" menuIcon glyphicon glyphicon-user"></div>
-            <AccountsUIWrapper />
-          </div>
-          <div className="col-md-4 tileMenu">
-            <div className=" menuIcon glyphicon glyphicon-user"></div>
-            <div><a href="#" data-toggle="modal"
-                data-target="#accountModal">{nazwa}</a></div>
+            <a href="#" data-toggle="modal"
+                data-target="#accountModal"><div className=" menuIcon glyphicon glyphicon-user"></div>
+            <div>{nazwa}</div></a>
           </div>
           {accountUI}
         </div>
@@ -232,8 +229,10 @@ MainLayout = React.createClass({
     logoutModal() {
         var logout = function() {
             Meteor.logout(function(error) {
-                console.log(error);
-                window.alert(error.reason);
+                if (error) {
+                    console.log(error);
+                    window.alert(error.reason);                    
+                }
             });
             //window.location.reload();
         };
