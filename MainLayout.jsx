@@ -265,6 +265,11 @@ MainLayout = React.createClass({
                 errMod.find('.modal-body')[0].innerText = "Hasła nie zgadzają się.";
                 errMod.modal();
             }
+            var $modal = $(event.target).closest('.modal-content');
+            $modal.find(".modal-body").hide();
+            $modal.find("#logged_user_ui-buttons").show();
+            $modal.find("#change_password").hide();
+            $modal.find(".modal-footer").find("#change_password").hide();
         };
         var show_change = function(event) {
             var $modal = $(event.target).closest('.modal-content');
@@ -314,7 +319,7 @@ MainLayout = React.createClass({
         <button type="button" className="btn btn-default" data-dismiss="modal">Zamknij</button>
         </div>
       <div id="change_password" style={{display: "none"}}>
-          <button type="button" className="btn btn-primary"
+          <button type="button" className="btn btn-primary" data-dismiss="modal"
                onClick={change}>
               Zmień hasło
           </button>
