@@ -99,6 +99,7 @@ reload@1.1.8
 retry@1.0.7
 routepolicy@1.0.10
 rzymek:moment-locale-pl@2.12.0
+rzymek:tinymce-cdn@4.0.0_2
 service-configuration@1.0.9
 session@1.1.5
 sha@1.0.7

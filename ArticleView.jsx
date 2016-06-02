@@ -39,7 +39,9 @@ ArticleView = React.createClass({
                         <div>Tytuł:</div>
                         <input id='title' className='form-control' type='text'></input>
                         <div>Treść:</div>
-                        <textarea id='content' className='form-control' rows='5' cols='80'></textarea>
+                        
+                        {/*<textarea id='content' className='form-control' rows='5' cols='80'></textarea>*/}
+                        <div id='content'></div>
                         <div>Tagi:</div>
                         <input id='tags' type='text' className='form-control' placeholder='tag1, tag2...'></input>
                         {/*TODO Hubert: dodawanie autora, którym może być jeden z urzędników (officials) istniejących w naszej instytucji.
@@ -73,11 +75,11 @@ ArticleView = React.createClass({
                         <div className='dropdown' id='author'>
                             <button className='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>Wybierz Autora
                             <span className='caret'></span></button>
-                            <ul className='dropdown-menu'>
+                            {/*<ul className='dropdown-menu'>
                                 <li>Mariolka</li>
                                 <li>Buhal</li>
                                 <li>gdzie reszta?</li>
-                            </ul>
+                            </ul>*/}
                         </div>
                         <div>Dodaj załącznik: </div>
                         <input type='file' id='file' />
@@ -136,11 +138,13 @@ ArticleView = React.createClass({
                 var attachment = Attachments.findOne({"_id":el.attachment_id});
                 return <div className='row' id={el._id}>
                     <br />
-                    {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
                     <div>
-                        <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}>
-                            <b>{el.title}</b>
-                        </a> <span style={{color:'red'}}><i>{
+                        {this.props.ifFull ? 
+                            <h3><b>{el.title}</b></h3> :
+                            <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}>
+                                <b>{el.title}</b>
+                            </a>
+                        } <span style={{color:'red'}}><i>{
                             el.publicationDate > now || !el.publicationDate ? '(wersja robocza)' : el.expirationDate && el.expirationDate < now ? '(wygaśnięty)' : null
                         }</i></span>
                         <span className='pull-right'>
@@ -153,8 +157,12 @@ ArticleView = React.createClass({
                         </span>
                     </div>
                     <br />
-                    <div>{this.props.ifFull ? el.content : el.content.slice(0,150).trim()+'...'}
-                        {this.props.ifFull ? null : <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}> Czytaj całość »</a>}</div>
+                    { this.props.ifFull ?
+                        <div dangerouslySetInnerHTML={{__html: el.content}}></div> :
+                        <div>{el.content.replace(/(<([^>]+)>)/ig,"").slice(0,150).trim()+'...'}
+                            <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}> Czytaj całość »</a>
+                        </div>
+                    }
                     {attachment ? <div><a href={attachment.url()} download>{attachment.name()}</a></div> : null}
                 </div>
             } else {
@@ -172,7 +180,23 @@ ArticleView = React.createClass({
             $ed.datetimepicker({locale: 'pl'});
             $ed.data('DateTimePicker').minDate(new Date());
             $ed.data('DateTimePicker').clear();
+            tinymce.init({
+                selector: '#content'
+            });
         });
+    },
+    cleanEditor() {
+        this.setState({
+            nowEdited: null,
+            selectedType: null
+        });
+        var $modal = $('#editArticleModal');
+        $modal.find('#title')[0].value = '';
+        window.parent.tinyMCE.get('content').setContent('');
+        $modal.find('#content')[0].value = '';
+        $modal.find('#tags')[0].value = '';
+        $modal.find('#expirationDate').data('DateTimePicker').date(null);
+        $modal.find('#publicationDate').data('DateTimePicker').date(null);
     },
     editArticle(event) {
         var id = $(event.target).closest('.row')[0].id;
@@ -181,7 +205,8 @@ ArticleView = React.createClass({
         var article = this.props.articles.find(function(el){return el._id == id});
         this.setState({selectedType: article.type}, ()=>{
             $modal.find('#title')[0].value = article.title;
-            $modal.find('#content')[0].value = article.content;
+            window.parent.tinyMCE.get('content').setContent(article.content);
+            //$modal.find('#content')[0].value = article.content;
             $modal.find('#tags')[0].value = article.tags;
             var $ed = $modal.find('#expirationDate');
             var $pd = $modal.find('#publicationDate');        
@@ -198,8 +223,6 @@ ArticleView = React.createClass({
                 $pd.data('DateTimePicker').date(null);        
             }
             var artType = this.data.articleTypes.find((el)=>{return el.name == article.type});
-            console.log(this.state.selectedType);
-            console.log(artType);
             if (artType) {
                 var $extensions = $modal.find('.extensions-wrapper');
                 artType.properties.map((el)=>{
@@ -216,7 +239,6 @@ ArticleView = React.createClass({
     addArticle(event) {
         var $modal = $(event.target).closest('.modal-content');
         var $title = $modal.find('#title')[0];
-        var $content = $modal.find('#content')[0];
         var $tags = $modal.find('#tags')[0];
         var $extensions = $modal.find('.extensions');
         var extensions = {};
@@ -225,7 +247,8 @@ ArticleView = React.createClass({
                 extensions[$extensions[i].id] = $extensions[i].value;
             }
         }
-        var expirationDate = $modal.find('#expirationDate').data('DateTimePicker').date();
+        var d = $modal.find('#expirationDate').data('DateTimePicker').date();
+        var expirationDate = d ? d._d.getTime() : Infinity;
         if (event.target.id == 'pbtn' && !this.state.nowEdited) {
             var publicationDate = (new Date()).getTime();
         } else {
@@ -236,7 +259,7 @@ ArticleView = React.createClass({
         var ins_id = this.props.institution._id;
         var obj = {
             title: $title.value,
-            content: $content.value,
+            content: window.parent.tinyMCE.get('content').getContent(),
             institution_id: ins_id,
             type: this.state.selectedType,
             tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
@@ -253,6 +276,8 @@ ArticleView = React.createClass({
                     }
                 });
             } else {
+                console.log('------------')
+                console.log(obj)
                 Meteor.call('updateArticle', this.state.nowEdited, obj);            
             }
         } else {
@@ -303,7 +328,8 @@ ArticleView = React.createClass({
         }
         if ( Meteor.user().GlobalRight===true ||inst!=-1) {
           return <div id='bottom-button-add-article'>
-                    <button type='button'  className='btn btn-info' data-toggle='modal' data-target='#editArticleModal'>Dodaj artykuł</button>
+                    <button type='button' onClick={this.cleanEditor} className='btn btn-info'
+                        data-toggle='modal' data-target='#editArticleModal'>Dodaj artykuł</button>
                   </div>
         }
       }
