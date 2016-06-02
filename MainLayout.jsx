@@ -143,8 +143,11 @@ MainLayout = React.createClass({
             var credentials = $modal.find("#sign_in")
             var username = credentials.find('#username')[0].value;
             var password = credentials.find('#password')[0].value;
-            Meteor.loginWithPassword(username, password);
-            console.log(Meteor.loggingIn());
+            Meteor.loginWithPassword(username, password, function(error) {
+                console.log(error);
+                window.alert(error.reason);
+            });
+            //console.log(Meteor.loggingIn());
             //window.location.reload();
         };
         var sign_up = function(event) {
@@ -162,11 +165,16 @@ MainLayout = React.createClass({
                     password : password
                 };
                 console.log(data);
-                Accounts.createUser(data);
+                Accounts.createUser(data, function(error) {
+                    console.log(error);
+                    window.alert(error.reason);
+                });
                 //while (Meteor.loggingIn()) {
 
                 //}
                 //window.location.reload();
+            } else {
+                window.alert("Hasła nie zgadzają się.");
             }
         };
         return <div id="accountModal" className="modal fade" role="dialog">
@@ -214,7 +222,10 @@ MainLayout = React.createClass({
     },
     logoutModal() {
         var logout = function() {
-            Meteor.logout();
+            Meteor.logout(function(error) {
+                console.log(error);
+                window.alert(error.reason);
+            });
             //window.location.reload();
         };
         var change = function(event) {
@@ -224,7 +235,12 @@ MainLayout = React.createClass({
             var new_pass = credentials.find("#new_password")[0].value;
             var new_pass_confirm = credentials.find("#new_password_confirm")[0].value;
             if (new_pass == new_pass_confirm) {
-                Accounts.changePassword(old_pass, new_pass);
+                Accounts.changePassword(old_pass, new_pass, function(error) {
+                    console.log(error);
+                    window.alert(error.reason);
+                });
+            } else {
+                window.alert("Hasła nie zgadzają się.");
             }
         };
         var show_change = function(event) {
