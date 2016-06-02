@@ -125,12 +125,21 @@ MainLayout = React.createClass({
     },
     loginModal() {
         var show_login = function(event) {
-            var $modal = $(event.target).closest('.modal-body');
+            var $modal = $(event.target).closest('.modal-content');
             $modal.find("#sign_up").show();
             $modal.find("#sign_in").hide();
+            $(event.target).closest('.modal-footer').find('#sign_in').hide();
+            $(event.target).closest('.modal-footer').find('#sign_up').show();
+        };
+        var close_login = function(event) {
+            var $modal = $(event.target).closest('.modal-content');
+            $modal.find("#sign_up").hide();
+            $modal.find("#sign_in").show();
+            $(event.target).closest('.modal-footer').find('#sign_in').show();
+            $(event.target).closest('.modal-footer').find('#sign_up').hide();
         };
         var login = function(event) {
-            var $modal = $(event.target).closest('.modal-body');
+            var $modal = $(event.target).closest('.modal-content');
             var credentials = $modal.find("#sign_in")
             var username = credentials.find('#username')[0].value;
             var password = credentials.find('#password')[0].value;
@@ -139,7 +148,7 @@ MainLayout = React.createClass({
             //window.location.reload();
         };
         var sign_up = function(event) {
-            var $modal = $(event.target).closest('.modal-body');
+            var $modal = $(event.target).closest('.modal-content');
             var credentials = $modal.find("#sign_up")
             //console.log(credentials);
             var username = credentials.find('#username')[0].value;
@@ -161,44 +170,46 @@ MainLayout = React.createClass({
             }
         };
         return <div id="accountModal" className="modal fade" role="dialog">
-  <div className="modal-dialog">
+            <div className="modal-dialog">
 
-    <div className="modal-content">
-      <div className="modal-header">
-        <button type="button" className="close" data-dismiss="modal">&times;</button>
-        <h4 className="modal-title">Login</h4>
-      </div>
-      <div className="modal-body">
-          <div id="sign_in">
-              <label htmlFor="username">Nazwa użytkownika</label>
-              <input id='username' className='form-control' type='text' />
-              <label htmlFor="password">Hasło</label>
-              <input id='password' className='form-control' type='password' />
-                  <button type="button" className="btn btn-primary" onClick={login}
-                      data-dismiss="modal">
-                      Zaloguj
-                  </button>
-                  <button className="btn btn-primary" onClick={show_login}>Stwórz nowe konto</button>
+        <div className="modal-content">
+          <div className="modal-header">
+            <button type="button" className="close" data-dismiss="modal">&times;</button>
+            <h4 className="modal-title">Logowanie/rejestracja</h4>
           </div>
-          <div id="sign_up" style={{display: "none"}}>
-              <label htmlFor="username">Nazwa użytkownika</label>
-              <input id='username' className='form-control' type='text' />
-              <label htmlFor="password">Hasło</label>
-              <input id='password' className='form-control' type='password' />
-              <label htmlFor="password_confirm">Powtórz hasło</label>
-              <input id='password_confirm' className='form-control' type='password' />
-                  <button type="button" className="btn btn-primary" onClick={sign_up}>
+          <div className="modal-body">
+              <div id="sign_in">
+                  <label htmlFor="username">Nazwa użytkownika</label>
+                  <input id='username' className='form-control' type='text' />
+                  <label htmlFor="password">Hasło</label>
+                  <input id='password' className='form-control' type='password' />
+              </div>
+              <div id="sign_up" style={{display: "none"}}>
+                  <label htmlFor="username">Nazwa użytkownika</label>
+                  <input id='username' className='form-control' type='text' />
+                  <label htmlFor="password">Hasło</label>
+                  <input id='password' className='form-control' type='password' />
+                  <label htmlFor="password_confirm">Powtórz hasło</label>
+                  <input id='password_confirm' className='form-control' type='password' />
+              </div>
+          </div>
+          <div className="modal-footer">
+              <button id="sign_in" type="button" className="btn btn-primary" onClick={login}
+                  data-dismiss="modal">
+                  Zaloguj
+              </button>
+              <button id="sign_in" className="btn btn-primary"
+                   onClick={show_login}>Stwórz nowe konto</button>
+                  <button id="sign_up" type="button" style={{display: "none"}} className="btn btn-primary" onClick={sign_up}>
                       Stwórz nowe konto
                   </button>
+            <button type="button" className="btn btn-default"
+                onClick={close_login} data-dismiss="modal">Zamknij</button>
           </div>
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
       </div>
     </div>
-
-  </div>
-</div>
     },
     logoutModal() {
         var logout = function() {
@@ -206,7 +217,7 @@ MainLayout = React.createClass({
             //window.location.reload();
         };
         var change = function(event) {
-            var $modal = $(event.target).closest('.modal-body');
+            var $modal = $(event.target).closest('.modal-content');
             var credentials = $modal.find("#change_password");
             var old_pass = credentials.find("#old_password")[0].value;
             var new_pass = credentials.find("#new_password")[0].value;
@@ -216,9 +227,16 @@ MainLayout = React.createClass({
             }
         };
         var show_change = function(event) {
-            var $modal = $(event.target).closest('.modal-body');
+            var $modal = $(event.target).closest('.modal-content');
             $modal.find("#logged_user_ui-buttons").hide();
             $modal.find("#change_password").show();
+            $modal.find(".modal-footer").find("#change_password").show();
+        };
+        var close_logout = function(event) {
+            var $modal = $(event.target).closest('.modal-content');
+            $modal.find("#logged_user_ui-buttons").show();
+            $modal.find("#change_password").hide();
+            $modal.find(".modal-footer").find("#change_password").hide();
         };
         return <div id="accountModal" className="modal fade" role="dialog">
   <div className="modal-dialog">
@@ -226,7 +244,7 @@ MainLayout = React.createClass({
     <div className="modal-content">
       <div className="modal-header">
         <button type="button" className="close" data-dismiss="modal">&times;</button>
-        <h4 className="modal-title">Logout</h4>
+        <h4 className="modal-title">Konto</h4>
       </div>
       <div className="modal-body">
 
@@ -237,29 +255,33 @@ MainLayout = React.createClass({
                   <input id='new_password' className='form-control' type='password' />
                   <label htmlFor="new_password_confirm">Powtórz nowe hasło</label>
                   <input id='new_password_confirm' className='form-control' type='password' />
+        </div>
 
-              <button type="button" className="btn btn-primary"
-                   onClick={change}>
-                  Zmień hasło
-              </button>
-          </div>
 
+        </div>
+        <div className="modal-footer">
           <div id="logged_user_ui-buttons">
               <button type="button" className="btn btn-primary"
                    onClick={show_change}>
                   Zmień hasło
               </button>
-            <button type="button" className="btn btn-primary" data-dismiss="modal"
+              <button type="button" className="btn btn-primary" data-dismiss="modal"
                  onClick={logout}>
-                Sign out
+                Wyloguj
             </button>
+        <button type="button" className="btn btn-default" data-dismiss="modal">Zamknij</button>
         </div>
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+      <div id="change_password" style={{display: "none"}}>
+          <button type="button" className="btn btn-primary"
+               onClick={change}>
+              Zmień hasło
+          </button>
+          <button type="button" className="btn btn-default"
+              onClick={close_logout} data-dismiss="modal">Zamknij</button>
       </div>
     </div>
 
+    </div>
   </div>
 </div>
     }
