@@ -110,7 +110,7 @@ MainLayout = React.createClass({
             }
           <div className="col-md-4 tileMenu">
             <div className=" menuIcon glyphicon glyphicon-user"></div>
-            <AccountsUIWrapper align='left' />
+            <AccountsUIWrapper />
           </div>
         </div>
     }
