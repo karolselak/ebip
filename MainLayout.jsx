@@ -97,7 +97,7 @@ MainLayout = React.createClass({
     headerMenu() {
         var accountUI = Accounts.userId() ? this.logoutModal() : this.loginModal();
         var nazwa = Accounts.user();
-        nazwa = nazwa != null ? nazwa.username : "Account";
+        nazwa = nazwa != null ? nazwa.username : "Zaloguj";
         return <div>
             <div className="col-md-3 tileMenu">
                 <a className="menuLink" href="/dictionary/" id="dictionaryLink">
@@ -117,8 +117,8 @@ MainLayout = React.createClass({
           </div>
           <div className="col-md-4 tileMenu">
             <div className=" menuIcon glyphicon glyphicon-user"></div>
-            <button type="button" className="btn btn-info btn-lg" data-toggle="modal"
-                data-target="#accountModal">{nazwa}</button>
+            <div><a href="#" data-toggle="modal"
+                data-target="#accountModal">{nazwa}</a></div>
           </div>
           {accountUI}
         </div>
@@ -130,6 +130,9 @@ MainLayout = React.createClass({
             $modal.find("#sign_in").hide();
             $(event.target).closest('.modal-footer').find('#sign_in').hide();
             $(event.target).closest('.modal-footer').find('#sign_up').show();
+            console.log();
+            $modal.find('.modal-header').find('.modal-title')[0]
+            .innerText = "Rejestracja";
         };
         var close_login = function(event) {
             var $modal = $(event.target).closest('.modal-content');
@@ -137,6 +140,8 @@ MainLayout = React.createClass({
             $modal.find("#sign_in").show();
             $(event.target).closest('.modal-footer').find('#sign_in').show();
             $(event.target).closest('.modal-footer').find('#sign_up').hide();
+            $modal.find('.modal-header').find('.modal-title')[0]
+            .innerText = "Logowanie";
         };
         var login = function(event) {
             var $modal = $(event.target).closest('.modal-content');
@@ -182,8 +187,7 @@ MainLayout = React.createClass({
 
         <div className="modal-content">
           <div className="modal-header">
-            <button type="button" className="close" data-dismiss="modal">&times;</button>
-            <h4 className="modal-title">Logowanie/rejestracja</h4>
+            <h4 className="modal-title">Logowanie</h4>
           </div>
           <div className="modal-body">
               <div id="sign_in">
@@ -207,13 +211,18 @@ MainLayout = React.createClass({
                   Zaloguj
               </button>
               <button id="sign_in" className="btn btn-primary"
-                   onClick={show_login}>Stwórz nowe konto</button>
+                   onClick={show_login}>Rejestracja</button>
                   <button id="sign_up" type="button" style={{display: "none"}}
                       className="btn btn-primary" onClick={sign_up} data-dismiss="modal">
                       Stwórz nowe konto
                   </button>
+                  <button id="sign_up" type="button" className="btn btn-primary"
+                      style={{display: "none"}}
+                      onClick={close_login}>
+                      Logowanie
+                  </button>
             <button type="button" className="btn btn-default"
-                onClick={close_login} data-dismiss="modal">Zamknij</button>
+                data-dismiss="modal">Zamknij</button>
           </div>
         </div>
 
