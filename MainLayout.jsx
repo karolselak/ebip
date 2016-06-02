@@ -200,7 +200,8 @@ MainLayout = React.createClass({
               </button>
               <button id="sign_in" className="btn btn-primary"
                    onClick={show_login}>Stwórz nowe konto</button>
-                  <button id="sign_up" type="button" style={{display: "none"}} className="btn btn-primary" onClick={sign_up}>
+                  <button id="sign_up" type="button" style={{display: "none"}}
+                      className="btn btn-primary" onClick={sign_up} data-dismiss="modal">
                       Stwórz nowe konto
                   </button>
             <button type="button" className="btn btn-default"
@@ -228,12 +229,14 @@ MainLayout = React.createClass({
         };
         var show_change = function(event) {
             var $modal = $(event.target).closest('.modal-content');
+            $modal.find(".modal-body").show();
             $modal.find("#logged_user_ui-buttons").hide();
             $modal.find("#change_password").show();
             $modal.find(".modal-footer").find("#change_password").show();
         };
         var close_logout = function(event) {
             var $modal = $(event.target).closest('.modal-content');
+            $modal.find(".modal-body").hide();
             $modal.find("#logged_user_ui-buttons").show();
             $modal.find("#change_password").hide();
             $modal.find(".modal-footer").find("#change_password").hide();
@@ -246,7 +249,7 @@ MainLayout = React.createClass({
         <button type="button" className="close" data-dismiss="modal">&times;</button>
         <h4 className="modal-title">Konto</h4>
       </div>
-      <div className="modal-body">
+      <div className="modal-body" style={{display: "none"}}>
 
           <div id="change_password" style={{display: "none"}}>
                   <label htmlFor="old_password">Stare hasło</label>
