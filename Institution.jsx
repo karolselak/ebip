@@ -125,7 +125,7 @@ Institution = React.createClass({
                 return <section />
             }
         } else {
-            return <ArticleView articles={this.data.articles} institution={this.data.institution}/>
+            return <ArticleView articles={this.data.articles} institution={this.data.institution} ifFull={!!this.props.article} />
         }
     }
 });

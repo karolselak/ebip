@@ -14,15 +14,12 @@ ArticleView = React.createClass({
     },
     render() {
         _ArticleView = this;
-        var e = this.props.articles && this.props.articles.find((el)=>{el.id == this.state.nowEdited});
         return <div>
             {/*przycisk dodawania artykułów*/}
             <div className='container'>
               <div className='row'>
-                <div className='col-md-9' id='articles'>
                   {/*artykuły*/}
                   {this.renderArticles()}
-                </div>
               </div>
               <div className='row'>
                 <div className='col-md-10' id='bottom-Row'>
@@ -40,11 +37,11 @@ ArticleView = React.createClass({
                     </div>
                     <div className='modal-body'>
                         <div>Tytuł:</div>
-                        <input id='title' className='form-control' type='text' value={e && e.title}></input>
+                        <input id='title' className='form-control' type='text'></input>
                         <div>Treść:</div>
-                        <textarea id='content' className='form-control' rows='5' cols='80'>{e && e.content}</textarea>
+                        <textarea id='content' className='form-control' rows='5' cols='80'></textarea>
                         <div>Tagi:</div>
-                        <input id='tags' type='text' className='form-control' placeholder='tag1, tag2...' value={e && e.tags}></input>
+                        <input id='tags' type='text' className='form-control' placeholder='tag1, tag2...'></input>
                         {/*TODO Hubert: dodawanie autora, którym może być jeden z urzędników (officials) istniejących w naszej instytucji.
                            Trzeba stworzyć listę wyboru, gdzie będzie można wybrać jednego z nich.*/}
                         <div>Data publikacji:</div>
@@ -69,7 +66,9 @@ ArticleView = React.createClass({
                                 {this.renderDropdownTypes()}
                             </ul>
                         </div>
-                        {this.renderExtendedModal()}
+                        <div className='extensions-wrapper'>
+                            {this.renderExtendedModal()}
+                        </div>                        
                         <div>Autor:</div>
                         <div className='dropdown' id='author'>
                             <button className='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>Wybierz Autora
@@ -86,7 +85,7 @@ ArticleView = React.createClass({
                     <div className='modal-footer'>
                         <button type='button' id='pbtn' className='btn btn-success' data-dismiss='modal' onClick={this.addArticle} >Publikuj</button>
                         <button type='button' id='sbtn' className='btn btn-info' data-dismiss='modal' onClick={this.addArticle} >Zapisz wersję roboczą</button>
-                        <button type='button' className='btn btn-default' data-dismiss='modal'>Anuluj</button>
+                        <button type='button' id='abtn' className='btn btn-default' data-dismiss='modal'>Anuluj</button>
                     </div>
                 </div>
             </div>
@@ -94,8 +93,9 @@ ArticleView = React.createClass({
         </div>
     },
     renderExtendedModal() {
-        if (this.state.selectedType) {
-            return this.data.articleTypes.find((el)=>{return el.name == this.state.selectedType}).properties.map((el)=>{
+        var artType = this.data.articleTypes.find((el)=>{return el.name == this.state.selectedType});
+        if (artType) {
+            return artType.properties.map((el)=>{
                 return <div>
                     <div>{el+':'}</div>
                     <input id={el} className='form-control extensions' type='text'></input>
@@ -125,32 +125,41 @@ ArticleView = React.createClass({
     selectType(event) {
         this.setState({selectedType: event.target.id})
     },
+    cutContent(content) {
+        return content;
+    },
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
-            if (!el) {
+            var now = (new Date()).getTime();
+            if (el && ((Meteor.user() && (Meteor.user().GlobalRight || (Meteor.user().institutions && Meteor.user().institutions.includes(this.props.institution._id)))) ||
+            (el.publicationDate < now && (el.expirationDate > now || !el.expirationDate)))) {
+                var attachment = Attachments.findOne({"_id":el.attachment_id});
+                return <div className='row' id={el._id}>
+                    <br />
+                    {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
+                    <div>
+                        <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}>
+                            <b>{el.title}</b>
+                        </a> <span style={{color:'red'}}><i>{
+                            el.publicationDate > now || !el.publicationDate ? '(wersja robocza)' : el.expirationDate && el.expirationDate < now ? '(wygaśnięty)' : null
+                        }</i></span>
+                        <span className='pull-right'>
+                          <div>
+                            {this.articleEditButtons()}
+                            {' '}{el.author} {el.publicationDate
+                            && el.publicationDate != Infinity ? (new Date(el.publicationDate)).toLocaleDateString()
+                            : ''}
+                          </div>
+                        </span>
+                    </div>
+                    <br />
+                    <div>{this.props.ifFull ? el.content : el.content.slice(0,150).trim()+'...'}
+                        {this.props.ifFull ? null : <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}> Czytaj całość »</a>}</div>
+                    {attachment ? <div><a href={attachment.url()} download>{attachment.name()}</a></div> : null}
+                </div>
+            } else {
                 return null;
             }
-            var attachment = Attachments.findOne({"_id":el.attachment_id});
-            return <div className='row' id={el._id}>
-                <br />
-                {/*TODO Hubert: dodać tu datę publikacji oraz autora, poprawić wygląd*/}
-                <div>
-                    <a href={this.props.institution && '/i/'+this.props.institution.name+'/article/'+el._id}>
-                        <b>{el.title}</b>
-                    </a>
-                    <span className='pull-right'>
-                      <div>
-                        {this.articleEditeButtons()}
-                        {' '}{el.author} {el.publicationDate
-                        && el.publicationDate != Infinity ? (new Date(el.publicationDate)).toLocaleDateString()
-                        : ''}
-                      </div>
-                    </span>
-                </div>
-                <br />
-                <div className='ShortArticleView'>{el.content}</div>
-                {attachment ? <div><a href={attachment.url()} download>{attachment.name()}</a></div> : null}
-            </div>
         })
     },
     componentDidMount(){
@@ -165,14 +174,44 @@ ArticleView = React.createClass({
             $ed.data('DateTimePicker').clear();
         });
     },
-    /*componentDidUpdate() {
-        $(function() {
-            $('[data-toggle="popover"]').popover();
-        });
-    },*/
     editArticle(event) {
-        this.setState({nowEdited: $(event.target).closest('.row')[0].id});
-        var $modal = $('#editArticleModal')
+        var id = $(event.target).closest('.row')[0].id;
+        this.setState({nowEdited: id});
+        var $modal = $('#editArticleModal');
+        var article = this.props.articles.find(function(el){return el._id == id});
+        this.setState({selectedType: article.type}, ()=>{
+            $modal.find('#title')[0].value = article.title;
+            $modal.find('#content')[0].value = article.content;
+            $modal.find('#tags')[0].value = article.tags;
+            var $ed = $modal.find('#expirationDate');
+            var $pd = $modal.find('#publicationDate');        
+            if (article.expirationDate) {
+                $ed.data('DateTimePicker').minDate(new Date(article.expirationDate));
+                $ed.data('DateTimePicker').date(new Date(article.expirationDate));
+            } else {
+                $ed.data('DateTimePicker').date(null);        
+            }
+            if (article.publicationDate) {
+                $pd.data('DateTimePicker').minDate(new Date(article.publicationDate));
+                $pd.data('DateTimePicker').date(new Date(article.publicationDate));
+            } else {
+                $pd.data('DateTimePicker').date(null);        
+            }
+            var artType = this.data.articleTypes.find((el)=>{return el.name == article.type});
+            console.log(this.state.selectedType);
+            console.log(artType);
+            if (artType) {
+                var $extensions = $modal.find('.extensions-wrapper');
+                artType.properties.map((el)=>{
+                    $extensions.find('#'+el)[0].value = article[el];
+                });
+            }
+        
+        });
+        //this.forceUpdate();
+
+
+
     },
     addArticle(event) {
         var $modal = $(event.target).closest('.modal-content');
@@ -187,7 +226,7 @@ ArticleView = React.createClass({
             }
         }
         var expirationDate = $modal.find('#expirationDate').data('DateTimePicker').date();
-        if (event.target.id == 'pbtn') {
+        if (event.target.id == 'pbtn' && !this.state.nowEdited) {
             var publicationDate = (new Date()).getTime();
         } else {
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
@@ -202,37 +241,47 @@ ArticleView = React.createClass({
             type: this.state.selectedType,
             tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
             publicationDate: publicationDate,
+            expirationDate: expirationDate,
         }
         _.extend(obj, extensions)
-        if (file) {
-            Attachments.insert(file, function(err, fileObj) {
-                if (!err) {
-                    obj.attachment_id = fileObj._id;
-                    Meteor.call('addArticle', obj);
-                }
-            });
+        if (this.state.nowEdited) {
+            if (file) {
+                Attachments.insert(file, function(err, fileObj) {
+                    if (!err) {
+                        obj.attachment_id = fileObj._id;
+                        Meteor.call('updateArticle', this.state.nowEdited, obj);
+                    }
+                });
+            } else {
+                Meteor.call('updateArticle', this.state.nowEdited, obj);            
+            }
         } else {
-            Meteor.call('addArticle', obj);
+            if (file) {
+                Attachments.insert(file, function(err, fileObj) {
+                    if (!err) {
+                        obj.attachment_id = fileObj._id;
+                        Meteor.call('addArticle', obj);
+                    }
+                });
+            } else {
+                Meteor.call('addArticle', obj);
+            }
         }
     },
     removeArticle(event) {
-        if (confirm("Na pewno usunąć artykuł?")) {
+        if (confirm("Czy na pewno chcesz usunąć artykuł?")) {
             Meteor.call('removeArticle', $(event.currentTarget).closest('.row')[0].id);
         }
     },
-    articleEditeButtons(){
+    articleEditButtons(){
       var inst=-1;
       if ( Meteor.user()) {
         if(Meteor.user().institutions ){
           inst=Meteor.user().institutions.indexOf(this.props.institution._id );
         }
         if ( Meteor.user().GlobalRight===true ||inst!=-1) {
-            //var html_usun = '<button onClick={this.removeArticle} type="button" class="btn btn-danger">Danger</button>';
-            //var id = $(event.target).closest('.row')[0].id;
-            //var modal_id = "modal" + id;
-            //var s_modal_id = "#" + modal_id;
           return <div>
-                    <button type='button' className='btn btn-xs btn-default'
+                    <button type='button' id="deleteArticleButton" className='btn btn-xs btn-default'
                         onClick={this.removeArticle}>
                         <span className='glyphicon glyphicon-trash'
                             aria-label='Usuń'></span>
@@ -242,33 +291,6 @@ ArticleView = React.createClass({
                         <span className='glyphicon glyphicon-pencil'
                             aria-label='Edytuj'></span>
                     </button>
-                    {/*}<button type='button' className='btn btn-xs btn-default'
-                        data-toggle="modal" data-target={s_modal_id}>
-                        <span className='glyphicon glyphicon-trash'
-                            aria-label='Usuń'></span>
-                    </button>*/}
-                    {/*<div id={modal_id} className="modal fade" role="dialog">
-                  <div className="modal-dialog">
-
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <button type="button" className="close" data-dismiss="modal">&times;</button>
-                        <h4 className="modal-title">Usunięcie {id}</h4>
-                      </div>
-                      <div className="modal-body">
-                        <p>Czy usunąć artykuł?</p>
-                            <button type="button" className="btn btn-default"
-                                onClick={this.removeArticle}>Tak</button>
-                      </div>
-                      <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal"
-                            onClick={this.removeArticle}>Tak</button>
-                        <button type="button" className="btn btn-default" data-dismiss="modal">Nie</button>
-                      </div>
-                    </div>
-
-                </div>
-                </div>*/}
                   </div>
         }
       }

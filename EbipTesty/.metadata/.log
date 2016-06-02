@@ -1,0 +1,743 @@
+!SESSION 2016-05-29 20:49:24.566 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_77
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pl_PL
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.emf.mwe2.language 4 0 2016-05-29 20:49:25.346
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.emf.mwe2.language [498]
+  Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.emf.mwe2.language.ui 4 0 2016-05-29 20:49:25.346
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.emf.mwe2.language.ui [499]
+  Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+       org.eclipse.emf.mwe2.language [498]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.code.editor.ldef 4 0 2016-05-29 20:49:25.346
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.code.editor.ldef [504]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.code.editor.ldef.ui 4 0 2016-05-29 20:49:25.346
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.code.editor.ldef.ui [505]
+  Unresolved requirement: Require-Bundle: org.eclipse.fx.code.editor.ldef; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.fx.code.editor.ldef; bundle-version="2.1.0.201508240602"; singleton:="true"
+       org.eclipse.fx.code.editor.ldef [504]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.css 4 0 2016-05-29 20:49:25.346
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.css [510]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+  Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+       org.eclipse.emf.mwe2.launch [500]
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.language [498]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.css.cssext 4 0 2016-05-29 20:49:25.361
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.css.cssext [511]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.xbase; visibility:="reexport"; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.xtext.xbase; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.xbase [615]
+         Unresolved requirement: Require-Bundle: de.itemis.xtext.antlr; bundle-version="2.0.0"; x-installation:="greedy"; resolution:="optional"
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+       org.eclipse.emf.mwe2.launch [500]
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.language [498]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.css.cssext.proposals 4 0 2016-05-29 20:49:25.361
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.css.cssext.proposals [512]
+  Unresolved requirement: Import-Package: org.eclipse.fx.ide.css.extapi
+    -> Export-Package: org.eclipse.fx.ide.css.extapi; bundle-symbolic-name="org.eclipse.fx.ide.css"; bundle-version="2.1.0.201508240705"; version="0.0.0"; x-friends:="org.eclipse.fx.ide.css.ui"
+       org.eclipse.fx.ide.css [510]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.launch [500]
+                Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+                     org.eclipse.emf.mwe2.language [498]
+                       Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                       Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                         -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.css.cssext.ui 4 0 2016-05-29 20:49:25.361
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.css.cssext.ui [513]
+  Unresolved requirement: Require-Bundle: org.eclipse.fx.ide.css.cssext; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.fx.ide.css.cssext; bundle-version="2.1.0.201508240705"; singleton:="true"
+       org.eclipse.fx.ide.css.cssext [511]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.xbase; visibility:="reexport"; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.xtext.xbase; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.xbase [615]
+                Unresolved requirement: Require-Bundle: de.itemis.xtext.antlr; bundle-version="2.0.0"; x-installation:="greedy"; resolution:="optional"
+                Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+                     org.eclipse.xtext.common.types [591]
+                       Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.launch [500]
+                Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+                     org.eclipse.emf.mwe2.language [498]
+                       Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                       Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                         -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.css.ui 4 0 2016-05-29 20:49:25.361
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.css.ui [516]
+  Unresolved requirement: Require-Bundle: org.eclipse.fx.ide.css; bundle-version="0.9.0"; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.fx.ide.css; bundle-version="2.1.0.201508240705"; singleton:="true"
+       org.eclipse.fx.ide.css [510]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.launch [500]
+                Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+                     org.eclipse.emf.mwe2.language [498]
+                       Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                       Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                         -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.fxgraph 4 0 2016-05-29 20:49:25.361
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.fxgraph [517]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.xbase; bundle-version="2.0.0"
+    -> Bundle-SymbolicName: org.eclipse.xtext.xbase; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.xbase [615]
+         Unresolved requirement: Require-Bundle: de.itemis.xtext.antlr; bundle-version="2.0.0"; x-installation:="greedy"; resolution:="optional"
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+  Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+       org.eclipse.emf.mwe2.launch [500]
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.language [498]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.fxgraph.ui 4 0 2016-05-29 20:49:25.377
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.fxgraph.ui [518]
+  Unresolved requirement: Require-Bundle: org.eclipse.fx.ide.fxgraph; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.fx.ide.fxgraph; bundle-version="2.1.0.201508240705"; singleton:="true"
+       org.eclipse.fx.ide.fxgraph [517]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.xbase; bundle-version="2.0.0"
+           -> Bundle-SymbolicName: org.eclipse.xtext.xbase; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.xbase [615]
+                Unresolved requirement: Require-Bundle: de.itemis.xtext.antlr; bundle-version="2.0.0"; x-installation:="greedy"; resolution:="optional"
+                Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+                     org.eclipse.xtext.common.types [591]
+                       Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.launch [500]
+                Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+                     org.eclipse.emf.mwe2.language [498]
+                       Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                       Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                         -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.fxml 4 0 2016-05-29 20:49:25.377
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.fxml [519]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types.ui; bundle-version="2.3.0"
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types.ui; bundle-version="2.8.4.v201508050135"
+       org.eclipse.xtext.common.types.ui [595]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.jdt.core 4 0 2016-05-29 20:49:25.377
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.jdt.core [522]
+  Unresolved requirement: Require-Bundle: org.eclipse.pde.core; bundle-version="3.8.0"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.jdt.ui 4 0 2016-05-29 20:49:25.377
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.jdt.ui [523]
+  Unresolved requirement: Require-Bundle: org.eclipse.fx.ide.jdt.core; bundle-version="0.9.0"
+    -> Bundle-SymbolicName: org.eclipse.fx.ide.jdt.core; bundle-version="2.1.0.201508240705"; singleton:="true"
+       org.eclipse.fx.ide.jdt.core [522]
+         Unresolved requirement: Require-Bundle: org.eclipse.pde.core; bundle-version="3.8.0"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.l10n 4 0 2016-05-29 20:49:25.377
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.l10n [524]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+  Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+       org.eclipse.emf.mwe2.launch [500]
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.language [498]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.xbase; visibility:="reexport"; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.xtext.xbase; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.xbase [615]
+         Unresolved requirement: Require-Bundle: de.itemis.xtext.antlr; bundle-version="2.0.0"; x-installation:="greedy"; resolution:="optional"
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.l10n.ui 4 0 2016-05-29 20:49:25.393
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.l10n.ui [525]
+  Unresolved requirement: Require-Bundle: org.eclipse.fx.ide.l10n; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.fx.ide.l10n; bundle-version="2.1.0.201508240705"; singleton:="true"
+       org.eclipse.fx.ide.l10n [524]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.launch [500]
+                Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+                     org.eclipse.emf.mwe2.language [498]
+                       Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                       Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                         -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.xbase; visibility:="reexport"; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.xtext.xbase; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.xbase [615]
+                Unresolved requirement: Require-Bundle: de.itemis.xtext.antlr; bundle-version="2.0.0"; x-installation:="greedy"; resolution:="optional"
+                Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.pde.core 4 0 2016-05-29 20:49:25.393
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.pde.core [527]
+  Unresolved requirement: Require-Bundle: org.eclipse.pde.core
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.pde.ui 4 0 2016-05-29 20:49:25.393
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.pde.ui [528]
+  Unresolved requirement: Require-Bundle: org.eclipse.pde.ui; bundle-version="3.6.100"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.pde.ui.e4 4 0 2016-05-29 20:49:25.393
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.pde.ui.e4 [529]
+  Unresolved requirement: Require-Bundle: org.eclipse.pde.core; bundle-version="3.7.0"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.rrobot 4 0 2016-05-29 20:49:25.408
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.rrobot [530]
+  Unresolved requirement: Require-Bundle: org.eclipse.pde.core; bundle-version="3.7.0"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.rrobot.dsl.ui 4 0 2016-05-29 20:49:25.408
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.rrobot.dsl.ui [532]
+  Unresolved requirement: Require-Bundle: org.eclipse.fx.ide.rrobot; bundle-version="0.9.0"
+    -> Bundle-SymbolicName: org.eclipse.fx.ide.rrobot; bundle-version="2.1.0.201508240705"
+       org.eclipse.fx.ide.rrobot [530]
+         Unresolved requirement: Require-Bundle: org.eclipse.pde.core; bundle-version="3.7.0"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.fx.ide.ui.mobile.sim.launch 4 0 2016-05-29 20:49:25.408
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.fx.ide.ui.mobile.sim.launch [536]
+  Unresolved requirement: Require-Bundle: org.eclipse.pde.core; bundle-version="3.8.0"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtend.core 4 0 2016-05-29 20:49:25.408
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtend.core [576]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtend.ide 4 0 2016-05-29 20:49:25.408
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtend.ide [579]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtend.core; bundle-version="[2.8.0,3.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.xtend.core; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtend.core [576]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtend.ide.common 4 0 2016-05-29 20:49:25.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtend.ide.common [580]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtend.core; bundle-version="[2.8.0,3.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.xtend.core; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtend.core [576]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtext.builder.standalone 4 0 2016-05-29 20:49:25.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtext.builder.standalone [590]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtext.common.types 4 0 2016-05-29 20:49:25.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtext.common.types [591]
+  Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtext.common.types.shared 4 0 2016-05-29 20:49:25.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtext.common.types.shared [593]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtext.purexbase 4 0 2016-05-29 20:49:25.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtext.purexbase [605]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+  Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; bundle-version="2.2.0"; x-installation:="greedy"; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+       org.eclipse.emf.mwe2.launch [500]
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.language [498]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtext.purexbase.ui 4 0 2016-05-29 20:49:25.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtext.purexbase.ui [606]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.purexbase; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.xtext.purexbase; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.purexbase [605]
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+         Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.launch; bundle-version="2.2.0"; x-installation:="greedy"; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.emf.mwe2.launch; bundle-version="2.8.1.v201508030411"; singleton:="true"
+              org.eclipse.emf.mwe2.launch [500]
+                Unresolved requirement: Require-Bundle: org.eclipse.emf.mwe2.language; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.emf.mwe2.language; bundle-version="2.8.1.v201508030411"; singleton:="true"
+                     org.eclipse.emf.mwe2.language [498]
+                       Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"; resolution:="optional"
+                       Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="2.8.0"; visibility:="reexport"
+                         -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtext.xbase 4 0 2016-05-29 20:49:25.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtext.xbase [615]
+  Unresolved requirement: Require-Bundle: de.itemis.xtext.antlr; bundle-version="2.0.0"; x-installation:="greedy"; resolution:="optional"
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.common.types [591]
+         Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.xtext.xbase.ui 4 0 2016-05-29 20:49:25.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.xtext.xbase.ui [618]
+  Unresolved requirement: Require-Bundle: org.eclipse.xtext.xbase; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.xtext.xbase; bundle-version="2.8.4.v201508050135"; singleton:="true"
+       org.eclipse.xtext.xbase [615]
+         Unresolved requirement: Require-Bundle: de.itemis.xtext.antlr; bundle-version="2.0.0"; x-installation:="greedy"; resolution:="optional"
+         Unresolved requirement: Require-Bundle: org.eclipse.xtext.common.types; bundle-version="[2.8.0,3.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.xtext.common.types; bundle-version="2.8.4.v201508050135"; singleton:="true"
+              org.eclipse.xtext.common.types [591]
+                Unresolved requirement: Require-Bundle: org.objectweb.asm; bundle-version="[5.0.1,6.0.0)"
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-05-29 20:49:37.133
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\DZONI'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.jobs 2 2 2016-05-29 20:49:52.987
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseUpdateJob
