@@ -2,7 +2,8 @@ Homepage = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         return {
-            institutions: Institutions.find().fetch()
+            institutions: Institutions.find().fetch(),
+            user: Meteor.user()
         };
     },
     render()
@@ -51,8 +52,8 @@ Homepage = React.createClass({
         </div>
     },
     renderInstitutions() {
-      if ( Meteor.user()) {
-        if (Meteor.user().GlobalRight===true) {
+      if ( this.data.user) {
+        if (this.data.user.GlobalRight===true) {
           return this.data.institutions.map((el)=>{
               return <div className= "tile1" >
                   <a className="tilelink" href={'/i/'+el.name}> {el.name}
@@ -103,8 +104,8 @@ Homepage = React.createClass({
         }
     },
     addInstButton(){
-      if ( Meteor.user()) {
-        if (Meteor.user().GlobalRight===true) {
+      if ( this.data.user) {
+        if (this.data.user.GlobalRight===true) {
           return <i data-toggle="modal" data-target="#addInstitutionModal">
             <div id="addInstitutionTile">
               <span id="glyphiconPlusSign" className="glyphicon glyphicon-plus-sign"></span>

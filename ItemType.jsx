@@ -26,7 +26,8 @@ ItemType = React.createClass({
         }
         return {
             itemtype: itemtype,
-            propertytype: propertytype
+            propertytype: propertytype,
+            user: Meteor.user()
         };
     },
     render() {
@@ -37,13 +38,21 @@ ItemType = React.createClass({
                 <div><b>{this.data.itemtype.description}</b></div>
                 {this.renderParents()}
                 {this.renderSameAs(this.data.itemtype.sameAs)}
+<<<<<<< HEAD
                 {Meteor.user() && Meteor.user().GlobalRight ? <div className="row">
+=======
+                {this.data.user && this.data.user.GlobalRight ? <div className="row">
+>>>>>>> real_custom_ui
                     <div className="col-md-12">
                         <button type="button" className="btn btn-info" data-toggle="modal" data-target="#addPropertyModal">
                             Dodaj właściwość
                         </button>
                     </div>
+<<<<<<< HEAD
                 </div> : null}                
+=======
+                </div> : null}               
+>>>>>>> real_custom_ui
                 <table className='table'>
                     <thead>
                         <tr className='info'>
@@ -125,7 +134,11 @@ ItemType = React.createClass({
         arr.push(<thead><tr className='active'><td colSpan='3'>
             <b>Właściwości z <a href={'/dictionary/'+this.data.itemtype.name}>{this.data.itemtype.name}:</a></b>
         </td></tr></thead>);
+<<<<<<< HEAD
         arr = arr.concat(<tbody>{render(this.data.itemtype.properties, Meteor.user() && Meteor.user().GlobalRight)}</tbody>);        
+=======
+        arr = arr.concat(<tbody>{render(this.data.itemtype.properties, this.data.user && this.data.user.GlobalRight)}</tbody>);        
+>>>>>>> real_custom_ui
         var p = this.data.itemtype.inheritedProperties;
         for (var i in p) {
             arr.push(<thead><tr className='active'><th colSpan='3'>

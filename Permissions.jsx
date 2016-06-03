@@ -7,7 +7,7 @@ Permissions = React.createClass({
 
     getMeteorData() {
         return {
-            user: Meteor.users.find().fetch(),
+            users: Meteor.users.find().fetch(),
             institutions: Institutions.find().fetch()
         };
     },
@@ -120,7 +120,7 @@ Permissions = React.createClass({
     },
 
     insertRow(){
-        return this.data.user.map((el)=>{
+        return this.data.users.map((el)=>{
             return <tr >
                 <td><p>{el.username}</p></td>
                 {this.whatRights(el)}
@@ -152,9 +152,9 @@ Permissions = React.createClass({
     },
     checked(){
       var us;
-      for(var i=0;i<this.data.user.length;i++){
-        if(this.data.user[i].username === this.state.HandleUser) {
-          us=this.data.user[i];
+      for(var i=0;i<this.data.users.length;i++){
+        if(this.data.users[i].username === this.state.HandleUser) {
+          us=this.data.users[i];
           break;
         }
       }

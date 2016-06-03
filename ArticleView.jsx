@@ -2,7 +2,8 @@ ArticleView = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         return {
-            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['Article']}}).fetch()
+            articleTypes: ItemTypes.find({inheritsFrom: {$in: ['Article']}}).fetch(),
+            user: Meteor.user()
         };
     },
     getInitialState() {
@@ -72,6 +73,7 @@ ArticleView = React.createClass({
                             {this.renderExtendedModal()}
                         </div>                        
                         <div>Autor:</div>
+<<<<<<< HEAD
                         <div className='dropdown' id='author'>
                             <button className='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>Wybierz Autora
                             <span className='caret'></span></button>
@@ -81,6 +83,9 @@ ArticleView = React.createClass({
                                 <li>gdzie reszta?</li>
                             </ul>*/}
                         </div>
+=======
+                        <input id='author' className='form-control' type='text'></input>
+>>>>>>> real_custom_ui
                         <div>Dodaj załącznik: </div>
                         <input type='file' id='file' />
                     </div>
@@ -133,7 +138,7 @@ ArticleView = React.createClass({
     renderArticles() {
         return this.props.articles && this.props.articles.map((el)=>{
             var now = (new Date()).getTime();
-            if (el && ((Meteor.user() && (Meteor.user().GlobalRight || (Meteor.user().institutions && Meteor.user().institutions.includes(this.props.institution._id)))) ||
+            if (el && ((this.data.user && (this.data.user.GlobalRight || (this.data.user.institutions && this.data.user.institutions.includes(this.props.institution._id)))) ||
             (el.publicationDate < now && (el.expirationDate > now || !el.expirationDate)))) {
                 var attachment = Attachments.findOne({"_id":el.attachment_id});
                 return <div className='row' id={el._id}>
@@ -239,6 +244,11 @@ ArticleView = React.createClass({
     addArticle(event) {
         var $modal = $(event.target).closest('.modal-content');
         var $title = $modal.find('#title')[0];
+<<<<<<< HEAD
+=======
+        var $author = $modal.find('#author')[0];
+        var $content = $modal.find('#content')[0];
+>>>>>>> real_custom_ui
         var $tags = $modal.find('#tags')[0];
         var $extensions = $modal.find('.extensions');
         var extensions = {};
@@ -259,7 +269,12 @@ ArticleView = React.createClass({
         var ins_id = this.props.institution._id;
         var obj = {
             title: $title.value,
+<<<<<<< HEAD
             content: window.parent.tinyMCE.get('content').getContent(),
+=======
+            content: $content.value,
+            author: $author.value,
+>>>>>>> real_custom_ui
             institution_id: ins_id,
             type: this.state.selectedType,
             tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
@@ -300,11 +315,11 @@ ArticleView = React.createClass({
     },
     articleEditButtons(){
       var inst=-1;
-      if ( Meteor.user()) {
-        if(Meteor.user().institutions ){
-          inst=Meteor.user().institutions.indexOf(this.props.institution._id );
+      if ( this.data.user) {
+        if(this.data.user.institutions ){
+          inst=this.data.user.institutions.indexOf(this.props.institution._id );
         }
-        if ( Meteor.user().GlobalRight===true ||inst!=-1) {
+        if ( this.data.user.GlobalRight===true ||inst!=-1) {
           return <div>
                     <button type='button' id="deleteArticleButton" className='btn btn-xs btn-default'
                         onClick={this.removeArticle}>
@@ -322,11 +337,11 @@ ArticleView = React.createClass({
     },
     addArticleButton(){
       var inst=-1;
-      if ( Meteor.user()) {
-        if(Meteor.user().institutions && this.props.articles){
-          inst=Meteor.user().institutions.indexOf(this.props.institution._id );
+      if ( this.data.user) {
+        if(this.data.user.institutions && this.props.articles){
+          inst=this.data.user.institutions.indexOf(this.props.institution._id );
         }
-        if ( Meteor.user().GlobalRight===true ||inst!=-1) {
+        if ( this.data.user.GlobalRight===true ||inst!=-1) {
           return <div id='bottom-button-add-article'>
                     <button type='button' onClick={this.cleanEditor} className='btn btn-info'
                         data-toggle='modal' data-target='#editArticleModal'>Dodaj artykuł</button>
