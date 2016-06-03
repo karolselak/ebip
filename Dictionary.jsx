@@ -18,20 +18,12 @@ Dictionary = React.createClass({
                 {this.renderList()}
               </div>
             </div>
-<<<<<<< HEAD
-            {Meteor.user() && Meteor.user().GlobalRight ? <div className="row">
-              <div className="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                  <button id="addType" type="button" className="btn btn-info" data-toggle="modal" data-target="#addTypeModal">Dodaj typ</button>
-              </div>
-            </div> : null}
-=======
             {this.data.user && this.data.user.GlobalRight ? 
             <div className="row">
               <div className="col-md-12 col-lg-12 col-xs-12 col-sm-12">
                   <button id="addType" type="button" className="btn btn-info" data-toggle="modal" data-target="#addTypeModal">Dodaj typ</button>
               </div>
             </div> : null }
->>>>>>> real_custom_ui
             {/*okno dodawania typu: */}
             <div className="modal fade" id="addTypeModal" role="dialog">
             <div className="modal-dialog">

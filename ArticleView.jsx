@@ -73,24 +73,12 @@ ArticleView = React.createClass({
                             {this.renderExtendedModal()}
                         </div>                        
                         <div>Autor:</div>
-<<<<<<< HEAD
-                        <div className='dropdown' id='author'>
-                            <button className='btn btn-default dropdown-toggle' type='button' id='menu1' data-toggle='dropdown'>Wybierz Autora
-                            <span className='caret'></span></button>
-                            {/*<ul className='dropdown-menu'>
-                                <li>Mariolka</li>
-                                <li>Buhal</li>
-                                <li>gdzie reszta?</li>
-                            </ul>*/}
-                        </div>
-=======
                         <input id='author' className='form-control' type='text'></input>
->>>>>>> real_custom_ui
                         <div>Dodaj załącznik: </div>
                         <input type='file' id='file' />
                     </div>
                     <div className='modal-footer'>
-                        <button type='button' id='pbtn' className='btn btn-success' data-dismiss='modal' onClick={this.addArticle} >Publikuj</button>
+                        <button type='button' id='pbtn' className='btn btn-success' data-dismiss='modal' onClick={this.addArticle} >Publikuj teraz</button>
                         <button type='button' id='sbtn' className='btn btn-info' data-dismiss='modal' onClick={this.addArticle} >Zapisz wersję roboczą</button>
                         <button type='button' id='abtn' className='btn btn-default' data-dismiss='modal'>Anuluj</button>
                     </div>
@@ -150,7 +138,7 @@ ArticleView = React.createClass({
                                 <b>{el.title}</b>
                             </a>
                         } <span style={{color:'red'}}><i>{
-                            el.publicationDate > now || !el.publicationDate ? '(wersja robocza)' : el.expirationDate && el.expirationDate < now ? '(wygaśnięty)' : null
+                            el.publicationDate > now || !el.publicationDate ? '(wersja robocza)' : el.expirationDate && el.expirationDate < now ? '(wygasły)' : null
                         }</i></span>
                         <span className='pull-right'>
                           <div>
@@ -216,13 +204,17 @@ ArticleView = React.createClass({
             var $ed = $modal.find('#expirationDate');
             var $pd = $modal.find('#publicationDate');        
             if (article.expirationDate) {
-                $ed.data('DateTimePicker').minDate(new Date(article.expirationDate));
+                if (article.expirationDate < (new Date()).getTime()) {
+                    $ed.data('DateTimePicker').minDate(new Date(article.expirationDate));                
+                }
                 $ed.data('DateTimePicker').date(new Date(article.expirationDate));
             } else {
                 $ed.data('DateTimePicker').date(null);        
             }
             if (article.publicationDate) {
-                $pd.data('DateTimePicker').minDate(new Date(article.publicationDate));
+                if (article.publicationDate < (new Date()).getTime()) {
+                    $pd.data('DateTimePicker').minDate(new Date(article.publicationDate));
+                }
                 $pd.data('DateTimePicker').date(new Date(article.publicationDate));
             } else {
                 $pd.data('DateTimePicker').date(null);        
@@ -236,19 +228,11 @@ ArticleView = React.createClass({
             }
         
         });
-        //this.forceUpdate();
-
-
-
     },
     addArticle(event) {
         var $modal = $(event.target).closest('.modal-content');
         var $title = $modal.find('#title')[0];
-<<<<<<< HEAD
-=======
         var $author = $modal.find('#author')[0];
-        var $content = $modal.find('#content')[0];
->>>>>>> real_custom_ui
         var $tags = $modal.find('#tags')[0];
         var $extensions = $modal.find('.extensions');
         var extensions = {};
@@ -259,7 +243,7 @@ ArticleView = React.createClass({
         }
         var d = $modal.find('#expirationDate').data('DateTimePicker').date();
         var expirationDate = d ? d._d.getTime() : Infinity;
-        if (event.target.id == 'pbtn' && !this.state.nowEdited) {
+        if (event.target.id == 'pbtn') { // && !this.state.nowEdited
             var publicationDate = (new Date()).getTime();
         } else {
             var d = $modal.find('#publicationDate').data('DateTimePicker').date();
@@ -269,12 +253,8 @@ ArticleView = React.createClass({
         var ins_id = this.props.institution._id;
         var obj = {
             title: $title.value,
-<<<<<<< HEAD
             content: window.parent.tinyMCE.get('content').getContent(),
-=======
-            content: $content.value,
             author: $author.value,
->>>>>>> real_custom_ui
             institution_id: ins_id,
             type: this.state.selectedType,
             tags: $tags.value ? $tags.value.split(',').map(function(el){return el.trim()}) : [],
