@@ -59,7 +59,7 @@ Homepage = React.createClass({
                   <a className="tilelink" href={'/i/'+el.name}> {el.name}
                   </a>
                   <div className="bottomRowInst" id={el._id}>
-                    <button type="button" id={'buttonRemuve'+el._id} className="btn btn-xs btn-default "
+                    <button type="button" id={'buttonRemuve'+el.name} className="btn btn-xs btn-default "
                     onClick={this.removeInstitution}>
                         <span className="glyphicon glyphicon-trash" aria-label="Usuń">
                         </span>
