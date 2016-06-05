@@ -52,7 +52,7 @@ SearchResults = React.createClass({
                       </div>
                       <div className="row " >
                         <div className="col-md-12 ShortArticleView ">
-                          {el2.content}
+                          <div dangerouslySetInnerHTML={{__html: el2.content}}></div>
                         </div>
                       </div>
                     </div>
