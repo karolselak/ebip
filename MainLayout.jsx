@@ -118,6 +118,7 @@ MainLayout = React.createClass({
             <div>{nazwa}</div></a>
           </div>
           {accountUI}
+          {this.renderErrorModal()}
         </div>
     },
     loginModal() {
@@ -146,8 +147,11 @@ MainLayout = React.createClass({
             var username = credentials.find('#username')[0].value;
             var password = credentials.find('#password')[0].value;
             Meteor.loginWithPassword(username, password, function(error) {
-                console.log(error);
-                window.alert(error.reason);
+                //console.log(error);
+                //window.alert(error.reason);
+                var errMod = $('#errorModal');
+                errMod.find('.modal-body')[0].innerText = error.reason;
+                errMod.modal();
             });
             //console.log(Meteor.loggingIn());
             //window.location.reload();
@@ -168,15 +172,18 @@ MainLayout = React.createClass({
                 };
                 console.log(data);
                 Accounts.createUser(data, function(error) {
-                    console.log(error);
-                    window.alert(error.reason);
+                    var errMod = $('#errorModal');
+                    errMod.find('.modal-body')[0].innerText = error.reason;
+                    errMod.modal();
                 });
                 //while (Meteor.loggingIn()) {
 
                 //}
                 //window.location.reload();
             } else {
-                window.alert("Hasła nie zgadzają się.");
+                var errMod = $('#errorModal');
+                errMod.find('.modal-body')[0].innerText = "Hasła nie zgadzają się.";
+                errMod.modal();
             }
         };
         return <div id="accountModal" className="modal fade" role="dialog">
@@ -184,6 +191,9 @@ MainLayout = React.createClass({
 
         <div className="modal-content">
           <div className="modal-header">
+          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
             <h4 className="modal-title">Logowanie</h4>
           </div>
           <div className="modal-body">
@@ -229,12 +239,10 @@ MainLayout = React.createClass({
     logoutModal() {
         var logout = function() {
             Meteor.logout(function(error) {
-                if (error) {
-                    console.log(error);
-                    window.alert(error.reason);                    
-                }
+                var errMod = $('#errorModal');
+                errMod.find('.modal-body')[0].innerText = error.reason;
+                errMod.modal();
             });
-            //window.location.reload();
         };
         var change = function(event) {
             var $modal = $(event.target).closest('.modal-content');
@@ -244,12 +252,20 @@ MainLayout = React.createClass({
             var new_pass_confirm = credentials.find("#new_password_confirm")[0].value;
             if (new_pass == new_pass_confirm) {
                 Accounts.changePassword(old_pass, new_pass, function(error) {
-                    console.log(error);
-                    window.alert(error.reason);
+                    var errMod = $('#errorModal');
+                    errMod.find('.modal-body')[0].innerText = error.reason;
+                    errMod.modal();
                 });
             } else {
-                window.alert("Hasła nie zgadzają się.");
+                var errMod = $('#errorModal');
+                errMod.find('.modal-body')[0].innerText = "Hasła nie zgadzają się.";
+                errMod.modal();
             }
+            var $modal = $(event.target).closest('.modal-content');
+            $modal.find(".modal-body").hide();
+            $modal.find("#logged_user_ui-buttons").show();
+            $modal.find("#change_password").hide();
+            $modal.find(".modal-footer").find("#change_password").hide();
         };
         var show_change = function(event) {
             var $modal = $(event.target).closest('.modal-content');
@@ -299,7 +315,7 @@ MainLayout = React.createClass({
         <button type="button" className="btn btn-default" data-dismiss="modal">Zamknij</button>
         </div>
       <div id="change_password" style={{display: "none"}}>
-          <button type="button" className="btn btn-primary"
+          <button type="button" className="btn btn-primary" data-dismiss="modal"
                onClick={change}>
               Zmień hasło
           </button>
@@ -309,7 +325,27 @@ MainLayout = React.createClass({
     </div>
 
     </div>
+        </div>
+    </div>
+},
+    renderErrorModal() {
+        return <div className="modal fade" id="errorModal" role="dialog">
+    <div className="modal-dialog">
+
+      <div className="modal-content">
+        <div className="modal-header">
+          <button type="button" className="close" data-dismiss="modal">&times;</button>
+          <h4 className="modal-title">Błąd</h4>
+        </div>
+        <div className="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-default" data-dismiss="modal">Zamknij</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
     }
 });
