@@ -1,0 +1,687 @@
+\documentclass{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {C:\Users\Jacek\Documents\LaTeX\ebip} }
+
+\begin{document}
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Politechnika Wrocławska\\Wydział Elektroniki W-4 \par}
+	\vspace{1cm}
+	{\scshape\LARGE Projekt zespołowy\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Elektroniczny Biuletyn Informacji Publicznej\par}
+	\vspace{2cm}
+	{\Large\itshape Autorzy:\\Karol Selak\\Martin Kurtz\\Jacek Krakowian\\Łukasz Grabczyński\\Hubert Olkiewicz\\Kaj Pityński\par}
+	\vspace{2cm}
+	{\Large\itshape Prowadzący:\\Dr inż. Tomasz Kubik\par}
+	\vfill
+	{\large \today\par}
+\end{titlepage}
+	\tableofcontents
+	\newpage
+\section{Wstęp}
+
+\subsection{Cel projektu}
+
+	Celem projektu jest stworzenie systemu eBIP (elektroniczny biuletyn informacji publicznej). Ma to być przestrzeń do zamieszczania przez organy publiczne rozmaitych ogłoszeń, informacji o przetargach, decyzje organów wykonawczych itp, wraz z załącznikami w postaci skanów dokumentów. Ważnym celem jest również utworzenie słownika typów danych. Zasoby mają być reprezentowane w postaci danych ustrukturyzowanych typu JSON-LD. System eBIP wychodzi na przeciwko oczekiwaniom zainteresowanych obywateli, przedsiębiorców oraz przedstawicieli władz. Zamieszczanie w przejrzysty i uporządkowany sposób informacji publicznych na stronie internetowej ma być ułatwieniem dla odbiorców.
+
+\subsection{Zakres projektu}
+	
+	System eBIP w założeniu ma stanowić zbiór podsystemów biuletynów informacji publicznej. Każdy podsystem ma w założeniu dotyczyć danej organizacji, bądź pewnych obszarów administracyjnych, których kompetencje mogą się częściowo pokrywać. Każdy podsystem może być prowadzony przez osobny zespół administratorów. Jedyną funkcją jaka jest dostępna dla użytkowników systemu eBIP jest przeglądanie zamieszczonych ogłoszeń oraz ewentualne pobranie załącznika do ogłoszenia. Dostęp do systemu jest uzyskiwany za pomocą przeglądarki stron WWW. Dane są zaopatrywane w znaczniki i zapisywane w strukturach JSON. 
+
+	
+\subsection{Opis działania systemu}
+
+	W ramach aplikacji funkcjonować może wiele instytucji, z których każda posiada własną podstronę. Za dodawanie nowych instytucji odpowiadają administratorzy globalni oraz administratorzy instytucji. Administratorzy instytucji mogą dodawać, edytować oraz usuwać artykuły. 
+	
+	Oprócz tego w obrębie systemu zawiera się słownik schematów danych ustrukturyzowanych. Możliwa jest jego edycja przez administratora globalnego. W szczególności możliwe jest tworzenie nowych klas artykułów, dziedziczących po klasie Article. Klasy te mogą być następnie używane podczas wstawiania nowych artykułów do systemu - po wybraniu odpowiedniej klasy artykułu możliwe jest określanie wartości jej pól.
+	
+	Aplikcja udostępnia także interfejs REST API, który umożliwia pozyskanie treści publikowanych artykułów oraz danych instytucji w semantycznym formacie LD-JSON. Ponadto istnieje również interfejs RESTowy dla samego słownika.
+ 
+	 \newpage
+\subsection{Technologie}
+	
+\begin{itemize} 
+	\item JavaScript
+	\item Meteor.JS
+	\item ReactJS
+	\item MongoDB
+	\item GitHub
+
+\end{itemize}
+\section{Instrukcja wdrożeniowa systemu}
+	\begin{enumerate}
+	\item Instalacja środowiska MeteorSystem:\\\\
+	Linux – w okienku termianala należy wpisać instrukcję:\\ 
+	curl https://install.meteor.com/ | sh\\\\
+	System Windows – należy pobrać installer ze strony producenta:\\
+	https://www.meteor.com/install ,następnie, należy uruchomić installer i postępować zgodnie z jego poleceniami.
+	\item Sklonowanie repozytorium:\\\\
+	W okienku teminala należy wpisać instrukcję:\\
+	git clone git@github.com:karolselak/ebip.git\\
+	lub pobranie aplikacji graficznej obsługującej GIT np. darmowy program TortoisGit ze strony https://tortoisegit.org/  i sklonowanie repozytorium.
+	\item Uruchomienie środowiska meteor:\\\\
+	W okienku terminala należy przejść do katalogu zawierającego pobrane repozytorium, następnie uruchomienie Meteora instrukcją:\\\\
+	meteor
+	
+	\end{enumerate}
+	
+
+	\newpage
+\subsection{Instrukcja użytkownika}
+\subsection{Rejestracja konta}
+	Pierwszym krokiem jest uruchomienie panelu logowania. Aby je uruchomić należy kliknąć ikonkę 1. Spowoduje to rozwinięcie dymka okienka logowania. Aby założyć konto użytkownika należy kliknąć w link create account. Następnie należy uzupełnić pola nazwa użytkownika 2oraz hasło 4, a następnie potwierdzić hasło w polu 4. Następnie należy użyć przycisku 5 aby stworzyć konto.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{1.png}
+	\centering
+	\caption{Rejestracja nowego użytkownika.}
+\end{figure}	
+
+\subsection{Zmiana hasła}
+	Aby zmienić hasło do logowania należy otworzyć okienko logowania, a następnie wybrać link change password. Pojawi się okienko zmiany hasła. Należy wypełnić pola kolejno obecnego hasła , nowego hasła  oraz powtórzenie nowego hasła. Następnie należy operację potwierdzić wybierając przycisk Change password.
+\newpage
+\subsection{Logowanie}
+	Aby się zalogować do systemu należy przejść do panelu logowania jak powyżej. Należy kliknąć na ikonkę 1 oraz wpisać dane nazwy użytkownika 2 oraz hasła 3. Następnie należy kliknąć przycisk Sign in 4. Po zalogowaniu użytkownik uzyska dostęp do wielu ukrytych dla użytkownika niezalogowanego funkcji systemu.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{2.png}
+	\centering
+	\caption{Logowanie do systemu.}
+\end{figure}
+
+	Po prawidłowym zalogowaniu na ekranie pojawi się główne okno systemu eBip.
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{3.png}
+	\centering
+	\caption{Widok systemu po zalogowaniu się.}
+\end{figure}
+\newpage
+
+\subsection{Dodawanie instytucji}
+	W pierwszej kolejności należy wybrać przycisk 1 z okna głównego systemu.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{4.png}
+	\centering
+\end{figure}
+
+	Spowoduje to przejście do okna Dodaj instytucję. Należy wypełnić pola danymi instytucji oraz potwierdzić dodanie instytucji przyciskiem Dodaj.	
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{5.png}
+	\centering
+\end{figure}
+\subsection{Dodawanie artykułu}
+	Aby dodać artykuł należy wybrać przycisk Dodaj artykuł z okna dodawania artykułów. Spowoduje to pojawienie się okna Dodaj artykuł. Należy wypełnić kolejne pola treścią oraz określić parametry artykułu. Następnie należy potwierdzić dodanie artykułu przyciskiem Publikuj.	
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{6.png}
+	\centering
+\end{figure}
+
+\subsection{Edycja artykułu}
+	W celu edycji artykułu należy odnaleźć pożądany artykuł z listy artykułów w oknie. Następnie należy kliknąć przycisk oznaczony symbolem pióra, który jest obok wyświetlonego nagłówka artykułu. Pojawi się okno edycji parametrów artykułu, które można modyfikować. Aby zatwierdzić zmiany należy kliknąć przycisk Publikuj.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{7.png}
+	\centering
+\end{figure}
+
+\subsection{Usuwanie artykułu}
+	Aby usunąć artykuł należy z listy artykułów odnaleźć pożądany artykuł, a następnie kliknąć odpowiadającą mu ikonkę z symbolem śmietnika. Pojawi się dymek wymagający potwierdzenia wykonania usunięcia. Należy powierdzić operację usuwania przyciskiem Usuń.
+
+\subsection{Nadawanie/odebranie praw administratora}
+	Aby nadać lub odebrać prawa administratorowi należy wybrać przycisk 1 z listy przycisków w górnym pasku. Następnie należy wybrać odpowiedni przycisk spośród przycisków 2,3,4 lub 5. 
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{8.png}
+	\centering
+\end{figure}
+
+	W efekcie pojawi się okno, w którym należy wybrać instytucje co do których prawem ma być objęty użytkownik. Należy wybrać odpowiednie instytucje i operację powierdzić przyciskiem Zapisz.
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{9.png}
+	\centering
+\end{figure}	
+
+\newpage		
+	Lub w przypadku odbierania praw pojawi się dymek żądający potwierdzenia wykonywanej operacji.	
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{10.png}
+	\centering
+\end{figure}
+
+\subsection{Wyszukiwanie artykułów}
+	Istnieją dwie opcje wyszukiwania.  
+	Wyszukiwanie globalne, z poziomu strony głównej systemu eBip. Aby wyszukać artykuły globalnie należy wpisać frazę w okienko wyszukiwarki oraz pozostawić pole Wybierz instytucję niewybrane. Następnie rozpocząć przyciskiem Wyszukaj. Spowoduje to przeszukanie treści artykułów we wszystkich instytucjach.
+	Wyszukiwanie w obrębie instytucji. Aby wyszukać artykuły należy wpisać frazę jak poprzednio, następnie wybrać instytucję w polu Wybierz instytucję i rozpocząć poszukiwania przyciskiem Wyszukaj. Spowoduje to przeszukanie treści artykułów jednej instytucji.
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{11.png}
+	\centering
+\end{figure}
+
+\newpage
+
+	Poniżej przykładowy wynik wyszukiwania.
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{12.png}
+	\centering
+\end{figure}	
+
+\subsection{Dodawanie pojęć do słownika}
+	Aby dodać pojęcie do słownika należy w pierwszej kolejności wybrać przycisk Słownik znajdujący się w górnym pasku. Ze strony słownika należy wybrać przycisk Dodaj typ.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{13.png}
+	\centering
+\end{figure}
+	Spowoduje to pojawienie się okna Dodaj typ jak poniżej. Należy wypełnić pola oraz wybrać parametr. Całą operację należy potwierdzić przyciskiem Dodaj.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{14.png}
+	\centering
+\end{figure}
+\subsection{Interfejs REST API}	
+	Istnieją dwa główne punkty dostępowe do systemu z poziomu maszynowego. Pierwszym z nich jest dostęp do słownika, który odbywa się pod adresem: [domena\_aplikacji] \textbackslash dictionary \textbackslash [nazwa\_pojęcia]. Zachowana jest konwencja, zgodnie z którą typy danych pisane są z wielkiej litery, zaś pola typów z małej.Natomiast drugim punktem dostępowym jest dostęp do kolekcji znajdujących się w systemie. Jego adres jest następujący: [domena\_aplikacji] \textbackslash restQuery \textbackslash [nazwa\_kolekcji] \textbackslash [zapytanie\_mongoDB], gdzie nazwą kolekcji może być Articles dla artykułów oraz Institutioins dla instytucji.
+
+\newpage
+	
+\section{Wymagania funkcjonalne}
+	
+\subsection{Funkcje realizowane przez system}
+
+	System gwarantuje możliwość dodania przez odpowiednie organy administracyjne artykułu, który będzie zawierał szczegółowe dane na temat informacji publicznej. Informacja ta będzie w postaci notki oraz pliku w formacie PDF. Artykuły będą udostępniane przez administratorów. Każdy użytkownik będzie mógł wyszukać interesujący go artykuł. Wyszukiwanie odbywa poprzez wpisanie w wyszukiwarkę słowa kluczowego lub wybranie instytucji z dostępnej na stronie.System EBIP ma obsługiwać użytkowników zewnętrznych (łączący się zdalnie z innych komputerów) oraz użytkowników wewnętrznych (łączących się z systemem na tym samym komputerze, jak np. administrator).
+	System EBIP ma realizować następujące funkcje:
+\begin{enumerate}
+	\item Dodaj artykuł
+	\item Edytuj artykuł
+	\item Edytuj słownik
+	\item Publikuj artykuł
+	\item Nadaj prawa administratora
+	\item Edytuj układ i wygląd strony
+	\item Zarządzaj instytucją
+\end{enumerate}
+	\newpage
+	
+\subsubsection{Diagramy przypadków użycia}
+
+\begin{figure}[h!]
+	\includegraphics[width=15.5cm,height=10cm,angle=90]{ebip_use_case_diagram.jpg}
+	\caption{Diagram przypadkow użycia administratora}
+\end{figure}
+	\newpage	
+\begin{figure}[h!]
+	\includegraphics[width=\linewidth]{ebip_use_case_diagram_user.jpg}
+	\caption{Diagram przypadkow użycia użytkownika}
+\end{figure}
+\subsubsection{Aktorzy oraz ich uprawnienia}
+	
+	Z punktu działania systemu wyróżnia się trzech aktorów:  użytkownik, administrator globalny oraz administrator instytucji.
+\begin{itemize} 
+	\item Użytkownik	
+	\\Użytkownik poprzez przeglądarkę stron WWW wybiera interesującą go instytucję, a następnie przegląda ogłoszenia zawarte w systemie.
+	\item Administrator globalny	
+	\\Aktor Administrator pełni rolę kontroli systemu EBIP, rozbudowywania systemu poprzez powołanie nowych instytucji bądź usuwanie już istniejących instytucji.
+	\item Administrator instytucji	
+	\\Większe uprawnienia posiada administrator instytucji. Jest to aktor, który posiada możliwość zamieszczania, edytowania oraz usuwania artykułów jaki i załączników.
+\end{itemize}
+\subsubsection{Opis przypadków użycia}
+	
+\begin{itemize}
+	\item \textbf{Zaloguj się do systemu (administrator globalny)}	
+	\\Zdarzenie inicjujące: wciśnij przycisk "Zaloguj"	
+	\\Warunki początkowe: wejdź na stronę www projektu	
+	\\Opis przebiegu interakcji: wypełnij następujące pola "Login", "Hasło" oraz wciśnij przycisk "Zaloguj się"	
+	\\Warunki końcowe: przejście do panelu administratora lub odmowa dostępu w przypadku podania błędnych danych.
+	
+	
+	\item \textbf{Nadaj prawa administratora globalnego}	
+	\\Zdarzenie inicjujące: wciśnij przycisk "Dodaj uprawnienia globalne"	
+	\\Warunki początkowe: zalogowanie się do systemu	
+	\\Opis przebiegu interakcji: Pojawia się zapytanie o potwierdzenie nadania uprawnień globalnych użytkownikowi	
+	\\Warunki końcowe: nadanie praw administratorowi.
+	
+	
+	\item \textbf{Utwórz instytucję}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Dodaj instytucję"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: Pojawia się formularz którego należy uzupełnić odpowiednimi informacjami o instytucji
+	\\Warunki końcowe: utworzenie nowej instytucji
+	
+	
+	\item \textbf{Usuń instytucję}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Usuń instytucję"
+	\\Warunki początkowe: zalogowanie się do systemu jako administrator z prawami do danej instytucji	
+	\\Opis przebiegu interakcji: Wybieramy instytucję, którą chcemy usunąć. Pojawia się zapytanie o potwierdzenie usunięcie
+	\\Warunki końcowe: usunięcie instytucji
+	
+	
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{Zaloguj się do systemu (administrator instytucji)}
+	\\Zdarzenie inicjujące: Wciśnij przycisk "Zaloguj"
+	\\Warunki początkowe: Wejdź na stronę www projektu	
+	\\Opis przebiegu interakcji: wypełnij następujące pola "Login", "Hasło" oraz wciśnij przycisk "Zaloguj się"	
+	\\Warunki końcowe: przejście do panelu administratora lub odmowa dostępu w przypadku podania błędnych danych
+
+	
+	\item \textbf{Publikuj artykuł}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Dodaj artykuł"	
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: Wprowadzenie odpowiedniej daty w trakcie dodawania artykułu
+	\\Warunki końcowe: publikacja na stronie artykułu
+	
+	
+	\item \textbf{Przywróć wersję roboczą}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Przywróć wersję roboczą"
+	\\Warunki początkowe: zalogowanie się do systemu	
+	\\Opis przebiegu interakcji: Wybierz wersję roboczą, którą chcesz przywrócić
+	\\Warunki końcowe: Przywrócenie wersji roboczej 
+	
+	
+	\item \textbf{Edytuj układ i wygląd strony}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Edytuj układ i wygląd strony"	
+	\\Warunki początkowe: zalogowanie się do systemu 	
+	\\Opis przebiegu interakcji: wybranie możliwych opcji edycji strony	
+	\\Warunki końcowe: edycja układu i wyglądu strony
+	
+
+	
+	\item \textbf{Dodaj filtr}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Dodaj filtr"	
+	\\Warunki początkowe: zalogowanie się do systemu	
+	\\Opis przebiegu interakcji: wypełnij formularz dotyczący dodania nowego filtru	
+	\\Warunki końcowe: dodanie nowego filtru
+
+	
+	\item \textbf{Usuń filtr}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Usuń filtr"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: wybierz filtr, który chcesz usunąć	
+	\\Warunki końcowe: usunięcie filtru
+	
+	
+	\item \textbf{Dodaj nagłówek filtru}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Dodaj nagłówek filtru"
+	\\Warunki początkowe: zalogowanie się do systemu oraz wejście w panel "Edytuj układ i wygląd strony "
+	\\Opis przebiegu interakcji: wypełnij formularz dotyczący nagłówku filtru
+	\\Warunki końcowe: dodanie nagłówka filtru
+	
+	\item \textbf{Usuń nagłówek filtru}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Usuń nagłówek filtru"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: wybierz nagłówek filtru do usunięcia
+	\\Warunki końcowe: usunięcie nagłówka filtru
+	
+
+	
+	\item \textbf{Edytuj pasek boczny}
+	\\Zdarzenie inicjujące: naciśnij przycisk "Edytuj pasek boczny"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: wybranie możliwych opcji edycji paska bocznego
+	\\Warunki końcowe: edycja paska bocznego
+	
+	
+	\item \textbf{Nadaj prawa administratora lokalnego}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Dodaj uprawnienia lokalne"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: Pojawia się zapytanie o potwierdzenie nadania uprawnień lokalnych użytkownikowi
+	\\Warunki końcowe: nadanie praw administratorowi.
+	
+	
+	\item \textbf{Edytuj artykuł}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Edytuj artykuł"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: wybierz artykuł do edycji a następnie wypełnij formularz dotyczący edycji pól
+	\\Warunki końcowe: edycja artykułu
+
+	
+	\item \textbf{Usuń załącznik}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Usuń załącznik"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: wybierz załącznik, który chcesz usunąć
+	\\Warunki końcowe: usunięcie załącznika
+
+	
+	\item \textbf{Zmień typ artykułu}	
+	\\Zdarzenie inicjujące: wciśnij przycisk "Edytuj typ artykułu"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: wybierz artykuł a następnie zmień jego typ
+	\\Warunki końcowe: zmiana typu artykułu
+	
+	\newpage
+	
+	\item \textbf{Edytuj słownik}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Edytuj słownik"
+	\\Warunki początkowe: zaloguj się do systemu
+	\\Opis przebiegu interakcji: wybierz słownik a następnie wypełnij formularz dotyczący edycji słownika
+	\\Warunki końcowe: edycja słownika
+	
+	
+	\item \textbf{Dodaj właściwość}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Dodaj właściwość"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: wypełnij formularz dotyczący dodania nowej właściwości
+	\\Warunki końcowe: dodanie właściwości
+
+	
+	\item \textbf{Usuń właściwość}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Usuń właściwość"
+	\\Warunki początkowe: zalogowani się do systemu
+	\\Opis przebiegu interakcji: po wybraniu właściwości należy potwierdzić usunięcie właściwości
+	\\Warunki końcowe: usunięcie właściwości
+
+	
+	\item \textbf{Dodaj typ}
+	\\Zdarzenie inicjujące: wciśnij przycisk "Dodaj typ"
+	\\Warunki początkowe: zalogowanie się do systemu
+	\\Opis przebiegu interakcji: wypełnienie formularza dotyczącego dodania typu
+	\\Warunki końcowe: dodanie typu
+
+
+
+	
+	%Użytkownik
+	\item \textbf{Wybierz instytucję}
+	\\Zdarzenie inicjujące: brak
+	\\Warunki początkowe: wejdź na stronę www projektu
+	\\Opis przebiegu interakcji: wybranie odpowiedniego linku(kafelka)
+	\\Warunki końcowe: wybranie instytucji
+
+	
+	\item \textbf{Wyszukaj artykuł}
+	\\Zdarzenie inicjujące: brak
+	\\Warunki początkowe: wejdź na stronę www projektu
+	\\Opis przebiegu interakcji: wpisanie wyszukiwanej frazy 
+	\\Warunki końcowe: wyszukanie danego artykułu
+	
+	
+	\item \textbf{Wybierz artykuł z listy}
+	\\Zdarzenie inicjujące: wybierz interesującą Cię instytucję
+	\\Warunki początkowe: wejdź na stronę www projektu
+	\\Opis przebiegu interakcji: wybór artykułu z listy
+	\\Warunki końcowe: przejście do wybranego artykułu
+
+	
+	\item \textbf{Wyświetl artykuł}
+	\\Zdarzenie inicjujące: wybranie artykułu z listy
+	\\Warunki początkowe: wejdź na stronę www projektu oraz stronę instytucji która Cię interesuje
+	\\Opis przebiegu interakcji: brak
+	\\Warunki końcowe: wyświetlenie artykułu	
+
+
+	
+	\item \textbf{Pobierz załącznik}
+	\\Zdarzenie inicjujące: wyświetlenie artykułu
+	\\Warunki początkowe: wejdź na stronę www projektu oraz w dany artykuł
+	\\Opis przebiegu interakcji: wybranie załącznika z listy
+	\\Warunki końcowe: pobranie załącznika w formacie PDF
+	
+	\item \textbf{Zaloguj się do systemu (użytkownik)}	
+	\\Zdarzenie inicjujące: wciśnij przycisk "Zaloguj"	
+	\\Warunki początkowe: wejdź na stronę www projektu	
+	\\Opis przebiegu interakcji: wypełnij następujące pola "Login", "Hasło" oraz wciśnij przycisk "Zaloguj się"	
+	\\Warunki końcowe: przejście do panelu użytkownika lub odmowa dostępu w przypadku podania błędnych danych.
+	
+	\item \textbf{Utwórz konto (użytkownik)}	
+	\\Zdarzenie inicjujące: wciśnij przycisk "Utwórz konto"	
+	\\Warunki początkowe: wejdź na stronę www projektu	
+	\\Opis przebiegu interakcji: wypełnij następujące pola "Nazwa użytkownika", "Hasło" oraz wciśnij przycisk "Utwórz konto"	
+	\\Warunki końcowe: utworzenie nowego konta
+	
+	\item \textbf{Przeglądaj słownik}	
+	\\Zdarzenie inicjujące: wciśnij przycisk "Słownik"	
+	\\Warunki początkowe: wejdź na stronę www projektu	
+	\\Opis przebiegu interakcji: wybranie hasła a następnie wyświetlenie właściwości związanych z podanym hasłem	
+	\\Warunki końcowe: przeglądanie zawartości słownika	
+	
+		
+\end{itemize}
+	
+\subsubsection{Dostęp administratora}
+	
+	W systemie istnieje użytkownik o identyfikatorze „administrator”. W kontekście tego użytkownika można wykonywać wszystkie czynności administracyjne. System udostępnia trzy podstawowe funkcje administracyjne:
+\begin{itemize}
+	\item Zarządzanie administratorami (nadawanie praw administratora lokalnego oraz globalnego)
+	\item Zarządzanie artykułami oraz słownikiem
+	\item Zarządzanie wyglądem i układem strony
+\end{itemize}
+
+\subsubsection{Autoryzacja i uwierzytelnianie}
+
+	Aby zalogować się na konto administratora będzie wymagane podanie loginu oraz hasła. Hasło musi składać się co najmniej z 8 znaków w tym z minimum jeden dużej litery, cyfr oraz znaków specjalnych.
+\section {Baza danych}
+	W systemie wykorzystywana jest nierelacyjna baza danych MongoDB. Opiera się ona na dokumentowym modelu danych. Oznacza to, ze dane są przechowywane w dokumentach, które są zbiorami atrybutów oraz ich wartości. Meteor daje możliwość dołączenia schematu do kolekcji.
+\subsection{Kolekcje MongoDB w Meteorze}
+	W Meteorze warstwa danych jest przechowywana w MongoDB. Zestaw powiązanych danych w MongoDB jest nazywany kolekcją. Kolekcje, które występują w systemie:
+	Articles, Institutions, Persons , ItemTypes, PropertyTypes. Aby utworzyć kolekcję Articles należało użyć następującego kodu Articles = new Mongo.Collection('articles');
+
+\subsection{Schemat}
+	Schemat określa w jaki sposób dokument wstawiony do kolekcji jest zdefiniowany.Niniejszy przykład pokazuje schemat kolekcji ItemType.\\\\
+	ItemTypeSchema = new SimpleSchema(\{\\
+		name: \{\\
+			type: String\\
+		\},\\
+		description: \{\\
+			type: String,\\
+			label: 'short description of the type',\\
+			optional: true\\
+		\},\\
+		inheritsFrom: \{\\
+			type: [String],\\
+			label: 'array of urls defining types the type inherits from',\\
+			defaultValue: []\\
+		\},\\
+		sameAs: \{\\
+			type: String,\\
+			label: 'url defining types the type is same as',
+			optional: true\\
+		\},\\
+		properties: \{\\
+			type: [String],\\
+			label: 'properties defined as propertyTypes',\\
+			defaultValue: []\\
+		\}\\
+	\});\\\\	 
+\section {Testy funkcjonalne}
+	Testy wykonane za pomocą Selenium w środowisku Java.\\
+	
+	\begin{enumerate}
+	\item Przypadek użycia "Zaloguj się do systemu (administrator)"
+	\begin{enumerate}
+		\item Dane wejściowe: nazwa i hasło administratora
+		\item Wstępne warunki wykonania: wprowadzenie nazwy i hasła administratora
+		\item Kroki wykonania testu: Wypełnienie odpowiednio pól "Username" i "Password" oraz kliknięcie "Sign in" Po zalogowaniu się do systemu kliknięcie przycisku "Sign out"
+		\item Oczekiwany rezultat: zalogowanie się do systemu jako administrator oraz natychmiastowe wylogowanie się
+	\end{enumerate}
+	\item Przypadek użycia "Utwórz instytucję"
+		\begin{enumerate}
+		\item Dane wejściowe: nazwa instytucji
+		\item Wstępne warunki wykonania: zalogowanie się do systemu jako administrator. Wprowadzenie nazwy instytucji do utworzenia
+		\item Kroki wykonania testu: wciśnięcie przycisku "Dodaj"(Plus na niebieskim tle). Wypełnienie pola "Nazwa instytucji". Zaakceptowanie poprzez kliknięcie "Dodaj instytucję"
+		\item Oczekiwany rezultat: utworzenie nowej instytucji
+		\end{enumerate}
+	\item Przypadek użycia "Dodaj artykuł"
+		\begin{enumerate}
+		\item Dane wejściowe: nazwa artykułu
+		\item Wstępne warunki wykonania: zalogowanie się do systemu jako administrator. Wprowadzenie nazwy artykułu.
+		\item Kroki wykonania testu: Otworzenie okna dodawania artykułu. Sprawdzenie wyjścia poprzez kliknięcie przycisku "Anuluj". Czynność powtarzamy ponownie tylko teraz wprowadzamy nazwę artykułu i akceptujemy.
+		\item Oczekiwany rezultat: dodanie artykułu
+		\end{enumerate}
+	\item Przypadek użycia "Wyszukaj artykuł"
+		\begin{enumerate}
+		\item Dane wejściowe: brak
+		\item Wstępne warunki wykonania: zalogowanie się do systemu
+		\item Kroki wykonania testu: wpisanie w wyszukiwarkę nazw instytucji. I sprawdzenie czy dany artykuł znajduje się w systemie
+		\item Oczekiwany rezultat: wyszukanie artykułu w systemie
+		\end{enumerate}
+
+	\item Przypadek użycia "Usuń artykuł"
+		\begin{enumerate}
+		\item Dane wejściowe: brak
+		\item Wstępne warunki wykonania: zalogowanie się do systemu jako administrator
+		\item Kroki wykonania testu: Kliknięcie przycisku usuń artykuł pod pierwszym artykułem
+		\item Oczekiwany rezultat: usunięcie artykułu
+		\end{enumerate}
+	\end{enumerate}
+		
+
+\section{Projekt interfejsu użytkownika}
+
+\subsection{Diagram przepływów}
+
+	Widoczny na rysunku diagram przepływów opisuje możliwe przejścia pomiędzy 
+	stronami systemu Ebip. Z widoku głównego 'home' możliwe są przejścia do panela 
+	słownika pojęć '/directory', skorzystanie z wyszukiwarki instytucji 
+	'/search/:phrase', przejście do strony zawierającej informacje o systemie oraz 
+	jego twórcach bądź, co wydaje się być rzeczą najważniejszą przejście do posystemu
+	konkretnej instytucji.
+	Z poziomu strony głównej instytucji '/:institution' możliwe jest przejście
+	do wyszukiwarki artykułów '/search/:articles' i dalej do widoku artykułu
+	'/:institution/article', bądź bezpośrednie przejście do widoku artykułu. 
+	Ponadto, możliwe jest także przejście do strony zawierającej informacje
+	o instytucji '/:institution/about'.
+	Z każdego widoku systemu Ebip możliwy jest powrót do strony głównej 
+	systemu poprzez kliknięcie w odpowiednią ikonkę, natomiast z każdego 
+	widoku instytucji analogicznie jest możliwość powrotu do jej strony głównej.
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{SiteMap.png}
+	\centering
+	\caption{Diagram przepływów}
+\end{figure}
+	\newpage
+\subsection{Widoki}
+
+	Widok główny systemu eBIP z poziomu administratora. W części centralnej stron umieszczony jest zbiór
+	przycisków, z których każdy reprezentuje konkretną instytucję. Pasek boczny
+	zawiera w swojej górnej części zestaw filtrów, za pomocą których można zawęzić
+	obszar poszukiwań. W dolnej części paska bocznego znajdują się linki do słownika
+	pojęć oraz strony zawierającej informacje o systemie.
+	W części górnej strony zawiera się okienko wyszukiwarki oraz zestaw ikonek, 
+	które umożliwiają logowanie do systemu oraz nawigowanie po systemie.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{(Admin).png}
+	\centering
+	\caption{Mockup przedstawiający główną stronę systemu z poziomu administratora}
+\end{figure}
+
+
+	Widok główny systemu eBIP z poziomu użytkownika. Różnice w stronie, w porównanie
+	do widoku poprzedniego polega na braku widocznych funkcji administratora np.
+	brak przycisku umożliwiającego dodanie nowej instytucji.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{(User).png}
+	\centering
+	\caption{Mockup przedstawiający główną stronę systemu z poziomu użytkownika}
+\end{figure}
+	\newpage
+	
+	
+	Widok słownika pojęć z poziomu użytkownika. W panelu lewym bocznym znajduje
+	się lista zdefiniowanych w słowniku pojęć. Jest to zbiór linków, które odsyłają
+	do konkretnych pojęć.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{directory.png}
+	\centering
+	\caption{Mockup przedstawiający słownik pojęć}
+\end{figure}
+	Podgląd typu mikrodanych z poziomu użytkownika. W panelu w centralnej części strony
+	znajduje się tabela parametrów konkretnej mikrodanej wraz z opisem.
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{directory__itemname.png}
+	\centering
+	\caption{Mockup przedstawiający mikrodane}
+\end{figure}
+	\newpage
+	
+	
+	Widok główny instytucji z poziomu administratora. W panelu w centralnej części stron znajduje się lista
+	ostatnio dodanych artykułów. W panelu bocznym w lewej części strony znajduje
+	się zestaw filtrów ograniczających obszar poszukiwań. Poniżej są odnośniki do
+	słownika mikrodanych oraz strony zawierającej informacje o instytucji.
+	W części górnej strony zawiera się okienko wyszukiwarki oraz zestaw ikonek, 
+	które umożliwiają logowanie do systemu instytucji oraz nawigowanie 
+	po systemie instytucji.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{i__institution(Admin).png}
+	\centering
+	\caption{Mockup przedstawiający daną instytucję z poziomu administratora}
+\end{figure}
+	Widok główny instytucji z poziomu użytkownika.
+	Różnice pomiędzy tym widokiem oraz opisanym wcześniej polega na brku widocznych
+	funkcji przeznaczonych dla administratora instytucji takich jak np. brak ikonek
+	umożliwiających usuwanie artykułów.	
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{i__institution(User).png}
+	\centering
+	\caption{Mockup przedstawiający daną instytucję z poziomu użytkownika}
+\end{figure}
+	\newpage
+	
+	
+	Widok strony "O nas", która to jest stroną zawierającą dane o instytucji takie
+	jak np. dane kontaktowe.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{i__institution_about.png}
+	\centering
+	\caption{Mockup przedstawiający stronę ,na której znajdują się informacje o instytucji }
+\end{figure}
+	Widok artykułu z poziomu administratora.
+	Panel w centralnej części strony zawiera tekst publikacji oraz ikonkę służącą
+	do pobrania załącznika. Funkcjonalność pozostałych paneli została już opisana
+	przy wcześniejszy widoku.
+
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{i__institution_article__article(Admin).png}
+	\centering
+	\caption{Mockup przedstawiający widok artykułu z poziomu administratora}
+\end{figure}
+	\newpage
+	Widok strony "O instytucji", która jest stroną zawierającą dane o systemie oraz
+	jego twórcach.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{i__institution_article__article(User).png}
+	\centering
+	\caption{Mockup przedstawiający widok strony na której znajdują się informacje o systemie}
+\end{figure}
+	Widok strony wyszukanych artykułów.
+	Panel w centralnej części strony zawiera listę wyszukanych artykułów. Są to 
+	odnośniki do konkretnych publikacji.
+\begin{figure}[h!]
+	\includegraphics[width=10.5cm,height=6.5cm]{search__phrase.png}
+	\centering
+	\caption{Mockup przedstawiający widok strony wyszukanych artykułów}
+\end{figure}
+
+\newpage
+
+\section{Serwer}
+\subsection{Scalingo}
+	W celu udostępnienia systemu skorzystaliśmy z serwisu Scalingo. Umożliwia on wdrożenie projektu na zewnętrzny serwer aby był on dostępny dla użytkowników z zewnątrz. Proces wdrożenia opiera się na tym ,że cały projekt zostaje przesłany na wewnętrzne repozytorium serwisu.
+	
+	\begin{figure}[h!]
+		\includegraphics[width=10.5cm,height=6.5cm]{serwer12.png}
+		\centering
+		\caption{Zdjęcie przedstawiające działanie systemu na serwerze.}
+	\end{figure}
+	
+\subsection{Wdrożenie projektu na serwer}
+\begin{enumerate}
+	\item Wejście na stronę: https://scalingo.com/.
+	\item Rejestracja nowego konta.(Możliwość połączenia z GitHubem)
+	\item Dodanie nowego projektu, o nazwie PWREBIP
+	\item Wygenerowanie klucz RSA:-\textgreater \$ ssh-keygen -t rsa -b 4096
+	\item Dodajemy klucz ssh-add ścieżka, w przypadku gdy nie podano ścieżki przy generacji klucza, wystarczy ssh-add bez argumentu.
+	\item Dodajemy klucz ssh do profilu (konfiguracja -\textgreater SHH), nazwa jest nieważna, a pole w pole z zawartością należy skopiować treść wygenerowanego klucza (domyslnie w /home/USERNAME/.ssh/id\_rsa).
+	\item ściągamy kod źródłowy -\textgreater git clone https://github.com/karolselak/ebip.
+	\item Wchodzimy do folderu z projektem (domyślnie cd ebip).
+	\item Wpisujemy komendę git remote add scalingo git@scalingo.com:PWREBIP.git
+	\item Deploy aplikacji -\textgreater git push scalingo master, powyższe dwie instrukcje można także sprawdzić we własnym profilu
+	
+\end{enumerate}
+
+
+\end{document}
